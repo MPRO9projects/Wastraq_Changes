@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="canonical" href="https://wastraq.com/login.html">
+  <!-- Clarity tracking code for https://wastraq.com/ -->
+
+  <!-- ── FAVICONS ─────────────────────────────── -->
+<link rel="icon" type="image/png" href="screenshots/favicon.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="screenshots/apple-touch-icon.png">
+<link rel="stylesheet" href="cookie-consent.css">
+<meta name="description" content="Login to the WASTRAQ smart waste management platform to access dashboards, reports, operations data, and waste tracking tools.">
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wtmhp3u28x");
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Login | WASTRAQ",
+  "url": "https://wastraq.com/login.html",
+  "description": "Login page for the WASTRAQ smart waste management platform."
+}
+</script>
+  <title>Login | WASTRAQ Smart Waste Management Platform</title>
+  <link rel="stylesheet" href="wastraq.css"/>
+  <style>
+    .auth-hero {
+      padding: calc(var(--nav-h) + 60px) 32px 60px;
+      background: linear-gradient(145deg, var(--green-900), #0c3520);
+      color: white;
+      text-align: center;
+    }
+    .auth-hero h1 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      margin-bottom: 14px;
+    }
+    .auth-hero p {
+      font-size: 1.05rem;
+      opacity: .8;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .auth-main {
+      background: var(--bg);
+      padding: 64px 32px 80px;
+      min-height: 60vh;
+    }
+    .auth-card-wrap {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .auth-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+    .auth-card h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--green-900);
+      margin-bottom: 6px;
+      letter-spacing: -.02em;
+    }
+    .auth-card .sub {
+      font-size: .9rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .wq-btn-google {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: white;
+      font-family: var(--font);
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color .2s, background .2s, box-shadow .2s;
+    }
+    .wq-btn-google:hover {
+      border-color: var(--green-300);
+      background: var(--green-50);
+      box-shadow: 0 2px 12px rgba(10,32,22,.08);
+      transform: translateY(-1px);
+    }
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .auth-divider span {
+      font-size: .8rem;
+      color: var(--text-light);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .auth-options-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 4px 0 8px;
+    }
+    .wq-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .wq-checkbox-label input[type=checkbox] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--green-600);
+      cursor: pointer;
+    }
+    .wq-field-link {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--green-600);
+      transition: color .2s;
+    }
+    .wq-field-link:hover { color: var(--green-700); }
+    .wq-field-error {
+      font-size: .8rem;
+      color: #ef4444;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+    .auth-footer-link {
+      text-align: center;
+      margin-top: 22px;
+      font-size: .875rem;
+      color: var(--text-muted);
+    }
+    .auth-footer-link a {
+      color: var(--green-600);
+      font-weight: 700;
+    }
+    .auth-footer-link a:hover { color: var(--green-700); }
+
+    @media (max-width: 480px) {
+      .auth-card { padding: 28px 20px; }
+      .auth-main { padding: 40px 16px 60px; }
+      .auth-options-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+
+  <!-- WASTRAQ API Configuration -->
+  <script>window.WASTRAQ_API_BASE = "https://backend.wastraq.com"; /* change to production URL */</script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="auth-hero">
+  <a href="index.html">
+    <img src="screenshots/wastraq_logo.png" alt="WASTRAQ" height="100" style="display:block;margin:0 auto 20px"/>
+  </a>
+  <div class="wq-section-tag" style="color:var(--green-300);justify-content:center;margin-bottom:12px">Welcome Back</div>
+  <h1>Sign In to WASTRAQ</h1>
+  <p>Continue managing your waste operations with intelligent, real-time insights.</p>
+</div>
+
+<!-- FORM -->
+<div class="auth-main">
+  <div class="auth-card-wrap">
+    <div class="auth-card">
+      <h2>Login to Your Account</h2>
+      <p class="sub">Enter your credentials to access your dashboard.</p>
+
+      <button class="wq-btn-google" type="button">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M17.64 9.205c0-.638-.057-1.252-.164-1.841H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+          <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z" fill="#34A853"/>
+          <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A9.009 9.009 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.892 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <div class="auth-divider"><span>or sign in with email</span></div>
+
+      <div id="login-form-state">
+        <form class="wq-form" id="loginForm" onsubmit="handleLogin(event)">
+          <div class="wq-field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@company.com" required/>
+            <div class="wq-field-error" id="emailError"></div>
+          </div>
+
+          <div class="wq-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Your password" required/>
+            <div class="wq-field-error" id="passwordError"></div>
+          </div>
+
+          <div class="auth-options-row">
+            <label class="wq-checkbox-label">
+              <input type="checkbox" id="remember"> Remember me
+            </label>
+            <a href="#" class="wq-field-link">Forgot password?</a>
+          </div>
+
+          <div style="margin-top:8px">
+            <button type="submit" id="login-btn" class="wq-btn-primary" style="width:100%;padding:14px;font-size:1rem;border-radius:10px;border:none;cursor:pointer">
+              Sign In →
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Shown after sign-in request is submitted
+      <div id="login-success-state" style="display:none;text-align:center;padding:40px 16px;">
+        <div style="width:64px;height:64px;background:var(--green-100);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--green-600);">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-size:1.2rem;font-weight:800;color:var(--green-900);margin-bottom:10px;">Access Request Received</h3>
+        <p style="font-size:.9rem;color:var(--text-muted);line-height:1.7;">
+          Thank you for your interest in WASTRAQ. Our team has been notified and will contact you shortly to set up your account access.
+        </p>
+        <p style="margin-top:12px;font-size:.9rem;color:var(--text-muted);">
+          While you wait, <a href="contact.html" style="color:var(--green-600);font-weight:600;">schedule a personalised demo</a> to see the platform in action.
+        </p>
+      </div>
+    </div> -->
+
+    <p class="auth-footer-link">
+      Don't have an account? <a href="register.html">Create one for free</a>
+    </p>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="wastraq-shared.js"></script>
+<script>
+injectNav('');
+injectFooter();
+
+/* Login handler — records the email as an access request (password is NEVER sent or stored) */
+function handleLogin(e) {
+  e.preventDefault();
+
+  var emailEl    = document.getElementById('email');
+  var passwordEl = document.getElementById('password');
+  var emailErr   = document.getElementById('emailError');
+  var passErr    = document.getElementById('passwordError');
+  var valid      = true;
+
+  emailErr.innerText = '';
+  passErr.innerText  = '';
+
+  if (!emailEl.value.includes('@')) {
+    emailErr.innerText = 'Please enter a valid email address.';
+    valid = false;
+  }
+  if (passwordEl.value.length < 6) {
+    passErr.innerText = 'Password must be at least 6 characters.';
+    valid = false;
+  }
+  if (!valid) return;
+
+  var btn = document.getElementById('login-btn');
+  btn.disabled    = true;
+  btn.textContent = 'Submitting…';
+
+  var WASTRAQ_API = (window.WASTRAQ_API_BASE || 'https://backend.wastraq.com');
+
+  /* Only the email is sent — password is intentionally excluded */
+  fetch(WASTRAQ_API + '/api/forms/login', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+  email: emailEl.value.trim(),
+  password: passwordEl.value.trim()
+})
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('Server error ' + res.status);
+    return res.json();
+  })
+  .then(function(json) {
+    if (json.success) {
+      document.getElementById('login-form-state').style.display    = 'none';
+      document.getElementById('login-success-state').style.display = 'block';
+    } else {
+      throw new Error(json.message || 'Submission failed');
+    }
+  })
+  .catch(function(err) {
+    btn.disabled    = false;
+    btn.textContent = 'Sign In →';
+    alert('Something went wrong. Please email us at info@wastraq.com');
+    console.error('Login form error:', err);
+  });
+}
+</script>
+<script src="cookie-consent.js"></script>
+  <!-- WASTRAQ Chatbot -->
+  <script data-api-base="https://backend.wastraq.com" src="wastraq-chatbot.js"></script>
+  <!-- Set your production API URL above before deployment -->
+</body>
+</html>
