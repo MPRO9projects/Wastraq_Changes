@@ -4,10 +4,9 @@ function injectNav(activePage = '') {
   const nav = `
   <nav class="wq-nav" id="wq-nav">
     <div class="wq-nav-inner">
-      <a href="index.html" class="wq-logo">
-        <img src="screenshots/wastraq_logo.png" alt="WASTRAQ" height="60" style="display:block;"><span class="tm">™</span>
-        <span class="logo-text">WASTRAQ<span class="tm" style="top:-8px; left:0;">™</span>
-</span>
+      <a href="index.html" class="wq-logo" id="wq-nav-logo">
+        <img src="screenshots/favicon.png" alt="WASTRAQ Logo" class="wq-nav-logo-icon" />
+        <span class="logo-text">WASTRAQ</span><span class="tm">™</span>
       </a>
       <ul class="wq-nav-links">
         <li class="has-dropdown ${activePage==='products'?'active':''}">
@@ -58,20 +57,27 @@ function injectNav(activePage = '') {
       <a href="partnership.html">Partnership</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
       <a href="contact.html" class="wq-btn-primary" style="margin-top:12px;display:block;text-align:center">Schedule Demo</a>
     </div>
   </nav>`;
-  document.getElementById('nav-placeholder').innerHTML = nav;
+  const navPlaceholder = document.getElementById('nav-placeholder');
+  if (navPlaceholder) {
+    navPlaceholder.innerHTML = nav;
+  }
   // Scroll behavior
   window.addEventListener('scroll', () => {
     const n = document.getElementById('wq-nav');
-    if (window.scrollY > 40) n.classList.add('scrolled');
-    else n.classList.remove('scrolled');
+    if (n) {
+      if (window.scrollY > 40) n.classList.add('scrolled');
+      else n.classList.remove('scrolled');
+    }
   });
 }
 
 function toggleMobileNav() {
-  document.getElementById('wq-mobile-menu').classList.toggle('open');
+  const menu = document.getElementById('wq-mobile-menu');
+  if (menu) menu.classList.toggle('open');
 }
 
 function injectFooter() {
@@ -80,8 +86,8 @@ function injectFooter() {
     <div class="wq-footer-top">
       <div class="wq-footer-brand">
         <a href="index.html" class="wq-logo wq-logo-light">
-          <img src="screenshots/wastraq_logo.png" alt="WASTRAQ" height="60" style="display:block;"><span class="tm">™</span>
-        <span class="logo-text">WASTRAQ<span class="tm" style="top:-8px; left:0;">™</span>
+          <img src="screenshots/favicon.png" alt="WASTRAQ Logo" class="wq-nav-logo-icon" />
+          <span class="logo-text">WASTRAQ</span><span class="tm">™</span>
         </a>
         <p>Intelligent waste management software for smart, sustainable, and profitable operations worldwide.</p>
         <div class="wq-social">

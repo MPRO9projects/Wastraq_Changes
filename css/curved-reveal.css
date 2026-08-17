@@ -1,0 +1,144 @@
+.wq-curved-reveal {
+  position: relative;
+  width: 100%;
+  height: 230vh; /* tune as needed: extra height = scroll room for settle/animate/hold/transition */
+  min-height: 230vh;
+  padding: 0;
+  margin: 0;
+  /* Pulls this section's pin range up so it engages the instant the previous
+     sticky section (Smart Operations) releases, instead of leaving a full
+     viewport-height of plain in-flow scrolling — an empty white/grey gap —
+     between the two. Standard technique for seamlessly stacking adjacent
+     position:sticky scenes.
+
+     NOTE: this must stay at exactly -100vh (not more). A larger negative
+     margin seems like an easy way to make this section engage *before* Smart
+     Operations finishes, but position:sticky doesn't work that way — until
+     this section's own wrapper top reaches the viewport top, its sticky
+     child renders at its normal in-flow position instead of pinned full-
+     screen, which looks like a broken partial overlap, not a clean rising
+     curtain. The actual "green scene already rising as Smart Operations
+     exits" effect is done inside Smart Operations' own pinned scene (see
+     .wq-smartops-handoff in smart-operations.css/js) so it can be driven by
+     transform/height with no sticky-layout side effects, and this section
+     picks up cleanly the instant that finishes. */
+  margin-top: -100vh;
+  margin-top: -100dvh;
+  overflow: visible;
+  background: #0f172a;
+  /* Default hidden for the same reason as .wq-reveal-card below: this
+     wrapper's own opaque background would otherwise bleed into view (in its
+     normal in-flow position) before the card is actually stuck. Flipped to
+     visible by curved-reveal.js the instant it genuinely engages. */
+  visibility: hidden;
+}
+
+.wq-reveal-card {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  border-radius: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0f172a 0%, #112d2c 100%);
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  right: 0;
+  /* Default hidden: this section's wrapper is pulled up to close the gap to
+     Smart Operations (see .wq-curved-reveal's margin-top), which means this
+     card would otherwise bleed into view from the bottom, in its normal
+     (not-yet-stuck) flow position, well before it's actually meant to appear
+     — covering Smart Operations' own still-active content underneath.
+     curved-reveal.js flips this to visible the instant the card is genuinely
+     stuck (top:0), so Smart Operations' own handoff curtain is what's seen
+     rising instead. */
+  visibility: hidden;
+}
+
+.wq-reveal-image {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(4, 18, 12, 0.25), rgba(6, 18, 13, 0.5)),
+    radial-gradient(circle at top left, rgba(110, 231, 183, 0.46), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.24), transparent 36%),
+    linear-gradient(135deg, #0b1d1b 0%, #123326 28%, #0e2f2a 62%, #0f172a 100%);
+}
+
+.wq-reveal-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 45%, rgba(0, 0, 0, 0.34));
+}
+
+.wq-reveal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: 90%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+}
+
+.wq-reveal-content h3 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 68px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.06em;
+}
+
+.wq-reveal-content p {
+  margin: 16px 0 0;
+  font-size: 15px;
+  opacity: 0.88;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wq-reveal-mask {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.wq-reveal-mask path {
+  fill: #f4f4f4;
+}
+
+@media (max-width: 640px) {
+  .wq-curved-reveal {
+    width: min(100%, calc(100% - 24px));
+  }
+
+  .wq-reveal-card {
+    min-height: 300px;
+    height: min(64vw, 360px);
+    border-radius: 24px;
+  }
+
+  .wq-reveal-content p {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wq-reveal-mask,
+  .wq-reveal-card,
+  .wq-reveal-image,
+  .wq-reveal-content {
+    transition: none !important;
+  }
+}

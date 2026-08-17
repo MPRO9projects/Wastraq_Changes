@@ -848,42 +848,9 @@ ul   { list-style: none; }
   <div id="tc-progress-bar"></div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     NAVIGATION
-═══════════════════════════════════════════════ -->
-<nav class="tc-nav" id="tc-nav" role="navigation" aria-label="Main navigation">
-  <div class="tc-nav-inner">
-    <a href="index.html" class="tc-logo" aria-label="WASTRAQ Home">
-      <img src="screenshots/wastraq_logo.png" alt="WASTRAQ" height="48" width="auto"/>
-      <span>WASTRAQ</span>
-    </a>
-    <ul class="tc-nav-links" role="list">
-      <li><a href="products.html">Products</a></li>
-      <li><a href="solutions.html">Solutions</a></li>
-      <li><a href="partnership.html">Partnership</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="tc-nav-actions">
-      <a href="login.html" class="tc-btn-ghost">Login</a>
-      <a href="contact.html" class="tc-btn-primary">Schedule Demo</a>
-    </div>
-    <button class="tc-hamburger" id="tc-hamburger"
-      onclick="tcToggleMenu()" aria-label="Open navigation menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="tc-mobile-menu" id="tc-mobile-menu" role="menu">
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="solutions.html">Solutions</a>
-    <a href="partnership.html">Partnership</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Login</a>
-    <a href="contact.html" class="tc-mobile-cta">Schedule Demo</a>
-  </div>
-</nav>
+<div id="nav-placeholder"></div>
+
+
 
 <!-- ═══════════════════════════════════════════════
      HERO
@@ -2063,6 +2030,10 @@ document.querySelectorAll('.tc-section').forEach(function(el) {
 /* ── Dynamic copyright year ── */
 var yearEl = document.getElementById('tc-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+</script>
+<script src="wastraq-shared.js"></script>
+<script>
+  injectNav();
 </script>
 <script src="cookie-consent.js"></script>
 

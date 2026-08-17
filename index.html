@@ -50,8 +50,13 @@ content="Smart waste collection, GPS tracking, route optimization, analytics, an
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="screenshots/apple-touch-icon.png">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="wastraq.css?v=20260630-1">
 <link rel="stylesheet" href="cookie-consent.css">
+<link rel="stylesheet" href="wastraq-intro.css?v=20260815-1">
+<link rel="stylesheet" href="css/smart-operations.css">
+<link rel="stylesheet" href="css/curved-reveal.css">
+<link rel="stylesheet" href="css/smart-story.css">
 
 <!-- Clarity tracking code for https://wastraq.com/ -->
 <script>
@@ -483,6 +488,195 @@ content="Smart waste collection, GPS tracking, route optimization, analytics, an
   <script>window.WASTRAQ_API_BASE = "https://backend.wastraq.com"; /* change to production URL */</script>
 </head>
 <body>
+
+<!-- ── 1. CINEMATIC INTRO EXPERIENCE (First Page Overlay) ── -->
+<div id="wastraq-intro-experience">
+  <div class="wq-intro-stage1" id="wq-intro-stage1">
+    <div class="wq-intro-bg-wrapper">
+      <img src="screenshots/landfill_hd.jpg" alt="Landfill and Waste Problem" class="wq-intro-bg" id="wq-intro-bg" />
+      
+      <!-- Subtle Excavator Midground Heat & Motion Overlay -->
+      <div class="wq-excavator-motion" aria-hidden="true"></div>
+
+      <!-- Natural Steam & Smoke Plumes rising from waste heaps -->
+      <div class="wq-smoke-plume plume-left" aria-hidden="true"></div>
+      <div class="wq-smoke-plume plume-center" aria-hidden="true"></div>
+      <div class="wq-smoke-plume plume-right" aria-hidden="true"></div>
+    </div>
+    <div class="wq-intro-overlay"></div>
+
+    <div class="wq-intro-content">
+      <h1 class="wq-typewriter-heading">
+        <span id="wq-typewriter-text" class="wq-typewriter-text"></span>
+      </h1>
+    </div>
+
+    <!-- White Colour Taskbar anchored at the bottom of Stage 1 -->
+    <div class="wq-taskbar-anchor" id="wq-taskbar-trigger">
+      <div class="wq-scroll-hint">
+        <span>Scroll down to explore</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+      </div>
+      <div class="wq-white-taskbar">
+        <span class="wq-taskbar-text">WE HAVE A SOLUTION</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Flying Circular Rotating Logo with Circuit Flow Animation -->
+<div id="wq-intro-flying-logo-wrap">
+  <div class="wq-circuit-container" id="wq-circuit-container">
+    <svg class="wq-circuit-svg" viewBox="0 0 500 500" fill="none">
+      <defs>
+        <linearGradient id="pcb-grad-top" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#22c55e" />
+          <stop offset="100%" stop-color="#159d91" />
+        </linearGradient>
+        <linearGradient id="pcb-grad-right" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#159d91" />
+          <stop offset="100%" stop-color="#0750ad" />
+        </linearGradient>
+        <linearGradient id="pcb-grad-bot" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#159d91" />
+          <stop offset="100%" stop-color="#22c55e" />
+        </linearGradient>
+        <linearGradient id="pcb-grad-left" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#22c55e" />
+          <stop offset="100%" stop-color="#0750ad" />
+        </linearGradient>
+        <filter id="pcb-node-glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="1.5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- ── TOP SECTOR (UP) ── -->
+      <g class="wq-pcb-trace t-top-1">
+        <path d="M 250 150 L 250 102 L 230 82 L 195 82" stroke="url(#pcb-grad-top)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="195" cy="82" r="2.6" class="wq-pcb-node" fill="#22c55e" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-top-2">
+        <path d="M 250 102 L 270 82 L 305 82" stroke="url(#pcb-grad-top)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="305" cy="82" r="2.6" class="wq-pcb-node" fill="#159d91" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-top-3">
+        <path d="M 225 153 L 225 118 L 205 98 L 175 98" stroke="url(#pcb-grad-top)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="175" cy="98" r="2.6" class="wq-pcb-node" fill="#22c55e" />
+      </g>
+      <g class="wq-pcb-trace t-top-4">
+        <path d="M 275 153 L 275 118 L 295 98 L 325 98" stroke="url(#pcb-grad-top)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="325" cy="98" r="2.6" class="wq-pcb-node" fill="#159d91" />
+      </g>
+
+      <!-- ── TOP-RIGHT SECTOR ── -->
+      <g class="wq-pcb-trace t-tr-1">
+        <path d="M 320 180 L 348 152 L 380 152" stroke="url(#pcb-grad-right)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="380" cy="152" r="2.6" class="wq-pcb-node" fill="#159d91" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-tr-2">
+        <path d="M 302 160 L 322 140 L 348 140 L 362 126" stroke="url(#pcb-grad-right)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="362" cy="126" r="2.6" class="wq-pcb-node" fill="#0750ad" />
+      </g>
+
+      <!-- ── RIGHT SECTOR (RIGHT) ── -->
+      <g class="wq-pcb-trace t-right-1">
+        <path d="M 350 250 L 398 250 L 418 230 L 418 195" stroke="url(#pcb-grad-right)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="418" cy="195" r="2.6" class="wq-pcb-node" fill="#0750ad" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-right-2">
+        <path d="M 398 250 L 418 270 L 418 305" stroke="url(#pcb-grad-right)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="418" cy="305" r="2.6" class="wq-pcb-node" fill="#159d91" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-right-3">
+        <path d="M 347 225 L 382 225 L 402 205 L 402 175" stroke="url(#pcb-grad-right)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="402" cy="175" r="2.6" class="wq-pcb-node" fill="#0750ad" />
+      </g>
+      <g class="wq-pcb-trace t-right-4">
+        <path d="M 347 275 L 382 275 L 402 295 L 402 325" stroke="url(#pcb-grad-right)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="402" cy="325" r="2.6" class="wq-pcb-node" fill="#159d91" />
+      </g>
+
+      <!-- ── BOTTOM-RIGHT SECTOR ── -->
+      <g class="wq-pcb-trace t-br-1">
+        <path d="M 320 320 L 348 348 L 380 348" stroke="url(#pcb-grad-right)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="380" cy="348" r="2.6" class="wq-pcb-node" fill="#0750ad" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-br-2">
+        <path d="M 302 340 L 322 360 L 348 360 L 362 374" stroke="url(#pcb-grad-right)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="362" cy="374" r="2.6" class="wq-pcb-node" fill="#22c55e" />
+      </g>
+
+      <!-- ── BOTTOM SECTOR (DOWN) ── -->
+      <g class="wq-pcb-trace t-bot-1">
+        <path d="M 250 350 L 250 398 L 230 418 L 195 418" stroke="url(#pcb-grad-bot)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="195" cy="418" r="2.6" class="wq-pcb-node" fill="#22c55e" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-bot-2">
+        <path d="M 250 398 L 270 418 L 305 418" stroke="url(#pcb-grad-bot)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="305" cy="418" r="2.6" class="wq-pcb-node" fill="#159d91" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-bot-3">
+        <path d="M 225 347 L 225 382 L 205 402 L 175 402" stroke="url(#pcb-grad-bot)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="175" cy="402" r="2.6" class="wq-pcb-node" fill="#22c55e" />
+      </g>
+      <g class="wq-pcb-trace t-bot-4">
+        <path d="M 275 347 L 275 382 L 295 402 L 325 402" stroke="url(#pcb-grad-bot)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="325" cy="402" r="2.6" class="wq-pcb-node" fill="#159d91" />
+      </g>
+
+      <!-- ── BOTTOM-LEFT SECTOR ── -->
+      <g class="wq-pcb-trace t-bl-1">
+        <path d="M 180 320 L 152 348 L 120 348" stroke="url(#pcb-grad-left)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="120" cy="348" r="2.6" class="wq-pcb-node" fill="#159d91" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-bl-2">
+        <path d="M 198 340 L 178 360 L 152 360 L 138 374" stroke="url(#pcb-grad-left)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="138" cy="374" r="2.6" class="wq-pcb-node" fill="#22c55e" />
+      </g>
+
+      <!-- ── LEFT SECTOR (LEFT) ── -->
+      <g class="wq-pcb-trace t-left-1">
+        <path d="M 150 250 L 102 250 L 82 230 L 82 195" stroke="url(#pcb-grad-left)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="82" cy="195" r="2.6" class="wq-pcb-node" fill="#22c55e" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-left-2">
+        <path d="M 102 250 L 82 270 L 82 305" stroke="url(#pcb-grad-left)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="82" cy="305" r="2.6" class="wq-pcb-node" fill="#159d91" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-left-3">
+        <path d="M 153 225 L 118 225 L 98 205 L 98 175" stroke="url(#pcb-grad-left)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="98" cy="175" r="2.6" class="wq-pcb-node" fill="#22c55e" />
+      </g>
+      <g class="wq-pcb-trace t-left-4">
+        <path d="M 153 275 L 118 275 L 98 295 L 98 325" stroke="url(#pcb-grad-left)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="98" cy="325" r="2.6" class="wq-pcb-node" fill="#0750ad" />
+      </g>
+
+      <!-- ── TOP-LEFT SECTOR ── -->
+      <g class="wq-pcb-trace t-tl-1">
+        <path d="M 180 180 L 152 152 L 120 152" stroke="url(#pcb-grad-left)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="120" cy="152" r="2.6" class="wq-pcb-node" fill="#22c55e" filter="url(#pcb-node-glow)" />
+      </g>
+      <g class="wq-pcb-trace t-tl-2">
+        <path d="M 198 160 L 178 140 L 152 140 L 138 126" stroke="url(#pcb-grad-left)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="138" cy="126" r="2.6" class="wq-pcb-node" fill="#0750ad" />
+      </g>
+    </svg>
+  </div>
+  <div class="wq-flying-logo-inner" id="wq-flying-logo-inner">
+    <img src="screenshots/favicon.png" alt="WASTRAQ Logo" class="wq-flying-logo-img" />
+  </div>
+  <!-- Centered WASTRAQ Typography Text that smoothly fades before logo glides -->
+  <div class="wq-flying-logo-text-wrap" id="wq-flying-logo-text-wrap">
+    <span class="wq-centered-logo-text">WASTRAQ</span>
+  </div>
+</div>
+
+<!-- Standard WASTRAQ Navigation Bar -->
 <div id="nav-placeholder"></div>
 
 <!-- TICKER -->
@@ -521,8 +715,10 @@ content="Smart waste collection, GPS tracking, route optimization, analytics, an
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e" opacity=".3"/><circle cx="7" cy="7" r="3" fill="#22c55e"/></svg>
         The Future of Waste Management
       </div>
-      <h1>Smarter Waste.<br/><span>Cleaner Cities.</span><br/>Zero Guesswork.</h1>
-      <p>WASTRAQ is an all-in-one intelligent waste management platform that automates your operations, optimises every route, and puts real-time data at your fingertips.</p>
+      <h1 id="wq-hero-title">
+        <span id="wq-hero-typewriter-text"></span><span id="wq-hero-typewriter-cursor" class="wq-hero-cursor"></span>
+      </h1>
+      <p id="wq-hero-subtitle">WASTRAQ is an all-in-one intelligent waste management platform that automates your operations, optimises every route, and puts real-time data at your fingertips.</p>
       <div class="wq-hero-actions">
         <a href="contact.html" class="wq-btn-primary wq-btn-primary-lg">Schedule a Free Demo</a>
         <a href="products.html" class="wq-btn-outline wq-btn-primary-lg">Explore Platform</a>
@@ -532,29 +728,6 @@ content="Smart waste collection, GPS tracking, route optimization, analytics, an
         <span class="wq-pill"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>AI route engine included</span>
         <span class="wq-pill"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Scales with your fleet</span>
         <span class="wq-pill"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>SOC 2 compliant</span>
-      </div>
-    </div>
-    <div class="wq-hero-visual">
-      <div class="wq-hero-mockup">
-        <div class="wq-hero-mockup-bar">
-          <span></span><span></span><span></span>
-          <span class="wq-url">app.wastraq.com/dashboard</span>
-        </div>
-        <div class="wq-hero-visual">
-  <div class="wq-hero-video-card">
-    <img src="screenshots/wastraq.png" alt="WASTRAQ Dashboard" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
-  </div>
-</div>
-      </div>
-      <!-- Floating badge -->
-      <div class="wq-floating-badge" style="position:absolute;bottom:-20px;right:-16px;background:white;border-radius:12px;padding:12px 16px;box-shadow:var(--shadow-lg);border:1px solid var(--border);display:flex;align-items:center;gap:10px;">
-        <div style="width:36px;height:36px;background:var(--green-100);border-radius:10px;display:flex;align-items:center;justify-content:center;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        </div>
-        <div>
-          <div style="font-size:.7rem;color:var(--text-light);font-weight:600">Operational Savings</div>
-          <div style="font-size:1.1rem;font-weight:800;color:var(--green-700)">↓ 37% Costs</div>
-        </div>
       </div>
     </div>
   </div>
@@ -775,155 +948,191 @@ content="Smart waste collection, GPS tracking, route optimization, analytics, an
   </div>
 </section>
 
-<!-- MODULE GRID -->
-<section class="wq-section" style="background:var(--green-50)">
-  <div class="wq-section-inner">
-    <div class="wq-section-header center">
-      <div class="wq-section-tag anim">Modular by Design</div>
-      <h2 class="wq-section-title anim anim-delay-1">Everything Your Operation Needs</h2>
-      <p class="wq-section-sub anim anim-delay-2">Pick the modules that matter today. Add more as you grow. WASTRAQ is built to flex with your business — not lock you in.</p>
-    </div>
-    <div class="wq-module-grid">
-      <div class="wq-module-card anim"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/></svg></div><div class="mod-name">RouteTraq™</div><div class="mod-desc">Adaptive AI routing</div></div>
-      <div class="wq-module-card anim anim-delay-1"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div><div class="mod-name">Driver App</div><div class="mod-desc">Turn-by-turn guidance</div></div>
-      <div class="wq-module-card anim anim-delay-2"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="mod-name">Customer Management</div><div class="mod-desc">All clients, one view</div></div>
-      <div class="wq-module-card anim anim-delay-3"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="mod-name">Self-Service</div><div class="mod-desc">24/7 customer access</div></div>
-      <div class="wq-module-card anim anim-delay-4"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><div class="mod-name">Auto Invoicing</div><div class="mod-desc">Zero missed payments</div></div>
-      <div class="wq-module-card anim"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="mod-name">Analytics</div><div class="mod-desc">Real-time reporting</div></div>
-      <div class="wq-module-card anim anim-delay-1"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="mod-name">Vehicle Tracking</div><div class="mod-desc">Live GPS monitoring</div></div>
-      <div class="wq-module-card anim anim-delay-2"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div><div class="mod-name">Auto Workflows</div><div class="mod-desc">Smart task handling</div></div>
-      <div class="wq-module-card anim anim-delay-3"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="mod-name">Integrations</div><div class="mod-desc">Connect any system</div></div>
-      <div class="wq-module-card anim anim-delay-4"><div class="mod-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v4l3 3"/></svg></div><div class="mod-name">Field App</div><div class="mod-desc">Works offline too</div></div>
-    </div>
-  </div>
-</section>
+<section id="wq-smart-operations" class="wq-smart-operations" aria-label="Smart Operations module carousel">
+  <div class="wq-smartops-pin">
+    <div class="wq-smartops-container">
+      <header class="wq-smartops-header">
+        <div class="wq-smartops-label">Smart Operations</div>
+        <h2>Everything your operation needs.</h2>
+        <p>Use the modules that matter most today, then expand the platform as your operation grows. WASTRAQ keeps essential workflows connected across teams, sites, and service lines.</p>
+      </header>
 
-<!-- FEATURE BLOCK 1 -->
-<section class="wq-fb-section" style="background:white">
-  <div class="wq-fb-grid" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center">
-    <div class="anim">
-      <div class="wq-section-tag">Automate Everything</div>
-      <h2 class="wq-section-title">Stop Wasting Time on<br/>Manual Processes</h2>
-      <p style="color:var(--text-muted);line-height:1.75;margin-bottom:24px;font-size:1.02rem">WASTRAQ’s intelligent automation engine handles scheduling, billing, reporting, and communication — so your team can focuses on what actually matters.</p>
-      <ul class="wq-feature-list">
-        <li>Automatic route generation based on fill levels and priority</li>
-        <li>Self-triggering billing cycles with zero manual input</li>
-        <li>Smart notifications to customers on collection status</li>
-        <li>Exception-based alerting — only act when something needs attention</li>
-        <li>Fully configurable workflows to match how your team already works</li>
-      </ul>
-      <a href="products.html" class="wq-btn-primary">See Automation Features →</a>
-    </div>
-    <div class="anim anim-delay-2">
-      <div class="wq-visual-card">
-        <div class="wq-visual-card-header">
-          <h3>Automation Workflow Builder</h3>
-          <p>Drag, configure, and deploy — no code needed</p>
-        </div>
-        <div class="wq-visual-card-body">
-          <div style="display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:8px;">
-            <div style="width:28px;height:28px;border-radius:8px;background:#3b82f620;display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:8px;height:8px;border-radius:50%;background:#3b82f6"></div></div>
-            <span style="font-size:.82rem;font-weight:600;color:var(--text);flex:1">Bin sensor threshold reached</span>
-            <span style="font-size:.68rem;font-weight:700;color:#3b82f6;background:#3b82f620;padding:2px 8px;border-radius:100px">Trigger</span>
+      <div class="wq-smartops-page" tabindex="0" aria-live="polite">
+        <div class="wq-smartops-circle" aria-hidden="true"></div>
+        <div class="wq-smartops-cycle" aria-hidden="true"></div>
+        <div class="wq-smartops-arc" aria-hidden="true"></div>
+
+        <section class="wq-smartops-right">
+          <div class="wq-smartops-right-inner">
+            <h3 class="wq-smartops-right-title">Workforce Management</h3>
+            <ul class="wq-smartops-feature-list"></ul>
           </div>
-          <div style="position:relative;display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:8px;">
-            <div style="position:absolute;top:-8px;left:24px;width:2px;height:8px;background:var(--border)"></div>
-            <div style="width:28px;height:28px;border-radius:8px;background:#8b5cf620;display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:8px;height:8px;border-radius:50%;background:#8b5cf6"></div></div>
-            <span style="font-size:.82rem;font-weight:600;color:var(--text);flex:1">Check vehicle availability</span>
-            <span style="font-size:.68rem;font-weight:700;color:#8b5cf6;background:#8b5cf620;padding:2px 8px;border-radius:100px">Logic</span>
-          </div>
-          <div style="position:relative;display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:8px;">
-            <div style="position:absolute;top:-8px;left:24px;width:2px;height:8px;background:var(--border)"></div>
-            <div style="width:28px;height:28px;border-radius:8px;background:#22c55e20;display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div></div>
-            <span style="font-size:.82rem;font-weight:600;color:var(--text);flex:1">Schedule collection task</span>
-            <span style="font-size:.68rem;font-weight:700;color:#22c55e;background:#22c55e20;padding:2px 8px;border-radius:100px">Action</span>
-          </div>
-          <div style="position:relative;display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:8px;">
-            <div style="position:absolute;top:-8px;left:24px;width:2px;height:8px;background:var(--border)"></div>
-            <div style="width:28px;height:28px;border-radius:8px;background:#f59e0b20;display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:8px;height:8px;border-radius:50%;background:#f59e0b"></div></div>
-            <span style="font-size:.82rem;font-weight:600;color:var(--text);flex:1">Notify customer via SMS</span>
-            <span style="font-size:.68rem;font-weight:700;color:#f59e0b;background:#f59e0b20;padding:2px 8px;border-radius:100px">Notify</span>
-          </div>
-          <div style="position:relative;display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:8px;">
-            <div style="position:absolute;top:-8px;left:24px;width:2px;height:8px;background:var(--border)"></div>
-            <div style="width:28px;height:28px;border-radius:8px;background:#22c55e20;display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div></div>
-            <span style="font-size:.82rem;font-weight:600;color:var(--text);flex:1">Update billing record</span>
-            <span style="font-size:.68rem;font-weight:700;color:#22c55e;background:#22c55e20;padding:2px 8px;border-radius:100px">Billing</span>
-          </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURE BLOCK 2 -->
-<section class="wq-fb-section" style="background:var(--bg)">
-  <div class="wq-fb-grid" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center">
-    <div class="anim anim-delay-1">
-      <div class="wq-visual-card" style="border-radius:20px;overflow:hidden">
-        <div style="background:linear-gradient(135deg,var(--green-700),var(--green-500));padding:24px;color:white">
-          <h3 style="font-weight:700;margin-bottom:4px">Team Performance Hub</h3>
-          <p style="font-size:.85rem;opacity:.8">Attract, onboard, and empower high-performance teams</p>
-        </div>
-        <div style="padding:20px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
-            <div style="background:var(--bg);border-radius:10px;padding:12px;border:1px solid var(--border)"><div style="font-size:.68rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Onboarding Time</div><div style="font-size:1.1rem;font-weight:800;color:var(--green-700);margin-top:2px">2 Days</div><div style="font-size:.7rem;color:var(--text-light)">↓ From 3 Weeks</div></div>
-            <div style="background:var(--bg);border-radius:10px;padding:12px;border:1px solid var(--border)"><div style="font-size:.68rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Training Score</div><div style="font-size:1.1rem;font-weight:800;color:var(--green-700);margin-top:2px">97%</div><div style="font-size:.7rem;color:var(--text-light)">Platform Average</div></div>
-            <div style="background:var(--bg);border-radius:10px;padding:12px;border:1px solid var(--border)"><div style="font-size:.68rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Task Completion</div><div style="font-size:1.1rem;font-weight:800;color:var(--green-700);margin-top:2px">99.1%</div><div style="font-size:.7rem;color:var(--text-light)">This Month</div></div>
-            <div style="background:var(--bg);border-radius:10px;padding:12px;border:1px solid var(--border)"><div style="font-size:.68rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Driver Happiness</div><div style="font-size:1.1rem;font-weight:800;color:var(--green-700);margin-top:2px">4.8/5</div><div style="font-size:.7rem;color:var(--text-light)">Latest Survey</div></div>
-          </div>
-          <div style="font-size:.78rem;font-weight:700;margin-bottom:8px;color:var(--text)">Team Leaderboard This Week</div>
-          <div style="display:flex;align-items:center;gap:10px;padding:9px;border-radius:8px;border:1px solid var(--border);margin-bottom:6px;background:var(--bg)"><span style="font-size:.9rem">🥇</span><span style="font-size:.82rem;font-weight:600;color:var(--text-muted);flex:1">Ahmed R.</span><span style="font-size:.78rem;color:var(--green-600);font-weight:700">142 stops</span></div>
-          <div style="display:flex;align-items:center;gap:10px;padding:9px;border-radius:8px;border:1px solid var(--border);margin-bottom:6px;background:var(--bg)"><span style="font-size:.9rem">🥈</span><span style="font-size:.82rem;font-weight:600;color:var(--text-muted);flex:1">Priya N.</span><span style="font-size:.78rem;color:var(--green-600);font-weight:700">138 stops</span></div>
-          <div style="display:flex;align-items:center;gap:10px;padding:9px;border-radius:8px;border:1px solid var(--border);margin-bottom:6px;background:var(--bg)"><span style="font-size:.9rem">🥉</span><span style="font-size:.82rem;font-weight:600;color:var(--text-muted);flex:1">James T.</span><span style="font-size:.78rem;color:var(--green-600);font-weight:700">131 stops</span></div>
-        </div>
-      </div>
+<section class="wq-curved-reveal better-scroll-wrapper" aria-label="WASTRAQ transition reveal">
+  <div class="wq-reveal-card better-sticky-scene">
+    <div class="wq-reveal-image" aria-hidden="true"></div>
+    <div class="wq-reveal-content">
+      <h3>Better decisions. Better service.</h3>
+      <p>Operational visibility that keeps moving</p>
     </div>
-    <div class="anim anim-delay-2">
-      <div class="wq-section-tag">People-First Platform</div>
-      <h2 class="wq-section-title">Empower Your Team with Tools They’ll Actually Use</h2>
-      <p style="color:var(--text-muted);line-height:1.75;margin-bottom:24px;font-size:1.02rem">WASTRAQ is designed for real people in the field — not just managers at desks. Intuitive interfaces mean your team is productive from day one, not month three.</p>
-      <ul class="wq-feature-list">
-        <li>Mobile-first driver app works even without internet</li>
-        <li>Onboard new drivers in under 48 hours</li>
-        <li>Built-in team communication and task collaboration</li>
-        <li>Gamification and performance tracking to motivate crews</li>
-        <li>Multilingual support for diverse workforces</li>
-      </ul>
-      <a href="contact.html" class="wq-btn-primary">Book a Team Demo →</a>
-    </div>
+    <svg class="wq-reveal-mask" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+      <path id="wq-curved-mask" d="M 0 0 L 1000 0 L 1000 570 C 760 525 250 525 0 570 Z"></path>
+    </svg>
   </div>
 </section>
-t
-<!-- HOW IT WORKS -->
-<section class="wq-section wq-bg-white">
-  <div class="wq-section-inner">
-    <div class="wq-section-header center">
-      <div class="wq-section-tag anim">Simple Onboarding</div>
-      <h2 class="wq-section-title anim anim-delay-1">Up and Running in 4 Simple Steps</h2>
-      <p class="wq-section-sub anim anim-delay-2">No lengthy implementations. No expensive consultants. WASTRAQ is live and delivering value within days.</p>
+
+<section id="wq-smart-story" class="wq-smart-story" aria-label="Work Smarter with WASTRAQ">
+  <div class="wq-smart-story-container">
+    <header class="wq-smart-story-header wq-story-reveal">
+      <div class="wq-smart-story-label">Work Smarter with WASTRAQ</div>
+      <h2>Less Manual Work.<br><span style="display:inline-block;background:linear-gradient(90deg, #6fbb59 0%, #159d91 45%, #0750ad 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">More Done.</span></h2>
+      <p>Automate routine work, give your team simpler tools, and get your operation running faster without adding unnecessary complexity.</p>
+    </header>
+
+    <div class="wq-smart-story-track">
+      <div class="wq-story-line">
+        <div id="wq-story-line-fill" class="wq-story-line-fill"></div>
+      </div>
+
+      <article class="wq-story-block active" data-story="automation">
+        <div class="wq-story-copy left">
+          <h3 class="wq-story-title">Let routine work run itself.</h3>
+          <p class="wq-story-description">Automate scheduling, notifications, billing, reporting, and repetitive daily operations.</p>
+        </div>
+
+        <div class="wq-story-node"><i class="fa-solid fa-gears"></i></div>
+
+        <div class="wq-automation-visual">
+          <div class="wq-workflow-card active-step">
+            <div class="wq-workflow-icon"><i class="fa-solid fa-fill-drip"></i></div>
+            <div>
+              <h4>Bin threshold reached</h4>
+              <p>Collection required</p>
+            </div>
+            <div class="wq-workflow-tag">Trigger</div>
+          </div>
+
+          <div class="wq-workflow-card">
+            <div class="wq-workflow-icon"><i class="fa-solid fa-truck"></i></div>
+            <div>
+              <h4>Check vehicle availability</h4>
+              <p>Select available fleet</p>
+            </div>
+            <div class="wq-workflow-tag">Logic</div>
+          </div>
+
+          <div class="wq-workflow-card">
+            <div class="wq-workflow-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div>
+              <h4>Schedule collection</h4>
+              <p>Create field task</p>
+            </div>
+            <div class="wq-workflow-tag">Action</div>
+          </div>
+
+          <div class="wq-workflow-card">
+            <div class="wq-workflow-icon"><i class="fa-solid fa-message"></i></div>
+            <div>
+              <h4>Notify customer</h4>
+              <p>Send status automatically</p>
+            </div>
+            <div class="wq-workflow-tag">Notify</div>
+          </div>
+
+          <div class="wq-workflow-card">
+            <div class="wq-workflow-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+            <div>
+              <h4>Update billing</h4>
+              <p>Complete billing record</p>
+            </div>
+            <div class="wq-workflow-tag">Billing</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="wq-story-block" data-story="team">
+        <div class="wq-team-benefits">
+          <div class="wq-team-benefit">
+            <div class="wq-team-benefit-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <h4>Field-Ready</h4>
+            <p>Simple mobile tools for everyday work.</p>
+          </div>
+          <div class="wq-team-benefit">
+            <div class="wq-team-benefit-icon"><i class="fa-solid fa-user-plus"></i></div>
+            <h4>Faster Onboarding</h4>
+            <p>Get new team members productive quickly.</p>
+          </div>
+          <div class="wq-team-benefit">
+            <div class="wq-team-benefit-icon"><i class="fa-solid fa-comments"></i></div>
+            <h4>Better Collaboration</h4>
+            <p>Keep tasks and communication together.</p>
+          </div>
+          <div class="wq-team-benefit">
+            <div class="wq-team-benefit-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h4>Clear Performance</h4>
+            <p>Track progress without complex reports.</p>
+          </div>
+        </div>
+
+        <div class="wq-story-node"><i class="fa-solid fa-users"></i></div>
+
+        <div class="wq-story-copy right">
+          <h3 class="wq-story-title">Give your team better tools.</h3>
+          <p class="wq-story-description">Make everyday field work simpler, faster, and easier to manage.</p>
+        </div>
+      </article>
+
+      <article class="wq-story-block" data-story="onboarding">
+        <div class="wq-story-copy left">
+          <h3 class="wq-story-title">Go live faster.</h3>
+          <p class="wq-story-description">Move from setup to real operational value without a long implementation process.</p>
+        </div>
+
+        <div class="wq-story-node"><i class="fa-solid fa-rocket"></i></div>
+
+        <div class="wq-onboarding-visual">
+          <div class="wq-onboard-step">
+            <div class="wq-step-number">01</div>
+            <div>
+              <h4>Discovery Call</h4>
+              <p>Understand your operation and goals.</p>
+            </div>
+          </div>
+
+          <div class="wq-onboard-step">
+            <div class="wq-step-number">02</div>
+            <div>
+              <h4>Data Migration</h4>
+              <p>Move routes, customer, and fleet data.</p>
+            </div>
+          </div>
+
+          <div class="wq-onboard-step">
+            <div class="wq-step-number">03</div>
+            <div>
+              <h4>Team Training</h4>
+              <p>Get users comfortable quickly.</p>
+            </div>
+          </div>
+
+          <div class="wq-onboard-step">
+            <div class="wq-step-number">04</div>
+            <div>
+              <h4>Go Live &amp; Grow</h4>
+              <p>Launch and continue scaling.</p>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
-    <div class="wq-steps anim anim-delay-3">
-      <div class="wq-step">
-        <div class="wq-step-num">1</div>
-        <h4>Discovery Call</h4>
-        <p>We learn your operations, pain points, and goals to configure WASTRAQ perfectly for you.</p>
-      </div>
-      <div class="wq-step">
-        <div class="wq-step-num">2</div>
-        <h4>Data Migration</h4>
-        <p>Import your existing routes, customer records, and fleet data in hours — not months.</p>
-      </div>
-      <div class="wq-step">
-        <div class="wq-step-num">3</div>
-        <h4>Team Training</h4>
-        <p>Live walkthroughs and self-serve learning materials get your full team confident fast.</p>
-      </div>
-      <div class="wq-step">
-        <div class="wq-step-num">4</div>
-        <h4>Go Live & Grow</h4>
-        <p>Deploy with confidence. Our success team stays with you through every stage of growth.</p>
-      </div>
+
+    <div class="wq-smart-story-cta wq-story-reveal">
+      <a href="contact.html" class="wq-story-cta-link">See WASTRAQ in Action <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -1583,6 +1792,10 @@ to create a connected and intelligent waste management and sustainability ecosys
 <div id="footer-placeholder"></div>
 
 <script src="wastraq-shared.js?v=20260630-1"></script>
+<script src="wastraq-intro.js?v=20260815-1"></script>
+<script src="js/smart-operations.js"></script>
+<script src="js/curved-reveal.js"></script>
+<script src="js/smart-story.js"></script>
 <script>
 injectNav('home');
 injectFooter();
