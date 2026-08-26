@@ -1,0 +1,83 @@
+/* cookies.css — the cookie-consent banner popup (index.html only).
+   Depends on: nothing outside this file — no shared variables used. */
+
+#wastraq-cookie-banner {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 999999;
+  display: none;
+}
+
+.wastraq-cookie-box {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #061b22, #0b3431);
+  color: #ffffff;
+  border: 1px solid rgba(79, 174, 91, 0.35);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.wastraq-cookie-box h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.wastraq-cookie-box p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.wastraq-cookie-box a {
+  color: #4fae5b;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.wastraq-cookie-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.wastraq-cookie-actions button {
+  border: none;
+  border-radius: 999px;
+  padding: 11px 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#wastraq-accept-cookies {
+  background: #4fae5b;
+  color: #041017;
+}
+
+#wastraq-reject-cookies {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .wastraq-cookie-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wastraq-cookie-actions {
+    width: 100%;
+  }
+
+  .wastraq-cookie-actions button {
+    flex: 1;
+  }
+}
