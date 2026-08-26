@@ -1,3 +1,6 @@
+/* cookies.css — the cookie-consent banner popup (index.html only).
+   Depends on: nothing outside this file — no shared variables used. */
+
 #wastraq-cookie-banner {
   position: fixed;
   left: 20px;

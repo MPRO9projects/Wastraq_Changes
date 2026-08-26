@@ -1,3 +1,6 @@
+// cookies.js — the cookie-consent banner (index.html only).
+// Depends on: css/cookies.css for its styling.
+
 (function () {
   const CONSENT_KEY = "wastraq_cookie_consent";
   const REJECT_TIME_KEY = "wastraq_cookie_rejected_at";

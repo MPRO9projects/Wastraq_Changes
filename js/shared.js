@@ -1,26 +1,65 @@
+// shared.js — the shared site nav + footer (markup + behavior).
+// Used by index.html and cookies.html (and any future page).
+// Depends on: css/index.css (design tokens, .wq-btn-primary) and
+// css/nav-footer.css must both be linked on the page.
 // WASTRAQ Shared Navigation & Footer
+// Global Reload Routing Handler: Any page reload MUST navigate directly to "SMARTER WASTE. CLEANER CITIES. ZERO GUESSWORK." (index.html) at top (0,0)
+(function handleGlobalReloadRedirect() {
+  try {
+    let isReload = false;
+    const navEntries = performance.getEntriesByType('navigation');
+    if (navEntries && navEntries.length > 0) {
+      isReload = navEntries[0].type === 'reload';
+    } else if (window.performance && window.performance.navigation) {
+      isReload = window.performance.navigation.type === 1; // TYPE_RELOAD
+    }
+
+    if (isReload) {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      const path = window.location.pathname.toLowerCase();
+      // Pages that are allowed to stay put on reload instead of bouncing to
+      // the homepage — every real standalone page needs to be listed here,
+      // since this reload-redirect logic runs on every page that includes
+      // this shared script.
+      const STANDALONE_PAGES = ['cookies.html', 'products.html', 'solutions.html', 'enterprise.html', 'about.html', 'blog.html', 'contact.html'];
+      const isHome = path.endsWith('index.html') || path.endsWith('/') || path === ''
+        || STANDALONE_PAGES.some(p => path.endsWith(p));
+      if (!isHome) {
+        // Stop any further rendering or subpage script execution and redirect immediately to home
+        window.location.replace('index.html?reload=true');
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+  } catch (e) {
+    // Fallback if performance API is restricted
+  }
+})();
 
 function injectNav(activePage = '') {
   const nav = `
   <nav class="wq-nav" id="wq-nav">
     <div class="wq-nav-inner">
       <a href="index.html" class="wq-logo" id="wq-nav-logo">
-        <img src="screenshots/favicon.png" alt="WASTRAQ Logo" class="wq-nav-logo-icon" />
+        <img src="assets/images/index_favicon.png" alt="WASTRAQ Logo" class="wq-nav-logo-icon" />
         <span class="logo-text">WASTRAQ</span><span class="tm">™</span>
       </a>
       <ul class="wq-nav-links">
+        <li class="${activePage===''||activePage==='home'?'active':''}"><a href="index.html">Home</a></li>
         <li class="has-dropdown ${activePage==='products'?'active':''}">
           <a href="products.html">Products <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
           <div class="wq-dropdown">
-            <a href="products.html#core">TraqCore™ – The Core Platform</a>
+            <a href="products.html#core">TraqCore – The Core Platform</a>
             <a href="products.html#residential">Residential Collection</a>
             <a href="products.html#commercial">Commercial Collection</a>
-            <a href="products.html#skip">Skip & Bulk Hire</a>
+            <a href="products.html#skip">Skip &amp; Bulk Hire</a>
             <a href="products.html#routeai">RouteTraq™ | Smart Routing</a>
             <a href="products.html#incab">In-Cab Navigation</a>
             <a href="products.html#crm">Customer Relationship Management</a>
             <a href="products.html#portal">Customer Portal</a>
-            <a href="products.html#insights">Waste Insights & Analytics</a>
+            <a href="products.html#insights">Waste Insights &amp; Analytics</a>
             <a href="products.html#integrations">Integrations</a>
           </div>
         </li>
@@ -32,7 +71,7 @@ function injectNav(activePage = '') {
             <a href="enterprise.html">Enterprise</a>
           </div>
         </li>
-        <li class="${activePage==='partnership'?'active':''}"><a href="partnership.html">Partnership</a></li>
+        <li class="${activePage==='partnership'?'active':''}"><a href="contact.html">Partnership</a></li>
         <li class="has-dropdown ${activePage==='about'?'active':''}">
           <a href="about.html">About <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
           <div class="wq-dropdown">
@@ -43,7 +82,7 @@ function injectNav(activePage = '') {
         </li>
       </ul>
       <div class="wq-nav-actions">
-        <a href="login.html" class="wq-btn-ghost">Login</a>
+        <a href="#" class="wq-btn-ghost">Login</a>
         <a href="contact.html" class="wq-btn-primary">Schedule Demo</a>
       </div>
       <button class="wq-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
@@ -54,10 +93,10 @@ function injectNav(activePage = '') {
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="solutions.html">Solutions</a>
-      <a href="partnership.html">Partnership</a>
+      <a href="contact.html">Partnership</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact</a>
-      <a href="login.html">Login</a>
+      <a href="#">Login</a>
       <a href="contact.html" class="wq-btn-primary" style="margin-top:12px;display:block;text-align:center">Schedule Demo</a>
     </div>
   </nav>`;
@@ -86,7 +125,7 @@ function injectFooter() {
     <div class="wq-footer-top">
       <div class="wq-footer-brand">
         <a href="index.html" class="wq-logo wq-logo-light">
-          <img src="screenshots/favicon.png" alt="WASTRAQ Logo" class="wq-nav-logo-icon" />
+          <img src="assets/images/index_favicon.png" alt="WASTRAQ Logo" class="wq-nav-logo-icon" />
           <span class="logo-text">WASTRAQ</span><span class="tm">™</span>
         </a>
         <p>Intelligent waste management software for smart, sustainable, and profitable operations worldwide.</p>
@@ -100,10 +139,10 @@ function injectFooter() {
       <div class="wq-footer-cols">
         <div class="wq-footer-col">
           <h4>Products</h4>
-          <a href="products.html#core">TraqCore™ Platform</a>
+          <a href="products.html#core">TraqCore Platform</a>
           <a href="products.html#commercial">Commercial Collection</a>
           <a href="products.html#residential">Residential Collection</a>
-          <a href="products.html#skip">Skip & Bulk Hire</a>
+          <a href="products.html#skip">Skip &amp; Bulk Hire</a>
           <a href="products.html#crm">CRM</a>
           <a href="products.html#incab">In-Cab Navigation</a>
           <a href="products.html#portal">Customer Portal</a>
@@ -115,17 +154,17 @@ function injectFooter() {
           <a href="solutions.html#municipal">Municipal Utilities</a>
           <a href="solutions.html#collectors">Waste Collectors</a>
           <h4 style="margin-top:24px">Partnership</h4>
-          <a href="partnership.html">Become a Partner</a>
+          <a href="contact.html">Become a Partner</a>
         </div>
         <div class="wq-footer-col">
           <h4>Company</h4>
           <a href="about.html">About Us</a>
           <a href="blog.html">Blog</a>
           <a href="contact.html">Contact Us</a>
-          <a href="careers.html">Careers</a>
-          <a href="help.html">Help Centre</a>
-          <a href="terms-and-conditions.html">Terms of Service</a>
-          <a href="data-privacy.html">Data Privacy Policy</a>
+          <a href="#">Careers</a>
+          <a href="#">Help Centre</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Data Privacy Policy</a>
           <a href="cookies.html">Read Cookie Policy</a>
           <a href="#">Security Policy</a>
         </div>
@@ -139,16 +178,17 @@ function injectFooter() {
   document.getElementById('footer-placeholder').innerHTML = footer;
 }
 
-// Animate on scroll
+// Animate on scroll (replays when scrolling away and returning)
 function initScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('anim-in');
-        observer.unobserve(e.target);
+      } else {
+        e.target.classList.remove('anim-in');
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.22 });
   document.querySelectorAll('.anim').forEach(el => observer.observe(el));
 }
 
@@ -179,3 +219,4 @@ document.addEventListener('DOMContentLoaded', () => {
     obs.observe(statSection);
   }
 });
+

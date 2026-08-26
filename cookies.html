@@ -8,7 +8,10 @@
   <meta name="description" content="Read WASTRAQ's Cookie Policy to understand how we use cookies to improve user experience, analyze website traffic, and enhance our smart waste management platform." />
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="cookies.html">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/images/index_favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/index_apple_touch_icon.png">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/nav-footer.css">
 </head>
 <style>
     .legal-page {
@@ -22,6 +25,19 @@
   max-width: 900px;
   margin: 0 auto 40px;
   text-align: center;
+}
+
+.legal-back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #16a34a;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.legal-back-link:hover {
+  text-decoration: underline;
 }
 
 .legal-hero .eyebrow {
@@ -75,8 +91,11 @@
 </style>
 <body>
 
+<div id="nav-placeholder"></div>
+
   <main class="legal-page">
     <section class="legal-hero">
+      <a href="index.html" class="legal-back-link">← Back to WASTRAQ</a>
       <p class="eyebrow">WASTRAQ Legal</p>
       <h1>Cookie Policy</h1>
       <p>
@@ -139,6 +158,14 @@
       </p>
     </section>
   </main>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/shared.js"></script>
+<script>
+  injectNav('cookies');
+  injectFooter();
+</script>
 
 </body>
 </html>
