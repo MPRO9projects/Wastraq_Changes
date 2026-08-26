@@ -1,0 +1,1117 @@
+/* ==========================================================================
+   WASTRAQ Solutions Page Stylesheet (solutions.css)
+   ========================================================================== */
+
+/* ── HERO & CORE LAYOUT ──────────────────────────────────────────────────── */
+.sol-hero {
+  overflow: hidden;
+  position: relative;
+  padding: calc(var(--nav-h) + 58px) 32px 56px;
+  background: #f8faf7;
+  color: var(--green-900);
+}
+
+.sol-hero-inner {
+  position: relative;
+  max-width: 1180px;
+  min-height: 470px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .82fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.sol-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+}
+
+.sol-hero h1 {
+  font-size: clamp(2.35rem, 4.2vw, 4.15rem);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -.045em;
+  margin-bottom: 20px;
+}
+
+.sol-hero p {
+  font-size: 1.06rem;
+  opacity: .8;
+  max-width: 570px;
+  margin: 0 0 32px;
+  line-height: 1.7;
+}
+
+.sol-hero .sol-label {
+  color: var(--green-600) !important;
+}
+
+.sol-hero .sol-reveal {
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+.sol-hero.is-visible .sol-label {
+  animation: sol-label-in .7s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+.sol-label::before {
+  width: 0;
+  transition: none;
+}
+
+.sol-hero.is-visible .sol-label::before {
+  animation: sol-line-in .55s cubic-bezier(.16, 1, .3, 1) .12s forwards;
+}
+
+.sol-heading-line {
+  display: block;
+  overflow: hidden;
+}
+
+.sol-heading-line>span {
+  display: block;
+  opacity: 0;
+  transform: translateY(105%);
+}
+
+.sol-hero.is-visible .sol-heading-line>span {
+  animation: sol-heading-in .75s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+.sol-hero.is-visible .sol-heading-line:nth-child(2)>span {
+  animation-delay: .1s;
+}
+
+.sol-heading-line>span {
+  color: inherit;
+}
+
+.sol-hero.is-visible .sol-subtext {
+  animation: sol-rise-in .65s cubic-bezier(.16, 1, .3, 1) .95s forwards;
+}
+
+.sol-hero.is-visible .sol-actions {
+  animation: sol-pop-in .6s cubic-bezier(.16, 1, .3, 1) 1.1s forwards;
+}
+
+.sol-tabs {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 34px 0 0;
+  flex-wrap: wrap;
+  width: max-content;
+  max-width: 100%;
+}
+
+.sol-tab-btn {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(10, 32, 22, .2);
+  color: var(--green-800);
+  background: rgba(255, 255, 255, .3);
+  cursor: pointer;
+  transition: color .3s ease, border-color .3s ease, background .3s ease, filter .45s cubic-bezier(.16, 1, .3, 1), transform .45s cubic-bezier(.16, 1, .3, 1), opacity .45s;
+  font-family: var(--font);
+  backdrop-filter: blur(6px);
+}
+
+.sol-tab-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+.sol-tab-btn:hover {
+  background: rgba(255, 255, 255, .68);
+  border-color: var(--green-600);
+  transform: translateY(-2px);
+}
+
+.sol-tab-btn.active {
+  color: #14502e;
+  border-color: white;
+}
+
+.sol-tab-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  padding: 6px 9px;
+  border-radius: 6px;
+  color: white;
+  background: rgba(7, 31, 22, .88);
+  font-size: .7rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -3px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.sol-tab-btn:hover::after,
+.sol-tab-btn:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.sol-tab-btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.sol-tab-indicator {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  height: 50px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .16);
+  transition: left .5s cubic-bezier(.16, 1, .3, 1), width .5s cubic-bezier(.16, 1, .3, 1), top .5s cubic-bezier(.16, 1, .3, 1), height .5s cubic-bezier(.16, 1, .3, 1);
+}
+
+.sol-hero.is-visible .sol-tab-btn {
+  animation: sol-tab-in .55s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+.sol-hero.is-visible .sol-tab-btn:nth-of-type(1) {
+  animation-delay: 1.28s;
+}
+
+.sol-hero.is-visible .sol-tab-btn:nth-of-type(2) {
+  animation-delay: 1.37s;
+}
+
+.sol-hero.is-visible .sol-tab-btn:nth-of-type(3) {
+  animation-delay: 1.46s;
+}
+
+.sol-demo-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.sol-demo-btn::after {
+  content: "";
+  position: absolute;
+  inset: -50% auto -50% -30%;
+  width: 22%;
+  opacity: 0;
+  transform: rotate(22deg) translateX(-450%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .75), transparent);
+  transition: transform .7s ease, opacity .15s ease;
+  pointer-events: none;
+}
+
+.sol-demo-btn:hover::after {
+  opacity: 1;
+  transform: rotate(22deg) translateX(800%);
+}
+
+.sol-demo-btn:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+}
+
+.sol-arrow {
+  display: inline-block;
+}
+
+.sol-explore-btn:hover .sol-arrow {
+  animation: sol-arrow-bounce .65s ease-in-out infinite;
+}
+
+.sol-explore-btn:hover {
+  border-color: var(--green-300);
+}
+
+.sol-logo-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 410px;
+  opacity: 0;
+  transform: translateX(20px) scale(.96);
+}
+
+.sol-hero.is-visible .sol-logo-stage {
+  animation: sol-logo-stage-in .9s cubic-bezier(.16, 1, .3, 1) .18s forwards;
+}
+
+.sol-logo-rotor {
+  position: relative;
+  width: min(35vw, 390px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  animation: sol-logo-spin 18s linear infinite;
+  filter: drop-shadow(0 22px 28px rgba(19, 67, 43, .18));
+}
+
+.sol-logo-rotor::before,
+.sol-logo-rotor::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sol-logo-rotor::before {
+  inset: 0;
+  border: 1px solid rgba(20, 80, 46, .3);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  transform: rotate(-22deg);
+}
+
+.sol-logo-rotor::after {
+  inset: 8%;
+  border: 1px solid rgba(20, 80, 46, .22);
+  border-right-color: transparent;
+  transform: rotate(40deg);
+}
+
+.sol-logo-mark {
+  width: 83%;
+  height: 83%;
+  border-radius: 50%;
+  background-image: url('screenshots/wastraq_logo.png');
+  background-repeat: no-repeat;
+  background-size: 132% auto;
+  background-position: center 1%;
+  animation: sol-logo-float 5s ease-in-out infinite;
+}
+
+@keyframes sol-label-in {
+  from {
+    opacity: 0;
+    transform: scale(.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sol-line-in {
+  to {
+    width: 20px;
+  }
+}
+
+@keyframes sol-heading-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sol-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: .8;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sol-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sol-tab-in {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes sol-arrow-bounce {
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes sol-logo-stage-in {
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes sol-logo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sol-logo-float {
+  50% {
+    transform: scale(.97);
+  }
+}
+
+@media (max-width:800px) {
+  .sol-hero {
+    padding: calc(var(--nav-h) + 36px) 24px 44px;
+  }
+
+  .sol-hero-inner {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .sol-hero-content {
+    text-align: center;
+  }
+
+  .sol-hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sol-actions {
+    justify-content: center !important;
+  }
+
+  .sol-tabs {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sol-logo-stage {
+    min-height: 300px;
+    grid-row: 1;
+  }
+
+  .sol-logo-rotor {
+    width: min(72vw, 330px);
+  }
+
+  .sol-logo-mark {
+    background-size: 132% auto;
+  }
+
+  .sol-hero h1 {
+    font-size: clamp(2.25rem, 9vw, 3.4rem);
+  }
+}
+
+@media (max-width:600px) {
+  .sol-tabs {
+    gap: 8px;
+  }
+
+  .sol-tab-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .sol-tab-indicator {
+    height: 46px;
+  }
+
+  .sol-logo-stage {
+    min-height: 260px;
+  }
+
+  .sol-logo-rotor {
+    width: 250px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+  .sol-explore-btn:hover .sol-arrow,
+  .sol-logo-rotor,
+  .sol-logo-mark {
+    animation: none;
+  }
+
+  .sol-reveal,
+  .sol-heading-line>span,
+  .sol-tab-btn,
+  .sol-logo-stage {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .sol-label::before {
+    width: 20px;
+  }
+
+  .sol-hero.is-visible .sol-label,
+  .sol-hero.is-visible .sol-label::before,
+  .sol-hero.is-visible .sol-heading-line>span,
+  .sol-hero.is-visible .sol-subtext,
+  .sol-hero.is-visible .sol-actions,
+  .sol-hero.is-visible .sol-tab-btn,
+  .sol-hero.is-visible .sol-logo-stage {
+    animation: none;
+  }
+
+  .sol-tab-indicator {
+    transition: none;
+  }
+}
+
+.sol-section {
+  padding: 80px 32px;
+}
+
+.sol-section:nth-child(even) {
+  background: white;
+}
+
+.sol-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.sol-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.sol-split.rev {
+  direction: rtl;
+}
+
+.sol-split.rev>* {
+  direction: ltr;
+}
+
+.sol-info .badge {
+  display: inline-block;
+  background: var(--green-100);
+  color: var(--green-700);
+  font-size: .72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+
+.sol-info h2,
+.sol-info h3 {
+  font-size: clamp(1.7rem, 2.5vw, 2.3rem);
+  font-weight: 800;
+  color: var(--green-900);
+  letter-spacing: -.03em;
+  margin-bottom: 14px;
+}
+
+.sol-info p {
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.solution-detail {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.sol-section[id] .wq-section-title::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  margin: 18px auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--green-500), var(--green-700));
+  transition: width .65s cubic-bezier(.16, 1, .3, 1) .12s;
+}
+
+.sol-section[id] .wq-section-title.anim-in::after {
+  width: 56px;
+}
+
+.solutions-page .solution-detail .wq-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+.solutions-page .solution-detail .wq-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(7, 80, 173, .28);
+}
+
+.sol-cta-arrow {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform .22s ease;
+}
+
+.solutions-page .solution-detail .wq-btn-primary:hover .sol-cta-arrow {
+  transform: translateX(4px);
+}
+
+html.sol-motion-ready .solution-detail .wq-feature-list li {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity .45s ease, transform .45s cubic-bezier(.16, 1, .3, 1);
+}
+
+html.sol-motion-ready .solution-detail.anim-in .wq-feature-list li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+html.sol-motion-ready .solution-detail.anim-in .wq-feature-list li:nth-child(1) {
+  transition-delay: .12s;
+}
+
+html.sol-motion-ready .solution-detail.anim-in .wq-feature-list li:nth-child(2) {
+  transition-delay: .19s;
+}
+
+html.sol-motion-ready .solution-detail.anim-in .wq-feature-list li:nth-child(3) {
+  transition-delay: .26s;
+}
+
+html.sol-motion-ready .solution-detail.anim-in .wq-feature-list li:nth-child(4) {
+  transition-delay: .33s;
+}
+
+html.sol-motion-ready .solution-detail.anim-in .wq-feature-list li:nth-child(5) {
+  transition-delay: .40s;
+}
+
+html.sol-motion-ready .solution-detail.anim-in .wq-feature-list li:nth-child(6) {
+  transition-delay: .47s;
+}
+
+.sol-section-focus .wq-section-title {
+  animation: sol-section-highlight .6s cubic-bezier(.16, 1, .3, 1);
+}
+
+@keyframes sol-section-highlight {
+  50% {
+    color: var(--green-600);
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+  .sol-section[id] .wq-section-title::after,
+  .solutions-page .solution-detail .wq-btn-primary,
+  .sol-cta-arrow,
+  html.sol-motion-ready .solution-detail .wq-feature-list li {
+    transition: none;
+  }
+
+  .sol-section-focus .wq-section-title {
+    animation: none;
+  }
+}
+
+.sol-visual {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.sol-visual-header {
+  background: var(--green-800);
+  padding: 16px 22px;
+  color: white;
+  font-weight: 700;
+  font-size: .9rem;
+}
+
+.sol-visual-body {
+  padding: 20px;
+  background: var(--bg);
+}
+
+@media(max-width:900px) {
+
+  .sol-split,
+  .sol-split.rev {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 36px;
+  }
+}
+
+/* BAMCO-STYLE CURVED TRANSITIONS & COLOR SECTIONS */
+.bamco-curve-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  pointer-events: none;
+  z-index: 10;
+  margin-bottom: -3px;
+}
+
+.bamco-curve-wrapper svg {
+  display: block;
+  width: 100%;
+  height: clamp(60px, 9vw, 120px);
+  transform-origin: center bottom;
+  transition: transform 0.4s ease-out;
+}
+
+.bamco-curve-exit {
+  margin-bottom: -4px;
+  background: #0a2016;
+}
+
+/* Decorative Arch Entrance Layer (#municipal & #collectors) */
+.sol-arch-entrance-layer {
+  position: absolute;
+  top: -79px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.sol-arch-entrance-layer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+/* 2-Column Split Layout for Showcase Sections */
+.sol-split-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 960px) {
+  .sol-split-showcase {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Municipal Section (#0a2016) */
+.sol-municipal-section {
+  padding: 90px 32px;
+  background: #0a2016;
+  position: relative;
+  color: #ffffff;
+}
+
+.sol-split-badges {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.sol-municipal-section .wq-section-tag {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #dcfce7 !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  margin-bottom: 0 !important;
+}
+
+.sol-municipal-section .badge {
+  background: rgba(74, 222, 128, 0.16);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  font-weight: 800;
+  letter-spacing: .08em;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: .75rem;
+  text-transform: uppercase;
+  margin-bottom: 0 !important;
+  display: inline-block;
+}
+
+.sol-split-title {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.sol-split-subheading {
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 700;
+  color: rgba(240, 253, 244, 0.95);
+  margin-bottom: 20px;
+  line-height: 1.35;
+}
+
+.sol-split-desc p {
+  color: rgba(240, 253, 244, 0.88);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.sol-split-btn {
+  margin-top: 16px;
+}
+
+/* Stacked Frosted Micro-Cards Stack (Right Column - Municipal) */
+.sol-stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sol-frosted-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sol-frosted-card:hover {
+  transform: translateX(6px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(74, 222, 128, 0.38);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.sol-badge-check-green {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.18);
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sol-badge-check-green svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sol-frosted-card:hover .sol-badge-check-green svg {
+  transform: scale(1.12);
+}
+
+.sol-frosted-card span {
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Collectors Section (#f8faf7 Light Canvas) */
+.sol-collectors-section {
+  padding: 90px 32px;
+  background: #f8faf7;
+  position: relative;
+  color: #0a2016;
+}
+
+.sol-collectors-section .wq-section-tag {
+  background: rgba(21, 157, 145, 0.1) !important;
+  color: #0e564d !important;
+  border: 1px solid rgba(21, 157, 145, 0.25) !important;
+  margin-bottom: 0 !important;
+}
+
+.sol-collectors-section .badge {
+  background: #e6f4ea;
+  color: #14502e;
+  border: 1px solid rgba(20, 80, 46, 0.25);
+  font-weight: 800;
+  letter-spacing: .08em;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: .75rem;
+  text-transform: uppercase;
+  margin-bottom: 0 !important;
+  display: inline-block;
+}
+
+.sol-collectors-section .sol-split-title {
+  color: #0a2016 !important;
+}
+
+.sol-collectors-section .sol-split-subheading {
+  color: #14502e !important;
+}
+
+.sol-collectors-section .sol-split-desc p {
+  color: #2d3748 !important;
+}
+
+/* Stacked Light Micro-Cards (Left Column - Collectors) */
+.sol-light-card {
+  background: #ffffff;
+  border: 1px solid #e2ead0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 18px rgba(10, 32, 22, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sol-light-card:hover {
+  transform: translateX(-6px);
+  border-color: #159d91;
+  box-shadow: 0 8px 24px rgba(10, 32, 22, 0.1);
+}
+
+.sol-badge-check-emerald {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: rgba(21, 157, 145, 0.12);
+  color: #159d91;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sol-badge-check-emerald svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sol-light-card:hover .sol-badge-check-emerald svg {
+  transform: scale(1.12);
+}
+
+.sol-light-card span {
+  color: #0a2016;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* UNIFIED BUTTON STYLES FOR SOLUTIONS PAGE */
+.solutions-page .wq-btn-primary,
+.solutions-page .wq-btn-white,
+.solutions-page .wq-btn-outline-white,
+.solutions-page .sol-demo-btn,
+.solutions-page .sol-explore-btn,
+.sol-municipal-section .wq-btn-primary,
+.sol-collectors-section .wq-btn-primary,
+.solutions-page .wq-cta .wq-btn-white,
+.solutions-page .wq-cta .wq-btn-outline-white {
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 14px !important;
+  font-family: var(--font);
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  padding: 13px 28px !important;
+  box-shadow: 0 8px 24px rgba(7, 80, 173, 0.25) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.solutions-page .wq-btn-primary:hover,
+.solutions-page .wq-btn-white:hover,
+.solutions-page .wq-btn-outline-white:hover,
+.solutions-page .sol-demo-btn:hover,
+.solutions-page .sol-explore-btn:hover,
+.sol-municipal-section .wq-btn-primary:hover,
+.sol-collectors-section .wq-btn-primary:hover,
+.solutions-page .wq-cta .wq-btn-white:hover,
+.solutions-page .wq-cta .wq-btn-outline-white:hover {
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  filter: brightness(1.08) saturate(1.1) !important;
+  box-shadow: 0 12px 32px rgba(7, 80, 173, 0.38) !important;
+}
+
+/* "What WASTRAQ Customers Achieve" Metric Grid */
+.sol-exit-group {
+  background: #0a2016;
+  position: relative;
+  color: #ffffff;
+}
+
+.sol-exit-section {
+  padding: 90px 32px 60px;
+  background: #0a2016;
+}
+
+.sol-exit-section .wq-section-tag {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(74, 222, 128, 0.25) !important;
+}
+
+.sol-exit-section .wq-section-title {
+  color: #ffffff !important;
+}
+
+.wq-sol-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1023px) {
+  .wq-sol-compare-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .wq-sol-compare-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.sol-exit-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+  transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), border-color .35s ease, background .35s ease, box-shadow .35s ease;
+}
+
+.sol-exit-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(74, 222, 128, 0.4);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+}
+
+.sol-exit-card .val {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #4ade80;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.25);
+  letter-spacing: -.03em;
+  margin-bottom: 8px;
+}
+
+.sol-exit-card .label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.sol-exit-card .desc {
+  font-size: .86rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+.solutions-page .wq-cta {
+  background: #0a2016 !important;
+  padding: 60px 32px 100px;
+}
+
+.solutions-page .wq-cta h2 {
+  color: #ffffff;
+}
+
+.solutions-page .wq-cta p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* RESPONSIVE PADDING OVERRIDES FOR SOLUTIONS PAGE */
+@media (max-width: 768px) {
+  .sol-hero {
+    padding: calc(var(--nav-h) + 40px) 20px 48px !important;
+  }
+
+  .sol-section {
+    padding: 56px 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sol-hero {
+    padding: calc(var(--nav-h) + 24px) 16px 40px !important;
+  }
+
+  .sol-section {
+    padding: 10px 16px 44px !important;
+  }
+}
