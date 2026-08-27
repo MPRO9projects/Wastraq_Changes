@@ -127,8 +127,10 @@
 .wq-footer-col h4 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.4); margin-bottom: 14px; }
 .wq-footer-col a { display: block; font-size: .875rem; color: rgba(255,255,255,.6); padding: 4px 0; transition: color .2s; }
 .wq-footer-col a:hover { color: var(--green-400); }
-.wq-footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 20px 32px; max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: .8rem; color: rgba(255,255,255,.35); }
+.wq-footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 22px 32px; max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; text-align: center; font-size: .8rem; color: rgba(255,255,255,.35); }
 .wq-footer-bottom strong { color: rgba(255,255,255,.6); }
+.wq-footer-bottom strong a { transition: color .2s; }
+.wq-footer-bottom strong a:hover { color: var(--green-400); }
 
 /* ── RESPONSIVE ──────────────────────────────── */
 @media (max-width: 1024px) {

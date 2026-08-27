@@ -71,7 +71,7 @@ function injectNav(activePage = '') {
             <a href="enterprise.html">Enterprise</a>
           </div>
         </li>
-        <li class="${activePage==='partnership'?'active':''}"><a href="contact.html">Partnership</a></li>
+        <li class="${activePage==='partnership'?'active':''}"><a href="partnership.html">Partnership</a></li>
         <li class="has-dropdown ${activePage==='about'?'active':''}">
           <a href="about.html">About <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
           <div class="wq-dropdown">
@@ -93,7 +93,7 @@ function injectNav(activePage = '') {
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="solutions.html">Solutions</a>
-      <a href="contact.html">Partnership</a>
+      <a href="partnership.html">Partnership</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact</a>
       <a href="#">Login</a>
@@ -154,7 +154,7 @@ function injectFooter() {
           <a href="solutions.html#municipal">Municipal Utilities</a>
           <a href="solutions.html#collectors">Waste Collectors</a>
           <h4 style="margin-top:24px">Partnership</h4>
-          <a href="contact.html">Become a Partner</a>
+          <a href="partnership.html">Become a Partner</a>
         </div>
         <div class="wq-footer-col">
           <h4>Company</h4>
@@ -172,7 +172,7 @@ function injectFooter() {
     </div>
     <div class="wq-footer-bottom">
       <span>© 2026 WASTRAQ – All rights reserved</span>
-      <span>Developed by <strong><a href="https://www.mpro9.in/" target="_blank" rel="noopener noreferrer">M Pro9 Pvt. Ltd.</a></strong></span>
+      <span>Developed by <strong><a href="https://www.mpro9.in/" target="_blank" rel="noopener noreferrer">M PRO9 Pvt. Ltd.</a></strong></span>
     </div>
   </footer>`;
   document.getElementById('footer-placeholder').innerHTML = footer;
