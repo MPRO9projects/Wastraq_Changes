@@ -161,7 +161,7 @@ function injectFooter() {
           <a href="about.html">About Us</a>
           <a href="blog.html">Blog</a>
           <a href="contact.html">Contact Us</a>
-          <a href="#">Careers</a>
+          <a href="careers.html">Careers</a>
           <a href="#">Help Centre</a>
           <a href="#">Terms of Service</a>
           <a href="#">Data Privacy Policy</a>
