@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WASTRAQ | AI-Powered Enterprise Circular Economy &amp; MRF Intelligence Platform</title>
+<meta name="description" content="WASTRAQ — One intelligent platform to track, recover, optimise, and measure waste across the circular economy." />
+<meta name="author" content="WASTRAQ" />
+<meta property="og:title" content="WASTRAQ | Enterprise Circular Economy &amp; MRF Intelligence Platform" />
+<meta property="og:type" content="website" />
+<link rel="canonical" href="https://wastraq.com/enterprise.html">
+<link rel="icon" type="image/png" href="assets/enterprise/enterprise_favicon.png">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"WASTRAQ Enterprise","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://wastraq.com/enterprise.html","publisher":{"@type":"Organization","name":"WASTRAQ","url":"https://wastraq.com"}}</script>
+
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/nav-footer.css">
+<link rel="stylesheet" href="css/cookies.css">
+<link rel="stylesheet" href="css/chatbot.css">
+<link rel="stylesheet" href="css/enterprise.css">
+<script>window.WASTRAQ_API_BASE=window.location.origin;</script>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="hero-inner-grid">
+      <div id="hero-copy">
+        <div class="badge badge-white mb-6">
+          <span class="badge-dot" style="background:#4ade80;"></span>
+          AI-Powered Circular Economy Platform
+        </div>
+        <h1 class="t-h1 mb-6">Turn Waste Into<br><span class="grad-text">Measurable</span><br>Business Value.</h1>
+        <p class="t-body-hero mb-4" style="max-width:480px;">WASTRAQ helps enterprises, MRFs, recyclers, and waste operators track, optimise, and recover waste through one intelligent platform.</p>
+        <p class="hero-sub-small">Manage operations, improve material recovery, simplify EPR compliance, and measure ESG performance — all from one place.</p>
+        <div class="hero-btns">
+          <a href="#cta" class="btn btn-primary">Request a Demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="mailto:enterprise@wastraq.com" class="btn btn-hero-outline">Talk to Our Team</a>
+        </div>
+        <div class="trust-pills">
+          <span class="trust-pill"><span class="trust-pill-dot"></span>AI-Powered</span>
+          <span class="trust-pill"><span class="trust-pill-dot"></span>Real-Time</span>
+          <span class="trust-pill"><span class="trust-pill-dot"></span>Traceable</span>
+          <span class="trust-pill"><span class="trust-pill-dot"></span>Enterprise-Ready</span>
+        </div>
+      </div>
+      <div id="hero-visual">
+        <!-- Command Center Dashboard Widget -->
+        <div class="cc-widget">
+          <!-- Title bar -->
+          <div class="cc-titlebar">
+            <div class="cc-dots">
+              <span class="cc-dot cc-dot-red"></span>
+              <span class="cc-dot cc-dot-yellow"></span>
+              <span class="cc-dot cc-dot-green"></span>
+            </div>
+            <span class="cc-url">wastraq://command-center/global</span>
+            <span class="cc-live-badge"><span class="cc-live-dot"></span>LIVE</span>
+          </div>
+
+          <!-- Stats Row -->
+          <div class="cc-stats-row">
+            <div class="cc-stat-card">
+              <div class="cc-stat-label">TONNES DIVERTED</div>
+              <div class="cc-stat-value count-up" data-target="128940" data-suffix="">0</div>
+              <div class="cc-stat-change cc-positive">▲ 18.4% MoM</div>
+            </div>
+            <div class="cc-stat-card">
+              <div class="cc-stat-label">CO<sub>2</sub> AVOIDED</div>
+              <div class="cc-stat-value count-up" data-target="42.7" data-suffix="K t">0K t</div>
+              <div class="cc-stat-change cc-positive">▲ 9.1% MoM</div>
+            </div>
+            <div class="cc-stat-card">
+              <div class="cc-stat-label">EPR COMPLIANCE</div>
+              <div class="cc-stat-value count-up" data-target="98.6" data-suffix="%">0%</div>
+              <div class="cc-stat-change cc-positive">▲ on target</div>
+            </div>
+          </div>
+
+          <!-- Chart Panel -->
+          <div class="cc-chart-panel">
+            <div class="cc-chart-header">
+              <div>
+                <div class="cc-chart-eyebrow">MATERIAL RECOVERY · 30D</div>
+                <div class="cc-chart-title">PET · HDPE · Paper · Metals · E-Waste</div>
+              </div>
+              <div class="cc-chart-dots">
+                <span class="cc-cdot" style="background:#4ade80;"></span>
+                <span class="cc-cdot" style="background:#60a5fa;"></span>
+                <span class="cc-cdot" style="background:#c084fc;"></span>
+              </div>
+            </div>
+            <div class="cc-chart-wrap">
+              <canvas id="cc-recovery-chart" height="110"></canvas>
+            </div>
+          </div>
+
+          <!-- AI Live Feed -->
+          <div class="cc-livefeed">
+            <div class="cc-feed-label">AI LIVE FEED</div>
+            <div class="cc-feed-item">
+              <span class="cc-feed-dot" style="background:#4ade80;"></span>
+              <span>MRF-BLR-01 · Bale #4821 PET dispatched to Recycler GreenCircle</span>
+            </div>
+            <div class="cc-feed-item">
+              <span class="cc-feed-dot" style="background:#60a5fa;"></span>
+              <span>AI · 12,402 SKUs classified · 99.2% confidence</span>
+            </div>
+            <div class="cc-feed-item">
+              <span class="cc-feed-dot" style="background:#c084fc;"></span>
+              <span>EPR · Q2 target reached for Plastic Cat-I (FMCG client)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section id="metrics">
+  <div class="metrics-grid">
+    <div class="metric-cell reveal"><div class="t-eyebrow mb-3">Active MRFs</div><div class="metric-num mono count-up" data-target="214" data-suffix="">214</div><div class="metric-label">Plants &amp; Sites Connected</div></div>
+    <div class="metric-cell reveal" style="transition-delay:80ms;"><div class="t-eyebrow mb-3">CO&#8322; Avoided</div><div class="metric-num mono count-up" data-target="42.7" data-suffix="Kt">42.7Kt</div><div class="metric-label">Carbon Impact Measured</div></div>
+    <div class="metric-cell reveal" style="transition-delay:160ms;"><div class="t-eyebrow mb-3">Recyclers Linked</div><div class="metric-num mono count-up" data-target="3820" data-suffix="">3,820</div><div class="metric-label">Across the Circular Network</div></div>
+    <div class="metric-cell reveal" style="transition-delay:240ms;"><div class="t-eyebrow mb-3">EPR Compliance</div><div class="metric-num mono count-up" data-target="98.6" data-suffix="%">98.6%</div><div class="metric-label">On-Target Performance</div></div>
+  </div>
+</section>
+
+<!-- PLATFORM -->
+<section id="platform" class="section">
+  <div class="container">
+    <div class="reveal mb-14">
+      <div class="t-eyebrow mb-3">Platform Capabilities</div>
+      <h2 class="t-h2 mt-3">One Platform.<br>Complete Visibility.</h2>
+      <p class="t-body mt-4" style="max-width:520px;">Connect every stage of your waste and recycling operations in one intelligent system.</p>
+    </div>
+    <div class="cap-grid">
+      <!-- Upper Cards (Slide in one after another from Right side to Left side) -->
+      <div class="cap-card slide-from-right" style="transition-delay:150ms;"><div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="cap-title">Waste &amp; Material Tracking</div><div class="cap-desc">Track material movement from source to recovery across every site and region.</div></div>
+      <div class="cap-card slide-from-right" style="transition-delay:350ms;"><div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="cap-title">AI Waste Recognition</div><div class="cap-desc">Identify materials and contaminants using AI-powered computer vision.</div></div>
+      <div class="cap-card slide-from-right" style="transition-delay:550ms;"><div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="cap-title">MRF Operations</div><div class="cap-desc">Digitise weighing, sorting, inventory, quality, and dispatch at every facility.</div></div>
+      <div class="cap-card slide-from-right" style="transition-delay:750ms;"><div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="cap-title">Fleet &amp; Logistics</div><div class="cap-desc">Track vehicles, routes, pickups, and collection activity in real time.</div></div>
+      
+      <!-- Lower Cards (Slide in one after another from Left side to Right side) -->
+      <div class="cap-card slide-from-left" style="transition-delay:150ms;"><div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="cap-title">ESG &amp; Carbon Analytics</div><div class="cap-desc">Measure recovery, carbon impact, and sustainability performance across locations.</div></div>
+      <div class="cap-card slide-from-left" style="transition-delay:350ms;"><div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div><div class="cap-title">EPR Compliance</div><div class="cap-desc">Simplify EPR tracking, reporting, and documentation with audit-ready records.</div></div>
+      <div class="cap-card slide-from-left" style="transition-delay:550ms;"><div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="cap-title">QR / RFID Traceability</div><div class="cap-desc">Create transparent digital records for every material and asset in the chain.</div></div>
+      <div class="cap-card slide-from-left" style="transition-delay:750ms;"><div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><line x1="7.5" y1="15.5" x2="10" y2="13"/><line x1="16.5" y1="15.5" x2="14" y2="13"/></svg></div><div class="cap-title">Recycler Network</div><div class="cap-desc">Connect enterprises, collectors, MRFs, aggregators, and recyclers on one platform.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries" class="section" style="background:var(--c-white);">
+  <div class="container">
+    <div class="reveal text-center mb-14">
+      <div class="t-eyebrow mb-3">Who It's Built For</div>
+      <h2 class="t-h2 mt-3">Built for the<br>Circular Economy</h2>
+      <p class="t-body mt-4 mx-auto" style="max-width:480px;">WASTRAQ connects every stage of the waste and recycling value chain.</p>
+    </div>
+    <div class="industry-grid" id="industry-grid">
+
+      <div class="industry-card ind-card-anim" style="--ind-delay:0ms;">
+        <div class="ind-card-inner">
+          <div class="industry-num">01 &mdash; ENTERPRISE</div>
+          <div class="industry-title">Enterprises &amp; Brands</div>
+          <div class="industry-desc">Track waste, packaging recovery, EPR targets, and sustainability performance across locations and supply chains.</div>
+          <div class="ind-card-line"></div>
+        </div>
+      </div>
+
+      <div class="industry-card ind-card-anim" style="--ind-delay:150ms;">
+        <div class="ind-card-inner">
+          <div class="industry-num">02 &mdash; MANUFACTURING</div>
+          <div class="industry-title">Manufacturers</div>
+          <div class="industry-desc">Monitor plant waste, scrap recovery, material flows, and compliance across production facilities.</div>
+          <div class="ind-card-line"></div>
+        </div>
+      </div>
+
+      <div class="industry-card ind-card-anim" style="--ind-delay:300ms;">
+        <div class="ind-card-inner">
+          <div class="industry-num">03 &mdash; FACILITIES</div>
+          <div class="industry-title">MRFs</div>
+          <div class="industry-desc">Manage weighing, sorting, bale inventory, quality checks, plant performance, and recycler dispatch.</div>
+          <div class="ind-card-line"></div>
+        </div>
+      </div>
+
+      <div class="industry-card ind-card-anim" style="--ind-delay:450ms;">
+        <div class="ind-card-inner">
+          <div class="industry-num">04 &mdash; COLLECTION</div>
+          <div class="industry-title">Waste Collection Companies</div>
+          <div class="industry-desc">Track vehicles, routes, pickups, workforce, and proof of collection with real-time visibility.</div>
+          <div class="ind-card-line"></div>
+        </div>
+      </div>
+
+      <div class="industry-card ind-card-anim" style="--ind-delay:600ms;">
+        <div class="ind-card-inner">
+          <div class="industry-num">05 &mdash; RECYCLING</div>
+          <div class="industry-title">Recyclers &amp; Aggregators</div>
+          <div class="industry-desc">Manage material flows, partners, transactions, and traceability across your recycling operations.</div>
+          <div class="ind-card-line"></div>
+        </div>
+      </div>
+
+      <div class="industry-card ind-card-anim" style="--ind-delay:750ms;">
+        <div class="ind-card-inner">
+          <div class="industry-num">06 &mdash; SUSTAINABILITY</div>
+          <div class="industry-title">ESG &amp; Sustainability Teams</div>
+          <div class="industry-desc">Measure carbon impact, recovery performance, EPR progress, and sustainability KPIs with audit-ready reports.</div>
+          <div class="ind-card-line"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INTELLIGENCE -->
+<section id="intelligence" class="section">
+  <div class="container">
+    <div class="intel-grid">
+      <div class="slide-from-left">
+        <div class="t-eyebrow" style="color:rgba(74,222,128,0.8);" class="mb-4">Real-Time Intelligence</div>
+        <h2 class="t-h2 white mt-3 mb-5">See Your Entire Waste Operation in Real Time</h2>
+        <p class="intel-body">Get a real-time view of waste, recovery, costs, compliance, and sustainability across plants, regions, and countries.</p>
+        <div class="intel-bullets">
+          <div class="intel-bullet"><div class="bullet-dot"></div><div><div class="bullet-title">Live operational data</div><div class="bullet-desc">Waste volumes, collection status, MRF throughput — updated in real time.</div></div></div>
+          <div class="intel-bullet"><div class="bullet-dot"></div><div><div class="bullet-title">Cross-site visibility</div><div class="bullet-desc">Compare performance across plants, regions, and recycler partners.</div></div></div>
+          <div class="intel-bullet"><div class="bullet-dot"></div><div><div class="bullet-title">Automated reporting</div><div class="bullet-desc">ESG, EPR, and compliance reports generated automatically.</div></div></div>
+        </div>
+      </div>
+      <div class="dash-slide-left" style="transition-delay:120ms;">
+        <div class="dashboard-wrap" id="dash-mock">
+          <div class="dash-bar"><div class="dash-dot" style="background:#ef4444;opacity:.6;"></div><div class="dash-dot" style="background:#eab308;opacity:.6;"></div><div class="dash-dot" style="background:#4ade80;opacity:.6;"></div><span class="dash-url">wastraq://command-center/global</span><span class="dash-live"><span class="dash-live-dot"></span> LIVE</span></div>
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">Active MRFs</div><div class="kpi-value count-up" data-target="214" data-suffix="">0</div><div class="kpi-sub">&#8593; 9.1% MoM</div><div class="kpi-bar-bg"><div class="kpi-bar-fill" data-width="75%"></div></div></div>
+            <div class="kpi-card"><div class="kpi-label">CO&#8322; Avoided</div><div class="kpi-value count-up" data-target="42.7" data-suffix="Kt">0Kt</div><div class="kpi-sub">&#8593; On target</div><div class="kpi-bar-bg"><div class="kpi-bar-fill" data-width="88%"></div></div></div>
+            <div class="kpi-card"><div class="kpi-label">EPR Compliance</div><div class="kpi-value count-up" data-target="98.6" data-suffix="%">0%</div><div class="kpi-sub">&#8593; On target</div><div class="kpi-bar-bg"><div class="kpi-bar-fill" data-width="98%"></div></div></div>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-header"><div class="chart-label">Material Recovery &middot; 30D</div><div class="chart-rate">92% RECOVERY RATE</div></div>
+            <canvas id="dash-chart" height="110" style="width:100%;max-height:110px;"></canvas>
+          </div>
+          <div class="live-feed-wrap">
+            <div class="live-feed-heading">AI LIVE FEED</div>
+            <div class="live-feed-line"><div id="feed-dot" class="feed-dot"></div><div id="feed-text" class="feed-text">MRF-BLR-01 &middot; Bale #4821 PET dispatched to Recycler GreenCircle</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOVERY, AI & MRF INTELLIGENCE UNIFIED SECTION -->
+<section id="recovery" class="section" style="background:var(--c-bg); padding: 80px 0;">
+  <div class="container">
+    <!-- 1. RECOVERY INTELLIGENCE -->
+    <div id="recovery-intelligence-block" class="mb-20">
+      <div class="reveal text-center mb-14">
+        <div class="t-eyebrow mb-3">Recovery Intelligence</div>
+        <h2 class="t-h2 mt-3">Recover More. Waste Less.</h2>
+        <p class="t-body mt-4 mx-auto" style="max-width:520px;">Track material from collection to sorting, recovery, and recycling with real-time operational intelligence.</p>
+      </div>
+      <div class="process-flow" id="process-flow">
+        <div class="process-step active reveal"><div class="process-num">01</div><div class="process-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="process-label">Collect</div></div>
+        <div class="process-step reveal" style="transition-delay:100ms;"><div class="process-num">02</div><div class="process-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div><div class="process-label">Sort</div></div>
+        <div class="process-step reveal" style="transition-delay:200ms;"><div class="process-num">03</div><div class="process-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div><div class="process-label">Recover</div></div>
+        <div class="process-step reveal" style="transition-delay:300ms;"><div class="process-num">04</div><div class="process-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="process-label">Bale</div></div>
+        <div class="process-step reveal" style="transition-delay:400ms;"><div class="process-num">05</div><div class="process-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="process-label">Dispatch</div></div>
+        <div class="process-step reveal" style="transition-delay:500ms;"><div class="process-num">06</div><div class="process-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg></div><div class="process-label">Recycle</div></div>
+      </div>
+      <div class="recovery-stats">
+        <div class="card reveal" style="padding:28px;text-align:center;"><div class="stat-big count-up" data-target="92" data-suffix="%">0%</div><div class="stat-label">Avg. Material Recovery Rate</div></div>
+        <div class="card reveal" style="padding:28px;text-align:center;transition-delay:80ms;"><div class="stat-big count-up" data-target="3820" data-suffix="">0</div><div class="stat-label">Recyclers in the Network</div></div>
+        <div class="card reveal" style="padding:28px;text-align:center;transition-delay:160ms;"><div class="stat-big count-up" data-target="42.7" data-suffix="Kt">0Kt</div><div class="stat-label">CO&#8322; Avoided to Date</div></div>
+      </div>
+    </div>
+
+    <!-- 2. MRF INTELLIGENCE -->
+    <div id="mrf" class="mb-20 pt-16" style="border-top: 1px solid var(--c-border-soft);">
+      <div class="mrf-grid">
+        <div class="reveal">
+          <div class="t-eyebrow mb-4">MRF Intelligence</div>
+          <h2 class="t-h2 mt-3 mb-5">Smarter MRF Operations</h2>
+          <p class="t-body mb-8">Digitise weighing, bale inventory, quality checks, plant performance, and recycler dispatch in one operational platform.</p>
+          <a href="#cta" class="btn btn-hero-outline">See MRF Platform</a>
+        </div>
+        <div class="reveal" style="transition-delay:100ms;">
+          <div class="mrf-op-grid">
+            <div class="mrf-op-card"><div class="mrf-tag">WEIGHBRIDGE</div><div class="mrf-val count-up" data-target="18.4" data-suffix="t">0t</div><div class="mrf-lbl">Inflow Today</div><div class="mrf-sub">&#8593; Zone B Run</div></div>
+            <div class="mrf-op-card"><div class="mrf-tag">SORTING</div><div class="mrf-val count-up" data-target="94" data-suffix="%">0%</div><div class="mrf-lbl">Purity Rate</div><div class="mrf-sub">Above Target</div></div>
+            <div class="mrf-op-card"><div class="mrf-tag">BALE STOCK</div><div class="mrf-val count-up" data-target="312" data-suffix="">0</div><div class="mrf-lbl">Bales Ready</div><div class="mrf-sub">PET &middot; HDPE &middot; PP</div></div>
+            <div class="mrf-op-card"><div class="mrf-tag">DISPATCH</div><div class="mrf-val count-up" data-target="47" data-suffix="">0</div><div class="mrf-lbl">Trips Today</div><div class="mrf-sub">&#8593; On Schedule</div></div>
+            <div class="mrf-op-card"><div class="mrf-tag">QUALITY</div><div class="mrf-val">A+</div><div class="mrf-lbl">Bale Grade</div><div class="mrf-sub">Contamination Low</div></div>
+            <div class="mrf-op-card"><div class="mrf-tag">RECOVERY</div><div class="mrf-val count-up" data-target="92" data-suffix="%">0%</div><div class="mrf-lbl">Recovery Rate</div><div class="mrf-sub">&#8593; Best Ever</div></div>
+            <div class="mrf-op-card"><div class="mrf-tag">INTAKE</div><div class="mrf-val count-up" data-target="6.2" data-suffix="t">0t</div><div class="mrf-lbl">Pending QC</div><div class="mrf-sub">Mixed Plastic</div></div>
+            <div class="mrf-op-card"><div class="mrf-tag">UPTIME</div><div class="mrf-val count-up" data-target="99.1" data-suffix="%">0%</div><div class="mrf-lbl">Plant Uptime</div><div class="mrf-sub">30D Average</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. AI VISION TECHNOLOGY -->
+    <div id="ai-intelligence" class="pt-16" style="border-top: 1px solid var(--c-border-soft);">
+      <div class="ai-grid">
+        <div class="slide-from-left">
+          <div class="ai-vision-stream">
+            <!-- Header -->
+            <div class="ai-vs-header">
+              <div>
+                <div class="ai-vs-eyebrow">AI VISION STREAM</div>
+                <div class="ai-vs-title"><strong>Conveyor</strong> &middot; MRF-BLR-01 &middot; Line A</div>
+              </div>
+              <div class="ai-vs-badge"><span class="count-up" data-target="99.2" data-suffix="%">0%</span> CONFIDENCE</div>
+            </div>
+            
+            <!-- Vision Area -->
+            <div class="ai-vs-area">
+              <!-- Images with Bounding Boxes -->
+              <img src="assets/enterprise/enterprise_PET.png" class="ai-img ai-img-pet" alt="PET Bottle">
+              <img src="assets/enterprise/enterprise_HDPE.png" class="ai-img ai-img-hdpe" alt="HDPE Jug">
+              <img src="assets/enterprise/enterprise_pp.png" class="ai-img ai-img-pp" alt="PP Container">
+              <img src="assets/enterprise/enterprise_contaminant.png" class="ai-img ai-img-contam" alt="Contaminant">
+              
+              <!-- Brand Tags -->
+              <div class="ai-vs-tags">
+                <span class="ai-vs-tag tag-green">brand:NEXUS</span>
+                <span class="ai-vs-tag tag-green">brand:ORBIT</span>
+                <span class="ai-vs-tag tag-purple">brand:VIRIDIAN</span>
+              </div>
+            </div>
+
+            <!-- Bottom Stats -->
+            <div class="ai-vs-stats">
+              <div class="ai-vs-stat"><div class="stat-lbl">FPS</div><div class="stat-val count-up" data-target="62">0</div></div>
+              <div class="ai-vs-stat"><div class="stat-lbl">SKUs / hr</div><div class="stat-val count-up" data-target="12" data-suffix="K">0K</div></div>
+              <div class="ai-vs-stat"><div class="stat-lbl">Polymers</div><div class="stat-val count-up" data-target="7">0</div></div>
+              <div class="ai-vs-stat"><div class="stat-lbl">Brands</div><div class="stat-val count-up" data-target="1.2" data-suffix="K">0K</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-from-right" style="transition-delay:120ms;">
+          <div class="t-eyebrow mb-4">AI Vision Technology</div>
+          <h2 class="t-h2 mt-3 mb-5">AI That Understands Waste</h2>
+          <p class="t-body mb-8">Use computer vision and intelligent classification to identify materials, contaminants, polymers, and brands for faster and more accurate sorting.</p>
+          <div class="ai-feature-list">
+            <div class="ai-feature"><div class="ai-dot"></div>Multi-material recognition across plastics, metals, paper &amp; e-waste</div>
+            <div class="ai-feature"><div class="ai-dot"></div>482 SKUs classified per minute at industrial throughput</div>
+            <div class="ai-feature"><div class="ai-dot"></div>Contamination detection and automatic routing</div>
+            <div class="ai-feature"><div class="ai-dot"></div>Brand and polymer-level classification</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGISTICS -->
+<section id="logistics" class="section" style="background:var(--c-white);">
+  <div class="container">
+    <div class="logistics-grid">
+      <div class="slide-from-left">
+        <div class="logistics-map">
+          <svg viewBox="0 0 640 360" style="width:100%;" preserveAspectRatio="xMidYMid meet">
+            <defs><pattern id="gp" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(74,222,128,0.06)" stroke-width="1"/></pattern></defs>
+            <rect width="640" height="360" fill="url(#gp)"/>
+            <path d="M120,80 Q240,60 320,140" class="route-line"/>
+            <path d="M320,140 Q420,200 500,160" class="route-line" style="animation-delay:-3s;"/>
+            <path d="M200,280 Q290,250 320,140" class="route-line" style="animation-delay:-5s;"/>
+            <path d="M440,300 Q410,220 320,140" class="route-line" style="animation-delay:-2s;"/>
+            <path d="M100,200 Q210,190 320,140" class="route-line" style="animation-delay:-7s;"/>
+            <circle cx="120" cy="80" r="5" class="map-node"/><circle cx="120" cy="80" r="5" class="map-node-ring" style="animation-delay:-1s;"/>
+            <circle cx="200" cy="280" r="5" class="map-node" style="animation-delay:-0.5s;"/><circle cx="200" cy="280" r="5" class="map-node-ring" style="animation-delay:-1.5s;"/>
+            <circle cx="440" cy="300" r="5" class="map-node" style="animation-delay:-1s;"/><circle cx="440" cy="300" r="5" class="map-node-ring" style="animation-delay:-2s;"/>
+            <circle cx="500" cy="160" r="5" class="map-node" style="animation-delay:-1.5s;"/><circle cx="500" cy="160" r="5" class="map-node-ring" style="animation-delay:-0.8s;"/>
+            <circle cx="100" cy="200" r="5" class="map-node" style="animation-delay:-0.3s;"/><circle cx="100" cy="200" r="5" class="map-node-ring" style="animation-delay:-1.1s;"/>
+            <circle cx="320" cy="140" r="20" fill="rgba(22,163,74,0.2)" stroke="rgba(74,222,128,0.6)" stroke-width="2"/><circle cx="320" cy="140" r="8" fill="#16a34a"/>
+            <text x="320" y="174" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(74,222,128,0.8)" font-weight="700" letter-spacing="0.06em">MRF HUB</text>
+            <text x="120" y="66" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.35)">PICKUP A</text>
+            <text x="200" y="297" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.35)">PICKUP B</text>
+            <text x="440" y="317" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.35)">PICKUP C</text>
+            <text x="500" y="148" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(74,222,128,0.6)">RECYCLER</text>
+            <rect x="16" y="16" width="150" height="72" rx="8" fill="rgba(15,31,26,0.9)" stroke="rgba(74,222,128,0.2)" stroke-width="1"/>
+            <text x="28" y="34" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="0.08em">FLEET STATUS</text>
+            <circle cx="28" cy="48" r="3" fill="#4ade80"/><text x="38" y="52" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,0.65)">12 Active Vehicles</text>
+            <circle cx="28" cy="64" r="3" fill="#fbbf24"/><text x="38" y="68" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,0.65)">3 En Route to MRF</text>
+            <circle cx="28" cy="80" r="3" fill="#60a5fa"/><text x="38" y="84" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,0.65)">CO&#8322; saved: 8.4kg</text>
+          </svg>
+        </div>
+      </div>
+      <div class="slide-from-right" style="transition-delay:120ms;">
+        <div class="t-eyebrow mb-4">Fleet &amp; Logistics</div>
+        <h2 class="t-h2 mt-3 mb-5">Smarter Collection. Better Logistics.</h2>
+        <p class="t-body mb-7">Monitor vehicles, routes, pickups, proof of collection, and reverse logistics in real time from a single control view.</p>
+        <div class="feature-list" id="logistics-feature-list">
+          <div class="feature-item"><div class="feature-dot"></div>GPS tracking &amp; real-time route visibility</div>
+          <div class="feature-item"><div class="feature-dot"></div>Proof of collection &amp; digital manifests</div>
+          <div class="feature-item"><div class="feature-dot"></div>Geofencing &amp; smart zone alerts</div>
+          <div class="feature-item"><div class="feature-dot"></div>Carbon footprint calculated per route</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESG + EPR (SUSTAINABILITY INTELLIGENCE) -->
+<section id="esg" class="section">
+  <div class="esg-bg-grid"></div>
+  <div class="container">
+    <div class="esg-grid">
+      
+      <!-- Left Copy Block -->
+      <div class="esg-copy-block">
+        <div>
+          <span class="t-eyebrow mb-4" style="color:var(--c-green); font-weight:700; letter-spacing:0.08em;">SUSTAINABILITY INTELLIGENCE</span>
+        </div>
+        <h2 class="t-h2 mt-3 mb-5" style="font-size:2.4rem; font-weight:800; line-height:1.2; color:var(--c-text);">Turn Sustainability Into<br>Measurable Performance</h2>
+        <p class="t-body mb-8" style="color:var(--c-muted); font-size:1.02rem; line-height:1.65; max-width:480px;">Track EPR targets, carbon impact, landfill diversion, and sustainability KPIs with audit-ready reports &mdash; all automated.</p>
+        <div>
+          <a href="#cta" class="btn btn-primary esg-cta-btn" style="background:linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%); border-radius:12px; padding:14px 28px; font-weight:700; color:#ffffff; display:inline-flex; align-items:center; gap:10px; text-decoration:none;">See ESG Dashboard <svg class="esg-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Right 2x2 Enterprise KPI Metrics Grid -->
+      <div class="esg-metrics-panel" style="background:transparent; border:none; padding:0; box-shadow:none;">
+        <div class="esg-kpi-grid">
+          
+          <!-- Card 1: Compliance Score -->
+          <div class="esg-kpi-card">
+            <div class="esg-kpi-header">
+              <span class="esg-kpi-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <polyline points="9 12 11 14 15 10"/>
+                </svg>
+              </span>
+              <span class="esg-kpi-label">Compliance Score</span>
+            </div>
+            <div class="esg-kpi-val count-up" data-target="98.6" data-suffix="%">0%</div>
+            <div class="esg-kpi-sub">↗ 2.4% improvement</div>
+          </div>
+
+          <!-- Card 2: Material Recovered -->
+          <div class="esg-kpi-card">
+            <div class="esg-kpi-header">
+              <span class="esg-kpi-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 19H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"/><path d="M17 5h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4"/><path d="M12 2v20"/>
+                </svg>
+              </span>
+              <span class="esg-kpi-label">Material Recovered</span>
+            </div>
+            <div class="esg-kpi-val count-up" data-target="18420" data-suffix=" T">0 T</div>
+            <div class="esg-kpi-sub">92% recovery efficiency</div>
+          </div>
+
+          <!-- Card 3: CO2 Avoided -->
+          <div class="esg-kpi-card">
+            <div class="esg-kpi-header">
+              <span class="esg-kpi-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.1 2 7 0 4.4-3.6 8-8 8z"/><path d="M11 20v-6"/>
+                </svg>
+              </span>
+              <span class="esg-kpi-label">CO&#8322; Avoided</span>
+            </div>
+            <div class="esg-kpi-val count-up" data-target="42.7" data-suffix="K T">0K T</div>
+            <div class="esg-kpi-sub">Environmental impact tracked</div>
+          </div>
+
+          <!-- Card 4: Landfill Diversion -->
+          <div class="esg-kpi-card">
+            <div class="esg-kpi-header">
+              <span class="esg-kpi-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 11v6M9 14l3 3 3-3"/>
+                </svg>
+              </span>
+              <span class="esg-kpi-label">Landfill Diversion</span>
+            </div>
+            <div class="esg-kpi-val count-up" data-target="88" data-suffix="%">0%</div>
+            <div class="esg-kpi-sub">Waste redirected from landfill</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="traceability" class="section" style="background:var(--c-white);">
+  <div class="container">
+    <div class="trace-outer-grid">
+      <div class="reveal">
+        <div class="t-eyebrow mb-4">Digital Traceability</div>
+        <h2 class="t-h2 mt-3 mb-5">Know Where Every Kilogram Goes</h2>
+        <p class="t-body mb-8">Use QR/RFID and digital records to create transparent, verifiable material journeys from source to recycler.</p>
+        <div class="badge-group">
+          <div class="badge badge-green">QR Code</div>
+          <div class="badge badge-green">RFID Integration</div>
+          <div class="badge badge-green">Blockchain Records</div>
+          <div class="badge badge-green">Audit-Ready</div>
+        </div>
+      </div>
+      <div class="trace-journey" id="trace-journey">
+        <div class="trace-step active"><div class="trace-dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg></div><div class="trace-content"><div class="trace-stage">01 &mdash; Source</div><div class="trace-title">Waste Generated</div><div class="trace-desc">Enterprise site, QR tagged, material type and weight recorded.</div></div></div>
+        <div class="trace-step"><div class="trace-dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg></div><div class="trace-content"><div class="trace-stage">02 &mdash; Collection</div><div class="trace-title">Picked Up &amp; Logged</div><div class="trace-desc">Vehicle, driver, timestamp, and weight captured digitally.</div></div></div>
+        <div class="trace-step"><div class="trace-dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="trace-content"><div class="trace-stage">03 &mdash; MRF</div><div class="trace-title">Received &amp; Sorted</div><div class="trace-desc">Weighed, graded, and sorted by material type at facility.</div></div></div>
+        <div class="trace-step"><div class="trace-dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div><div class="trace-content"><div class="trace-stage">04 &mdash; Aggregator</div><div class="trace-title">Consolidated &amp; Dispatched</div><div class="trace-desc">Baled, documented, and dispatched to verified recycler.</div></div></div>
+        <div class="trace-step"><div class="trace-dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="trace-content"><div class="trace-stage">05 &mdash; Recycler</div><div class="trace-title">Recycled &amp; Verified</div><div class="trace-desc">Recycling certificate issued. Chain of custody closed.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS (BUSINESS VALUE) -->
+<section id="benefits" class="section">
+  <div class="container">
+    <div class="benefits-header-block reveal text-center mb-14">
+      <div class="benefits-label-reveal"><span class="t-eyebrow" style="color:rgba(74,222,128,0.85);" class="mb-3">Business Value</span></div>
+      <h2 class="t-h2 white mt-3 benefits-heading-reveal">From Waste Management<br>to Measurable Value.</h2>
+    </div>
+    <div class="benefit-grid" id="benefit-grid">
+      <div class="benefit-card" data-card="01">
+        <div class="benefit-mouse-glow"></div>
+        <div class="benefit-num">01</div>
+        <div class="benefit-title">Reduce Costs</div>
+        <div class="benefit-desc">Identify inefficiencies across collection, processing, and recovery to cut operational costs.</div>
+        <div class="benefit-accent-line"></div>
+      </div>
+      <div class="benefit-card" data-card="02">
+        <div class="benefit-mouse-glow"></div>
+        <div class="benefit-num">02</div>
+        <div class="benefit-title">Recover More</div>
+        <div class="benefit-desc">Use AI and real-time data to improve sorting yield, material quality, and recovery rates.</div>
+        <div class="benefit-accent-line"></div>
+      </div>
+      <div class="benefit-card" data-card="03">
+        <div class="benefit-mouse-glow"></div>
+        <div class="benefit-num">03</div>
+        <div class="benefit-title">Stay Compliant</div>
+        <div class="benefit-desc">Simplify EPR, ESG, and sustainability reporting with automated, audit-ready documentation.</div>
+        <div class="benefit-accent-line"></div>
+      </div>
+      <div class="benefit-card" data-card="04">
+        <div class="benefit-mouse-glow"></div>
+        <div class="benefit-num">04</div>
+        <div class="benefit-title">Trace Everything</div>
+        <div class="benefit-desc">Track every kilogram from generation through recovery and recycling with full transparency.</div>
+        <div class="benefit-accent-line"></div>
+      </div>
+      <div class="benefit-card benefit-card-highlighted" data-card="05">
+        <div class="benefit-mouse-glow"></div>
+        <div class="benefit-num">05</div>
+        <div class="benefit-title">Make Better Decisions</div>
+        <div class="benefit-desc">Turn operational data into actionable insights for teams, managers, and leadership.</div>
+        <div class="benefit-accent-line"></div>
+      </div>
+      <div class="benefit-card" data-card="06">
+        <div class="benefit-mouse-glow"></div>
+        <div class="benefit-num">06</div>
+        <div class="benefit-title">Connect the Ecosystem</div>
+        <div class="benefit-desc">Bring enterprises, collectors, MRFs, recyclers, and sustainability teams onto one platform.</div>
+        <div class="benefit-accent-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="section" style="background:var(--c-white);">
+  <div class="container">
+    <div class="reveal text-center mb-18">
+      <div class="t-eyebrow mb-3">Process</div>
+      <h2 class="t-h2 mt-3">From Waste Data to Circular Value</h2>
+    </div>
+    <div class="steps-grid" id="steps-grid">
+      <div class="steps-progress-track">
+        <div class="steps-progress-fill" id="steps-progress-fill"></div>
+      </div>
+      <div class="step-item reveal"><div class="step-num">01</div><div class="step-title">Connect</div><div class="step-desc">Connect your sites, vehicles, equipment, teams, and partners to the WASTRAQ platform.</div></div>
+      <div class="step-item reveal" style="transition-delay:100ms;"><div class="step-num">02</div><div class="step-title">Capture</div><div class="step-desc">Collect real-time operational and material data from every touchpoint across the value chain.</div></div>
+      <div class="step-item reveal" style="transition-delay:200ms;"><div class="step-num">03</div><div class="step-title">Intelligence</div><div class="step-desc">Use AI and analytics to identify opportunities, inefficiencies, and recovery potential.</div></div>
+      <div class="step-item reveal" style="transition-delay:300ms;"><div class="step-num">04</div><div class="step-title">Optimise</div><div class="step-desc">Improve recovery, reduce costs, simplify compliance, and measure your circular impact.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="section">
+  <div class="cta-glow"></div>
+  <div class="container" style="position:relative;z-index:1;text-align:center;">
+    <div class="reveal cta-inner">
+      <div class="badge badge-white mb-6" style="display:inline-flex;"><span class="badge-dot" style="background:#4ade80;"></span> Enterprise Platform</div>
+      <h2 class="t-h2 white mb-5">Ready to Make Waste Smarter?</h2>
+      <p class="cta-sub">See how WASTRAQ can help your organisation reduce waste costs, increase recovery, simplify compliance, and improve sustainability performance.</p>
+      <div class="cta-btns">
+        <a href="mailto:enterprise@wastraq.com" class="btn btn-primary" style="font-size:1rem;padding:16px 36px;">Request an Enterprise Demo <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="mailto:enterprise@wastraq.com" class="btn btn-hero-outline" style="font-size:1rem;padding:16px 32px;">Talk to Our Team</a>
+      </div>
+      <p class="cta-note">Tell us about your operations, locations, and sustainability goals. Our team will show you how WASTRAQ can fit your business.</p>
+
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+// Command Center Recovery Chart
+(function() {
+  var canvas = document.getElementById('cc-recovery-chart');
+  if (!canvas || !window.Chart) return;
+  var chartInstance = null;
+  var labels = ['D1','D2','D3','D4','D5','D6','D7','D8','D9','D10','D11','D12','D13','D14','D15','D16','D17','D18','D19','D20','D21','D22','D23','D24','D25','D26','D27','D28','D29','D30'];
+  
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        if (!chartInstance) {
+          chartInstance = new Chart(canvas, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'PET/HDPE',
+                  data: [120,135,128,150,145,160,175,168,182,195,188,200,215,210,228,235,225,242,255,248,262,275,268,282,290,285,298,310,305,320],
+                  borderColor: '#4ade80',
+                  backgroundColor: 'rgba(74,222,128,0.18)',
+                  borderWidth: 2.5,
+                  fill: true,
+                  tension: 0.5,
+                  pointRadius: 0,
+                },
+                {
+                  label: 'Paper/Metals',
+                  data: [60,65,70,68,75,80,78,85,88,90,95,92,98,102,105,108,112,110,118,120,125,122,128,132,135,138,140,145,142,148],
+                  borderColor: '#60a5fa',
+                  backgroundColor: 'rgba(96,165,250,0.12)',
+                  borderWidth: 2,
+                  fill: true,
+                  tension: 0.5,
+                  pointRadius: 0,
+                },
+                {
+                  label: 'E-Waste',
+                  data: [20,22,25,24,28,30,29,32,35,34,38,37,40,42,44,45,47,46,50,52,54,53,56,58,60,62,64,66,65,68],
+                  borderColor: '#c084fc',
+                  backgroundColor: 'rgba(192,132,252,0.08)',
+                  borderWidth: 1.5,
+                  fill: true,
+                  tension: 0.5,
+                  pointRadius: 0,
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: true,
+              plugins: { legend: { display: false }, tooltip: { enabled: false } },
+              scales: {
+                x: { display: false },
+                y: { display: false }
+              },
+              animation: { duration: 1200, easing: 'easeInOutQuart' }
+            }
+          });
+        }
+      } else {
+        if (chartInstance) {
+          chartInstance.destroy();
+          chartInstance = null;
+        }
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  observer.observe(canvas);
+})();
+</script>
+
+<div id="footer-placeholder"></div>
+<script src="js/shared.js"></script>
+<script>
+  injectNav('solutions');
+  injectFooter();
+</script>
+<script src="js/enterprise.js"></script>
+<script src="js/cookies.js"></script>
+<!-- WASTRAQ Chatbot -->
+<script data-api-base="https://backend.wastraq.com" src="js/chatbot.js"></script>
+<!-- Set your production API URL above before deployment -->
+
+</body>
+</html>
