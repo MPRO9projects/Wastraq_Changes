@@ -1,0 +1,521 @@
+// help-topic.js — page-specific behavior for help-topic.html
+// (Nav/footer are handled by the shared js/shared.js — this file only
+// contains genuine page logic: the topic content database, the
+// ?topic= query-driven article renderer, mini-search filter, and the
+// read-more toggle.)
+
+/* ══════════════════════════════════════════════════════
+   TOPIC CONTENT DATABASE
+   Each topic has: title, desc, color, icon, sections[]
+   Each section has: title, articles[]
+   Each article has: id, title, badge, readTime, desc, body (HTML)
+══════════════════════════════════════════════════════ */
+var TOPICS = {
+
+'platform-setup': {
+  title: 'Platform Setup & Configuration',
+  desc: 'Account setup, user management, onboarding, IoT sensor connection, API authentication, and platform configuration guides.',
+  color: '#0a2016',
+  articleCount: 18,
+  iconSvg: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>',
+  sections: [
+    {
+      title: 'Getting Started',
+      id: 'getting-started',
+      articles: [
+        {
+          id: 'platform-overview',
+          title: 'WASTRAQ Platform Overview and First Login',
+          badge: 'popular',
+          readTime: '5 min',
+          desc: 'A complete orientation to the WASTRAQ TraqCore platform. Understand the main modules, navigation structure, and where to start after your first login.',
+          body: '<h4>After Your First Login</h4><p>When you log into WASTRAQ for the first time, you will land on the Operations Dashboard. This is your command centre for daily waste management activity. From here, you can navigate to all major modules using the left navigation bar.</p><ul><li><strong>Operations Dashboard</strong> — live fleet view, today\'s routes, and exception alerts</li><li><strong>RouteTraq AI</strong> — route creation, optimization, and schedule management</li><li><strong>Fleet Management</strong> — vehicle registry, maintenance, and tracking</li><li><strong>Customer CRM</strong> — customer accounts, service contracts, and communications</li><li><strong>Billing</strong> — invoice generation, payment tracking, and accounting integrations</li><li><strong>Reporting</strong> — analytics, KPI dashboards, and compliance reports</li></ul><h4>Setting Up Your Organisation</h4><p>Before creating routes or adding drivers, complete the Organisation Setup wizard at <strong>Settings &gt; Organisation</strong>. This covers your depot addresses, operating zones, working hours, and default waste fraction settings. The setup wizard takes approximately 20 minutes.</p><div class="ht-article-note">Tip: Run the Platform Setup Checklist at Settings &gt; Onboarding to track your progress through all required configuration steps.</div>'
+        },
+        {
+          id: 'import-routes',
+          title: 'Importing Existing Route Data into WASTRAQ',
+          badge: 'popular',
+          readTime: '8 min',
+          desc: 'Migrate your existing collection points, route structures, and customer data from spreadsheets or your previous software into WASTRAQ using the bulk import tools.',
+          body: '<h4>Supported Import Formats</h4><p>WASTRAQ accepts collection point data in CSV, Excel (XLSX), and GeoJSON format. For customers migrating from other waste management software systems, we also support direct data exports from WasteHero, Trackway, and Causeway.</p><h4>Step-by-Step Import Process</h4><ul><li>Navigate to <strong>Settings &gt; Data Import &gt; Collection Points</strong></li><li>Download the WASTRAQ import template CSV to ensure correct field mapping</li><li>Populate the template with your collection point addresses, waste fractions, and service frequencies</li><li>Upload the completed file and run the validation check</li><li>Review and resolve any address matching warnings before confirming the import</li><li>Collection points will be geocoded automatically using our mapping engine</li></ul><h4>After Import</h4><p>Once collection points are imported, the RouteTraq AI can generate your first optimized routes. Navigate to RouteTraq &gt; Create Routes and select the imported collection points for your first zone.</p>'
+        },
+        {
+          id: 'roles-permissions',
+          title: 'Configuring User Roles and Permission Levels',
+          badge: null,
+          readTime: '6 min',
+          desc: 'Set up admin, supervisor, driver, and read-only roles. Control which features and data each user type can access across your WASTRAQ account.',
+          body: '<h4>Default Role Structure</h4><p>WASTRAQ ships with four default roles that cover most organisational structures:</p><ul><li><strong>Organisation Admin</strong> — full platform access including billing, user management, and API settings</li><li><strong>Depot Supervisor</strong> — route management, fleet tracking, exception handling, and reporting for their depot</li><li><strong>Driver</strong> — Driver App access only, limited to their assigned routes and collection confirmations</li><li><strong>Read Only</strong> — view-only access to dashboards and reports, suitable for finance officers and auditors</li></ul><h4>Custom Roles</h4><p>Enterprise customers can create custom roles with granular permission sets. Navigate to <strong>Settings &gt; User Management &gt; Roles</strong> to configure custom permissions across every platform feature and data domain.</p>'
+        }
+      ]
+    },
+    {
+      title: 'IoT and Integrations',
+      id: 'iot-sensors',
+      articles: [
+        {
+          id: 'iot-setup',
+          title: 'Connecting IoT Bin-Level Sensors to WASTRAQ',
+          badge: 'popular',
+          readTime: '10 min',
+          desc: 'Add, configure, and test IoT fill-level sensors from any supported provider. Connect sensor data to dynamic route scheduling in the RouteTraq AI engine.',
+          body: '<h4>Supported IoT Providers</h4><p>WASTRAQ has native connector support for the following IoT sensor providers:</p><ul><li>Sensoneo (all product lines)</li><li>Bigbelly Smart Waste Solutions</li><li>Enevo</li><li>SmartBin by Waste Vision</li><li>Generic MQTT and HTTP sensor endpoints via the custom connector</li></ul><h4>Adding a Sensor</h4><p>Navigate to <strong>IoT &gt; Sensor Management &gt; Add Sensor</strong>. Select your sensor manufacturer and enter the device serial number. The platform will verify connectivity and display the current fill-level reading within 30 seconds if the device is correctly provisioned.</p><div class="ht-article-note">Each IoT sensor must be assigned to a specific collection point in your WASTRAQ geography to enable dynamic scheduling. Sensors not linked to a collection point will still transmit data but will not influence route optimization.</div>'
+        },
+        {
+          id: 'api-auth',
+          title: 'REST API Authentication, Endpoints, and Rate Limits',
+          badge: null,
+          readTime: '12 min',
+          desc: 'Authenticate with the WASTRAQ REST API using OAuth 2.0, understand rate limits, and start making API calls to integrate with your existing systems.',
+          body: '<h4>Authentication</h4><p>The WASTRAQ REST API uses OAuth 2.0 client credentials flow. Obtain a client ID and secret from <strong>Settings &gt; API &gt; Credentials</strong>. Exchange these for a bearer token using the token endpoint:</p><div class="ht-article-code">POST https://api.wastraq.com/oauth/token\nContent-Type: application/x-www-form-urlencoded\n\ngrant_type=client_credentials\n&client_id=YOUR_CLIENT_ID\n&client_secret=YOUR_CLIENT_SECRET\n&scope=read write webhooks</div><h4>Rate Limits</h4><ul><li>Standard plans: 1,000 requests per hour</li><li>Professional plans: 10,000 requests per hour</li><li>Enterprise plans: custom limits — contact your CSM</li><li>Burst allowance: 2x the hourly limit for up to 5 minutes</li></ul><h4>Core Endpoints</h4><p>Full API reference documentation is available at <strong>developer.wastraq.com</strong>. Key endpoint categories include: Collection Points, Routes, Fleet, Drivers, Billing, Webhooks, and IoT Sensor Data.</p>'
+        },
+        {
+          id: 'customer-portal',
+          title: 'Enabling and Configuring the Customer Self-Service Portal',
+          badge: 'updated',
+          readTime: '7 min',
+          desc: 'Set up the branded customer portal so your clients can book collections, report issues, view invoices, and track service status without calling your team.',
+          body: '<h4>Activating the Portal</h4><p>Navigate to <strong>Settings &gt; Customer Portal &gt; Enable</strong>. Once enabled, your customers can access the portal at <em>yourname.portal.wastraq.com</em> or via a custom domain you configure under Portal Settings.</p><h4>Branding Configuration</h4><p>Upload your company logo, set your brand colour palette, and configure the portal header and footer text. The portal is fully white-labelable — the WASTRAQ brand is not visible to your customers unless you choose to include it.</p><ul><li>Custom subdomain or your own domain (requires DNS configuration)</li><li>Logo, favicon, and brand colours</li><li>Custom email address for notifications sent from the portal</li><li>Welcome message and FAQ section customisation</li></ul>'
+        },
+        {
+          id: 'container-labels',
+          title: 'Container Label Printing and Automation Rules',
+          badge: null,
+          readTime: '5 min',
+          desc: 'Generate and print QR-coded container labels for residential and commercial bins. Set automation rules that trigger actions when labels are scanned.',
+          body: '<h4>Generating Labels</h4><p>Navigate to <strong>Assets &gt; Container Labels &gt; Generate</strong>. Select the container type, waste fraction, and customer account. Labels are generated as print-ready PDFs in A4 or A5 format, with QR codes, barcodes, or both depending on your configuration.</p><h4>Automation Rules</h4><p>When a driver scans a label, WASTRAQ can automatically: log the collection confirmation, trigger a customer notification, update billing for weight-based accounts, or flag the container for maintenance inspection. Configure automation rules at <strong>Assets &gt; Container Labels &gt; Automation Rules</strong>.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'supervisor-dashboard': {
+  title: 'Supervisor Dashboard',
+  desc: 'Live fleet visibility, dispatch management, exception handling, performance analytics, and compliance reporting for waste operations supervisors.',
+  color: '#1e3a5f',
+  articleCount: 24,
+  iconSvg: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M3 17a4 4 0 004 4h3"/>',
+  sections: [
+    {
+      title: 'Fleet Monitoring',
+      id: 'fleet-monitoring',
+      articles: [
+        {
+          id: 'live-tracking',
+          title: 'Real-Time Vehicle and Driver Tracking',
+          badge: 'popular',
+          readTime: '6 min',
+          desc: 'Monitor every vehicle in your fleet in real time on the WASTRAQ operations map. Set up geofence alerts and track route adherence live.',
+          body: '<h4>The Operations Map</h4><p>The WASTRAQ Operations Map provides a live view of every active vehicle in your fleet, updated every 10 seconds. Each vehicle marker shows the driver name, current speed, collection stop sequence, and route adherence status.</p><ul><li>Click any vehicle to open its full live status panel</li><li>Use the layer controls to show or hide route lines, collection points, and zone boundaries</li><li>Filter the map view by depot, route, or driver using the top filter bar</li></ul><h4>Geofence Alerts</h4><p>Navigate to <strong>Fleet &gt; Geofences</strong> to define zones that trigger supervisor alerts. Common uses include depot departure/arrival tracking, restricted area monitoring, and contract boundary enforcement.</p>'
+        },
+        {
+          id: 'service-exceptions',
+          title: 'Managing Service Exceptions and Missed Collections',
+          badge: 'popular',
+          readTime: '8 min',
+          desc: 'Identify, investigate, and resolve missed collections, failed service attempts, and customer complaints from the Exceptions Manager.',
+          body: '<h4>The Exceptions Manager</h4><p>The Exceptions Manager at <strong>Operations &gt; Exceptions</strong> surfaces every service failure logged by drivers, detected by the GPS system, or reported by customers via the portal. Exceptions are categorised by type and severity:</p><ul><li><strong>Missed Collection</strong> — a scheduled stop was not completed within the service window</li><li><strong>Access Issue</strong> — driver was unable to access the collection point</li><li><strong>Contamination</strong> — driver reported the container was contaminated</li><li><strong>Customer Report</strong> — customer submitted a missed collection via the portal</li></ul><h4>Resolving Exceptions</h4><p>For each exception, supervisors can schedule a re-run, contact the customer, log an internal note, or close the exception with a resolution reason. All exception records are retained for compliance reporting.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'driver-app': {
+  title: 'Driver App Help',
+  desc: 'Installation, in-cab navigation, collection confirmation, offline mode, and issue reporting guides for the WASTRAQ Driver App on iOS and Android.',
+  color: '#78350f',
+  articleCount: 16,
+  iconSvg: '<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>',
+  sections: [
+    {
+      title: 'Installation',
+      id: 'installation',
+      articles: [
+        {
+          id: 'android-setup',
+          title: 'Android Installation and Initial Setup Guide',
+          badge: 'popular',
+          readTime: '5 min',
+          desc: 'Download, install, and configure the WASTRAQ Driver App on Android devices. Covers Google Play installation, account login, and completing your first run.',
+          body: '<h4>System Requirements</h4><ul><li>Android 9.0 (API level 28) or later</li><li>Minimum 3GB RAM recommended for smooth navigation performance</li><li>GPS / Location Services must be enabled</li><li>At least 500MB free storage for offline route cache</li></ul><h4>Installation Steps</h4><ul><li>Open the Google Play Store and search for "WASTRAQ Driver"</li><li>Tap Install and wait for the download to complete</li><li>Open the app and enter the server URL provided by your supervisor (format: yourcompany.wastraq.com)</li><li>Log in with your WASTRAQ driver credentials</li><li>Allow location permissions when prompted — this is required for route navigation and collection confirmation</li><li>Your assigned routes will download automatically. You are ready to start.</li></ul><h4>Troubleshooting Login Issues</h4><p>If you cannot log in, verify the server URL with your supervisor. Ensure your account has been activated in the WASTRAQ platform under Users &gt; Drivers. Contact support@wastraq.com if the issue persists.</p>'
+        },
+        {
+          id: 'ios-setup',
+          title: 'iOS Installation and Initial Setup Guide',
+          badge: 'popular',
+          readTime: '4 min',
+          desc: 'Download and configure the WASTRAQ Driver App on iPhone and iPad running iOS 15 or later. Step-by-step setup from App Store to first collection.',
+          body: '<h4>System Requirements</h4><ul><li>iOS 15.0 or later (iPhone or iPad)</li><li>GPS / Location Services enabled</li><li>Background App Refresh enabled for offline sync</li></ul><h4>Installation Steps</h4><ul><li>Open the App Store and search for "WASTRAQ Driver"</li><li>Tap Get and authenticate with Face ID or Touch ID if prompted</li><li>Open the app after installation completes</li><li>Enter your company\'s server URL and log in with your driver credentials</li><li>Tap Allow when asked for location permissions — select "Always Allow" for best performance</li><li>Your route data will sync automatically. The app is ready to use.</li></ul><div class="ht-article-note">iOS users: Enable "Always Allow" for location access (not just "While Using") to ensure collection confirmations are accurately logged even if you briefly switch to another app.</div>'
+        }
+      ]
+    },
+    {
+      title: 'Using the App',
+      id: 'using-app',
+      articles: [
+        {
+          id: 'offline-mode',
+          title: 'Driver App Offline Mode — Complete Guide',
+          badge: 'updated',
+          readTime: '6 min',
+          desc: 'Everything you need to know about the WASTRAQ Driver App offline mode. What data is cached, how confirmations are stored, and how sync works.',
+          body: '<h4>What Is Stored Offline</h4><p>The WASTRAQ Driver App caches the following data locally on your device for up to 7 days:</p><ul><li>All assigned routes with full stop lists, collection point details, and customer notes</li><li>Turn-by-turn navigation instructions for all routes</li><li>Container and customer data for each collection point</li><li>Issue report categories and submission forms</li></ul><h4>Working Without a Signal</h4><p>All core driver functions work fully offline. You can navigate between stops, confirm collections, capture photos, and log issues without any mobile data connection. Every action is time-stamped and GPS-stamped using the device clock and GPS hardware.</p><h4>Automatic Sync</h4><p>When a data connection is restored (Wi-Fi, 4G, or 5G), the app syncs all queued actions to the WASTRAQ platform automatically. A blue indicator in the toolbar shows when a sync is in progress. A green checkmark confirms all data is synced.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'route-optimization': {
+  title: 'Route Optimization',
+  desc: 'AI-powered route planning, zone configuration, vehicle constraints, dynamic scheduling with IoT data, and RouteTraq AI guides.',
+  color: '#14502e',
+  articleCount: 19,
+  iconSvg: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  sections: [
+    {
+      title: 'Route Planning',
+      id: 'route-planning',
+      articles: [
+        {
+          id: 'collection-zones',
+          title: 'Creating and Configuring Collection Zones',
+          badge: 'popular',
+          readTime: '7 min',
+          desc: 'Define your collection geography by drawing zones on the map or importing zone boundaries. Assign collection frequencies, vehicle types, and crew requirements per zone.',
+          body: '<h4>What Is a Collection Zone?</h4><p>A collection zone in WASTRAQ is a geographic area that defines a group of collection points served by a common schedule. Zones can represent wards, streets, housing estates, commercial districts, or any operational boundary your team uses.</p><h4>Creating a Zone</h4><ul><li>Navigate to <strong>RouteTraq &gt; Zone Management &gt; Create Zone</strong></li><li>Draw the zone boundary on the map using the polygon tool, or import a GeoJSON file</li><li>Set the zone name, default collection frequency, and primary waste fraction</li><li>Assign eligible vehicle types and minimum crew size</li><li>Confirm — collection points within the zone boundary are automatically associated</li></ul><h4>Zone Settings That Affect Optimization</h4><p>The following zone settings directly influence the routes generated by the RouteTraq AI:</p><ul><li>Collection windows (earliest start, latest finish)</li><li>Road access restrictions (e.g., no HGVs on certain streets)</li><li>Priority level (routes in high-priority zones are optimized first)</li><li>IoT threshold settings (fill level % that triggers early collection)</li></ul>'
+        },
+        {
+          id: 'running-optimizer',
+          title: 'Running the RouteTraq AI Optimizer for the First Time',
+          badge: 'popular',
+          readTime: '8 min',
+          desc: 'Configure your collection zones, vehicle fleet, and service frequencies to generate your first AI-optimized waste collection routes.',
+          body: '<h4>Before Running the Optimizer</h4><p>Ensure you have completed the following before running the RouteTraq AI:</p><ul><li>At least one collection zone configured with collection points</li><li>At least one vehicle registered in Fleet Management with capacity data</li><li>Working hours set in Organisation Settings</li></ul><h4>Running the Optimizer</h4><ul><li>Navigate to <strong>RouteTraq &gt; Optimize Routes</strong></li><li>Select the zones and date range for optimization</li><li>Choose your optimization objective: Minimize Mileage, Minimize Time, or Balance Workload</li><li>Click Run Optimization — the AI engine processes your data and presents route proposals within 30 seconds to 2 minutes depending on fleet size</li></ul><h4>Reviewing and Approving Routes</h4><p>The optimizer presents a comparison of your proposed routes versus your current routes (if you have existing data). Review the fuel saving estimate, total distance change, and crew hour impact. Approve individual routes or the full set. Approved routes become live and are pushed to the Driver App automatically.</p><div class="ht-article-note">You can run the optimizer as many times as needed without affecting live routes. Routes only go live when explicitly approved.</div>'
+        },
+        {
+          id: 'dynamic-rerouting',
+          title: 'Dynamic Re-Routing with IoT Fill-Level Data',
+          badge: 'new',
+          readTime: '9 min',
+          desc: 'Configure the RouteTraq AI to automatically adjust active routes based on real-time bin fill-level data from IoT sensors. Available in WASTRAQ v4.8.0 and later.',
+          body: '<h4>How Dynamic Re-Routing Works</h4><p>When Dynamic Scheduling is enabled, the RouteTraq AI continuously monitors fill-level readings from your connected IoT sensors. When a sensor reading crosses a threshold you have set, the AI evaluates whether that container needs to be added to today\'s route or can wait until its next scheduled collection.</p><h4>Enabling Dynamic Scheduling</h4><ul><li>Navigate to <strong>RouteTraq &gt; Settings &gt; Dynamic Scheduling</strong></li><li>Toggle Fill-Level Triggers to Enabled</li><li>Set your default fill threshold per waste fraction (e.g., 85% for general waste, 75% for recycling)</li><li>Set a minimum vehicle proximity for dynamic additions (e.g., only add bins within 2km of the current route)</li></ul><h4>Monitoring Dynamic Changes</h4><p>All dynamic re-routing decisions appear in the live Operations Dashboard under <strong>Today\'s Route Changes</strong>. Supervisors receive in-app notifications for each dynamic change. A daily summary report of dynamic additions and skips is generated automatically.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'fleet-management': {
+  title: 'Fleet Management',
+  desc: 'Vehicle registry, GPS tracking, maintenance scheduling, driver assignments, fuel management, and fleet performance analytics.',
+  color: '#1e40af',
+  articleCount: 15,
+  iconSvg: '<rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
+  sections: [
+    {
+      title: 'Vehicle Management',
+      id: 'vehicle-management',
+      articles: [
+        {
+          id: 'vehicle-registry',
+          title: 'Adding and Managing Vehicles in the Fleet Registry',
+          badge: null,
+          readTime: '5 min',
+          desc: 'Register your waste collection vehicles in WASTRAQ, assign GPS trackers, set capacity data, and link vehicles to depots and drivers.',
+          body: '<h4>Adding a Vehicle</h4><ul><li>Navigate to <strong>Fleet &gt; Vehicles &gt; Add Vehicle</strong></li><li>Enter the vehicle registration plate, type (RCV, tipper, van, etc.), and payload capacity</li><li>Assign the vehicle to a depot</li><li>Enter the GPS tracker serial number if using a WASTRAQ-compatible tracker</li><li>Set the vehicle\'s operating restrictions (max weight roads, urban zone access)</li></ul><h4>Capacity Data for Optimization</h4><p>Accurate capacity data is essential for the RouteTraq AI to plan realistic routes. Enter both the volume capacity (m³) and payload weight limit (kg). For split-body vehicles, enter each compartment capacity separately.</p>'
+        },
+        {
+          id: 'live-tracking',
+          title: 'Live Fleet Tracking Overview and GPS Configuration',
+          badge: 'popular',
+          readTime: '6 min',
+          desc: 'Monitor every vehicle position in real time. Configure GPS update frequency, low-signal fallback, and historical track playback.',
+          body: '<h4>GPS Tracker Compatibility</h4><p>WASTRAQ supports all major GPS tracker manufacturers including Teltonika, CalAmp, Webfleet, and Samsara. Trackers communicate with the platform over GPRS/4G using the WASTRAQ Cloud endpoint. Configuration files for each supported tracker are available at <strong>Fleet &gt; GPS Trackers &gt; Download Config</strong>.</p><h4>Update Frequency</h4><p>Default GPS position updates are every 30 seconds when the vehicle is moving and every 5 minutes when stationary. This can be adjusted per vehicle class in <strong>Fleet &gt; Settings &gt; Tracking Frequency</strong>. Higher frequency increases data usage — consult your tracker SIM data allowances before increasing.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'billing': {
+  title: 'Billing & Invoicing',
+  desc: 'Automated billing cycles, custom invoice templates, payment processing, Xero/QuickBooks integration, and subscription management.',
+  color: '#5b21b6',
+  articleCount: 14,
+  iconSvg: '<rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>',
+  sections: [
+    {
+      title: 'Billing Setup',
+      id: 'billing-setup',
+      articles: [
+        {
+          id: 'automated-billing',
+          title: 'Setting Up Automated Billing and Recurring Invoices',
+          badge: 'popular',
+          readTime: '7 min',
+          desc: 'Configure billing cycles, payment terms, and automated invoice dispatch for residential, commercial, and municipal accounts.',
+          body: '<h4>Billing Cycle Configuration</h4><p>WASTRAQ supports monthly, quarterly, annual, and custom billing cycles at the account level. Navigate to <strong>Billing &gt; Settings &gt; Billing Cycles</strong> to set defaults for each customer segment.</p><ul><li>Residential accounts: typically monthly, invoice on the 1st</li><li>Commercial accounts: typically monthly or quarterly, invoice on the last working day</li><li>Municipal contracts: typically monthly, aligned to council payment runs</li></ul><h4>Automatic Invoice Generation</h4><p>When a billing cycle closes, WASTRAQ automatically calculates charges based on services delivered, generates invoice PDFs, and either emails them to customers or exports them to your accounting system. No manual data entry is required after initial setup.</p><div class="ht-article-note">Test your billing configuration using the Billing Simulator at Billing &gt; Test &gt; Simulate Invoice before activating live billing for new accounts.</div>'
+        },
+        {
+          id: 'accounting-integrations',
+          title: 'Connecting Xero, QuickBooks, and SAP to WASTRAQ',
+          badge: 'popular',
+          readTime: '9 min',
+          desc: 'Set up real-time sync between WASTRAQ billing and your accounting software. Invoices, credit notes, and payment records sync automatically.',
+          body: '<h4>Xero Integration</h4><p>Navigate to <strong>Settings &gt; Integrations &gt; Xero</strong> and click Connect. You will be redirected to Xero to authorise the connection. Once authorised, WASTRAQ will automatically push:</p><ul><li>New invoices to Xero as draft or approved invoices (configurable)</li><li>Credit notes when raised in WASTRAQ</li><li>Payment records when payments are logged in WASTRAQ</li><li>Customer accounts synced to Xero contacts</li></ul><h4>QuickBooks Integration</h4><p>The QuickBooks integration follows the same OAuth connection flow. Navigate to <strong>Settings &gt; Integrations &gt; QuickBooks</strong>. Both QuickBooks Online and QuickBooks Desktop (via the desktop connector app) are supported.</p><h4>SAP and Enterprise ERP</h4><p>For SAP and other enterprise ERP systems, WASTRAQ provides a dedicated outbound API feed and a flat-file export option. Contact your customer success manager to configure the correct data mapping for your SAP chart of accounts and cost centre structure.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'recycling': {
+  title: 'Recycling Operations',
+  desc: 'Waste fraction configuration, recycling target setting, contamination tracking, sustainability reporting, and recyclate quality management.',
+  color: '#065f46',
+  articleCount: 12,
+  iconSvg: '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>',
+  sections: [
+    {
+      title: 'Recycling Configuration',
+      id: 'recycling-config',
+      articles: [
+        {
+          id: 'waste-fractions',
+          title: 'Configuring Waste Fraction Categories and Collection Types',
+          badge: null,
+          readTime: '6 min',
+          desc: 'Set up your waste stream categories, collection container types, and collection frequency rules for each fraction. Supports mixed dry recycling, co-mingled, and split fractions.',
+          body: '<h4>Default Waste Fractions</h4><p>WASTRAQ ships with the following pre-configured waste fractions that cover the majority of UK, EU, and international residential and commercial waste streams:</p><ul><li>General Waste (residual)</li><li>Dry Mixed Recycling (paper, card, plastic, glass, metal)</li><li>Food / Organic Waste</li><li>Garden / Green Waste</li><li>Glass (separate stream)</li><li>WEEE (electrical waste)</li><li>Hazardous Waste</li></ul><h4>Custom Fractions</h4><p>Navigate to <strong>Settings &gt; Waste Fractions &gt; Add Fraction</strong> to create custom fractions. For each fraction, configure: name, colour coding (for map and driver app displays), default collection frequency, eligible container types, and unit of measure (volume or weight).</p>'
+        },
+        {
+          id: 'recycling-targets',
+          title: 'Setting and Tracking Recycling Diversion Targets',
+          badge: null,
+          readTime: '5 min',
+          desc: 'Configure recycling diversion targets at organisation, depot, zone, or route level. Monitor performance in real time and receive alerts when zones fall below target.',
+          body: '<h4>Setting Targets</h4><p>Navigate to <strong>Recycling &gt; Target Management</strong> to configure diversion targets. Set a percentage target for each waste fraction at your chosen level of granularity.</p><ul><li>Organisation-level targets for executive reporting</li><li>Zone-level targets for operational accountability</li><li>Customer-level targets for commercial recycling contracts</li></ul><h4>Monitoring Performance</h4><p>The Recycling Performance dashboard shows live diversion rate versus target for every configured level. Zones tracking below target are highlighted in amber (within 5% of threshold) or red (below threshold). Supervisors assigned to underperforming zones receive weekly summary emails automatically.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'reporting': {
+  title: 'Reporting & Analytics',
+  desc: 'KPI dashboards, compliance reports, sustainability metrics, fleet performance analytics, and custom report builder guides.',
+  color: '#1e3a5f',
+  articleCount: 11,
+  iconSvg: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+  sections: [
+    {
+      title: 'Standard Reports',
+      id: 'standard-reports',
+      articles: [
+        {
+          id: 'kpi-reports',
+          title: 'Generating KPI and Operational Performance Reports',
+          badge: 'popular',
+          readTime: '7 min',
+          desc: 'Generate monthly and weekly KPI reports covering collection rate, fleet utilisation, first-time completion rate, and customer service performance.',
+          body: '<h4>Accessing Standard Reports</h4><p>Navigate to <strong>Reports &gt; Standard Reports</strong> to find all pre-built report templates. Reports can be generated on demand or scheduled for automatic generation and email delivery.</p><ul><li><strong>Operations Weekly Summary</strong> — collections completed, exceptions, fleet mileage, crew hours</li><li><strong>Customer Service Report</strong> — missed collections, complaint resolution, portal usage</li><li><strong>Fleet Performance Report</strong> — vehicle utilisation, fuel consumption, maintenance downtime</li><li><strong>Financial Summary</strong> — invoices raised, payments received, outstanding debtors</li></ul><h4>Scheduling Reports</h4><p>Every standard report can be scheduled under <strong>Reports &gt; Scheduled Delivery</strong>. Set the frequency (daily, weekly, monthly), recipients, and file format (PDF, Excel, CSV). Reports are delivered automatically at 6am on the configured day.</p>'
+        },
+        {
+          id: 'carbon-reports',
+          title: 'Sustainability and Carbon Emission Reports',
+          badge: 'new',
+          readTime: '6 min',
+          desc: 'Generate carbon footprint reports for your waste collection fleet. Track CO₂e per tonne collected, fuel consumption trends, and net zero progress.',
+          body: '<h4>Carbon Calculation Methodology</h4><p>WASTRAQ calculates vehicle emissions using the DEFRA/GHG Protocol emission factors updated annually. Calculations cover Scope 1 direct fleet emissions (fuel combustion) and can be extended to Scope 3 supply chain emissions for enterprise customers.</p><h4>Available Sustainability Metrics</h4><ul><li>CO₂e emissions per tonne of waste collected</li><li>Fleet-wide fuel consumption in litres and cost</li><li>Diesel vs alternative fuel vehicle split and emission comparison</li><li>Year-on-year emission reduction trend</li><li>Landfill diversion tonnage and carbon equivalent offset</li></ul><p>Navigate to <strong>Reports &gt; Sustainability</strong> to access the full carbon reporting suite. Reports can be exported in the standard formats required by environmental agencies and ESG reporting frameworks including GRI and TCFD.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'municipal': {
+  title: 'Municipal Operations',
+  desc: 'Municipal corporation setup, compliance reporting, multi-depot management, ward-level analytics, and smart city integration guides.',
+  color: '#1e293b',
+  articleCount: 13,
+  iconSvg: '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  sections: [
+    {
+      title: 'Municipal Configuration',
+      id: 'municipal-config',
+      articles: [
+        {
+          id: 'compliance-dashboard',
+          title: 'Municipal Compliance Dashboard — Setup and Report Templates',
+          badge: 'new',
+          readTime: '8 min',
+          desc: 'Configure the Municipal Compliance Reporting module for local authority and council operations. Generate ward-level performance reports for environmental agencies.',
+          body: '<h4>Activating the Municipal Module</h4><p>The Municipal Compliance module is available on WASTRAQ Professional and Enterprise plans. Navigate to <strong>Settings &gt; Modules &gt; Municipal Compliance</strong> to activate it. You will be guided through a configuration wizard that maps your ward structure to WASTRAQ zones.</p><h4>Report Templates Available</h4><ul><li>Monthly Waste Tonnage by Ward and Fraction</li><li>Collection Frequency SLA Adherence by Ward</li><li>Vehicle Fleet Emissions (CO₂, NOₓ, fuel)</li><li>Recycling Rate by Household and Commercial</li><li>Missed Collection Rate and Resolution Times</li><li>Depot Operational Hours and Crew Utilisation</li><li>Year-on-Year Landfill Diversion Rate</li></ul><h4>Scheduled Report Delivery</h4><p>Municipal compliance reports can be scheduled for delivery to elected members, environmental officers, and audit committees on a monthly or quarterly basis. Each recipient can be assigned a subset of reports appropriate to their role.</p>'
+        }
+      ]
+    }
+  ]
+},
+
+'smart-city': {
+  title: 'Smart City Waste Management',
+  desc: 'IoT infrastructure integration, open data APIs, urban analytics dashboards, and smart city platform connectors for WASTRAQ.',
+  color: '#134e4a',
+  articleCount: 9,
+  iconSvg: '<path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/>',
+  sections: [
+    {
+      title: 'Smart City Integration',
+      id: 'smart-city-integration',
+      articles: [
+        {
+          id: 'waste-analytics',
+          title: 'Smart City Waste Analytics — Open Data API and Urban Dashboard Integration',
+          badge: 'new',
+          readTime: '12 min',
+          desc: 'Connect WASTRAQ operational data to city-wide urban analytics platforms, publish open data feeds, and integrate with smart city IoT infrastructure.',
+          body: '<h4>Open Data API for Smart Cities</h4><p>WASTRAQ\'s Open Data API provides authenticated read access to aggregated, anonymised operational datasets that city analytics platforms can consume. Published datasets are updated at configurable intervals and include:</p><ul><li>Zone-level waste volumes and recycling rates (daily updates)</li><li>Service exception rates by ward for public transparency dashboards</li><li>Fleet emissions data in kg CO₂e per tonne collected</li><li>Bin fill-level heat maps for urban planning analytics</li></ul><h4>Smart City Platform Connectors</h4><p>WASTRAQ has pre-built connectors for major smart city platforms including Cisco Kinetic, Microsoft Azure IoT Hub, AWS IoT Core, and FIWARE-based city platforms via the NGSI-LD API standard. Configuration guides for each connector are available in the Developer documentation.</p>'
+        }
+      ]
+    }
+  ]
+}
+};
+
+/* ══════════════════════════════════════════════════════
+   PAGE CONTROLLER
+══════════════════════════════════════════════════════ */
+(function() {
+  'use strict';
+
+  var params  = new URLSearchParams(window.location.search);
+  var topicId = params.get('topic') || 'platform-setup';
+  var hash    = window.location.hash || '';
+
+  /* Load topic on boot */
+  loadTopic(topicId, hash);
+
+  /* Mark active sidebar link */
+  document.querySelectorAll('.ht-sidebar-link[data-topic]').forEach(function(a) {
+    a.classList.toggle('ht-active', a.getAttribute('data-topic') === topicId);
+  });
+
+  function loadTopic(id, hashTarget) {
+    var topic = TOPICS[id];
+    if (!topic) { topic = TOPICS['platform-setup']; id = 'platform-setup'; }
+
+    /* Update meta */
+    document.title = topic.title + ' | WASTRAQ Help Center';
+
+var metaDesc = document.getElementById('ht-meta-desc');
+if (metaDesc) {
+  metaDesc.content = topic.desc;
+}
+
+    /* Update hero */
+    document.getElementById('ht-title').textContent = topic.title;
+    document.getElementById('ht-desc').textContent = topic.desc;
+    document.getElementById('ht-breadcrumb-current').textContent = topic.title;
+    document.getElementById('ht-article-count').textContent = topic.articleCount + '+';
+    document.getElementById('ht-hero').style.background = 'linear-gradient(#0a2016,' + '#14502e' + ',#0f3422)';
+    document.getElementById('ht-hero-icon').innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + topic.iconSvg + '</svg>';
+
+    /* Update page title for sidebar active state */
+    document.querySelectorAll('.ht-sidebar-link[data-topic]').forEach(function(a) {
+      a.classList.toggle('ht-active', a.getAttribute('data-topic') === id);
+    });
+
+    /* Render articles */
+    var html = '';
+    topic.sections.forEach(function(section) {
+      html += '<section class="ht-section" id="' + section.id + '" aria-labelledby="sec-' + section.id + '">';
+      html += '<h2 class="ht-section-title" id="sec-' + section.id + '">' + section.title + '</h2>';
+      section.articles.forEach(function(art) {
+        var badgeHtml = '';
+        if (art.badge === 'popular') badgeHtml = '<span class="ht-badge ht-badge-popular">Popular</span>';
+        else if (art.badge === 'new') badgeHtml = '<span class="ht-badge ht-badge-new">New</span>';
+        else if (art.badge === 'updated') badgeHtml = '<span class="ht-badge ht-badge-updated">Updated</span>';
+
+        html += '<article class="ht-article-card" id="' + art.id + '" aria-labelledby="art-' + art.id + '">' +
+          '<div class="ht-article-card-header">' +
+          '<h3 id="art-' + art.id + '">' + art.title + '</h3>' +
+          badgeHtml +
+          '</div>' +
+          '<div class="ht-article-meta-row">' +
+          '<span class="ht-article-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>' + art.readTime + ' read</span>' +
+          '</div>' +
+          '<p class="ht-article-desc">' + art.desc + '</p>' +
+          '<div class="ht-article-body-wrap" id="body-' + art.id + '">' +
+          '<div class="ht-article-body">' + art.body + '</div>' +
+          '</div>' +
+          '<button class="ht-toggle-btn" onclick="htToggle(\'' + art.id + '\',this)" aria-expanded="false">' +
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
+          'Read full article' +
+          '</button>' +
+          '</article>';
+      });
+      html += '</section>';
+    });
+
+    /* CTA */
+    html += '<div class="ht-cta">' +
+      '<h3>Did Not Find Your Answer?</h3>' +
+      '<p>Our support team is here to help with any question about the WASTRAQ smart waste management platform.</p>' +
+      '<div class="ht-cta-btns">' +
+      '<a href="contact.html" class="ht-cta-btn ht-cta-solid">Contact Support</a>' +
+      '<a href="help-articles.html" class="ht-cta-btn ht-cta-outline">Browse Updates</a>' +
+      '</div></div>';
+
+    document.getElementById('ht-content').innerHTML = html;
+
+    /* Scroll to hash after render */
+    if (hashTarget) {
+      setTimeout(function() {
+        var el = document.querySelector(hashTarget);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          /* Auto-expand the article */
+          var body = document.getElementById('body-' + hashTarget.replace('#',''));
+          var btn  = body ? body.nextElementSibling : null;
+          if (body && btn) { body.classList.add('open'); btn.setAttribute('aria-expanded','true'); btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg> Collapse'; }
+        }
+      }, 350);
+    }
+  }
+
+  /* Expose mini-search filter */
+  window.htFilterArticles = function(query) {
+    var q = query.trim().toLowerCase();
+    var cards = document.querySelectorAll('.ht-article-card');
+    var sections = document.querySelectorAll('.ht-section');
+    var noRes = document.getElementById('ht-no-results');
+
+    if (!q) { cards.forEach(function(c){ c.style.display=''; }); sections.forEach(function(s){ s.style.display=''; }); if(noRes) noRes.style.display='none'; return; }
+
+    cards.forEach(function(card) {
+      var text = card.textContent.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+    sections.forEach(function(s) {
+      var vis = Array.from(s.querySelectorAll('.ht-article-card')).some(function(c){ return c.style.display !== 'none'; });
+      s.style.display = vis ? '' : 'none';
+    });
+  };
+
+  /* Toggle article body */
+  window.htToggle = function(id, btn) {
+    var body = document.getElementById('body-' + id);
+    if (!body) return;
+    var isOpen = body.classList.contains('open');
+    body.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    btn.innerHTML = isOpen
+      ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg> Read full article'
+      : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg> Collapse';
+    if (!isOpen) { document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  };
+
+})();
