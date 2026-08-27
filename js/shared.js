@@ -163,8 +163,8 @@ function injectFooter() {
           <a href="contact.html">Contact Us</a>
           <a href="careers.html">Careers</a>
           <a href="#">Help Centre</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Data Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms of Service</a>
+          <a href="data-privacy.html">Data Privacy Policy</a>
           <a href="cookies.html">Read Cookie Policy</a>
           <a href="#">Security Policy</a>
         </div>
