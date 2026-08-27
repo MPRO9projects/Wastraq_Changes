@@ -76,10 +76,8 @@ a.wq-btn-primary:hover {
 }
 .wq-btn-primary-lg { padding: var(--hero-cta-padding); font-size: var(--hero-cta-size); font-weight: var(--hero-cta-weight); border-radius: 10px; }
 
-.wq-btn-white { padding: 14px 30px; border-radius: 10px; font-size: .95rem; font-weight: 700; background: white; color: var(--green-700); transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 20px rgba(0,0,0,.15); }
-.wq-btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
-.wq-btn-outline-white { padding: 14px 30px; border-radius: 10px; font-size: .95rem; font-weight: 700; border: 2px solid rgba(255,255,255,.5); color: white; transition: border-color .2s, background .2s; }
-.wq-btn-outline-white:hover { border-color: white; color: var(--green-800); background: rgba(255, 255, 255, 255); }
+/* .wq-btn-white / .wq-btn-outline-white intentionally not redefined —
+   inherits the shared gradient look from css/index.css. */
 
 /* Universal button hover lift (matches main site behaviour) */
 button,

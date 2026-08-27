@@ -71,10 +71,8 @@ a.wq-btn-primary:hover {
   box-shadow: 0 6px 24px rgba(7, 80, 173, .4) !important;
 }
 
-.wq-btn-white { padding: 14px 30px; border-radius: 10px; font-size: .95rem; font-weight: 700; background: white; color: var(--green-700); transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 20px rgba(0,0,0,.15); }
-.wq-btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
-.wq-btn-outline-white { padding: 14px 30px; border-radius: 10px; font-size: .95rem; font-weight: 700; border: 2px solid rgba(255,255,255,.5); color: white; transition: border-color .2s, background .2s; }
-.wq-btn-outline-white:hover { border-color: white; color: var(--green-800); background: rgba(255, 255, 255, 255); }
+/* .wq-btn-white / .wq-btn-outline-white intentionally not redefined —
+   inherits the shared gradient look from css/index.css. */
 
 /* Universal button hover lift (matches main site behaviour) */
 button,
@@ -972,70 +970,9 @@ h2.wq-section-title { font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 800; l
   border-color: var(--green-400, #22c55e);
 }
 
-/* ── FINAL CTA BUTTON STYLING ────────────────────────── */
-.wq-cta .wq-btn-white,
-.wq-cta a[href*="mail"] {
-  background: var(--btn-gradient) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border: none !important;
-  box-shadow: 0 4px 16px rgba(21, 157, 145, 0.3) !important;
-  font-weight: 700;
-  border-radius: var(--radius-sm, 8px);
-  padding: 13px 28px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.wq-cta .wq-btn-white:hover,
-.wq-cta a[href*="mail"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(21, 157, 145, 0.4) !important;
-}
-
-.wq-cta .wq-btn-outline-white {
-  position: relative;
-  overflow: hidden;
-  background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-radius: var(--radius-sm, 8px);
-  font-weight: 700;
-  padding: 13px 28px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  z-index: 1;
-  transition: border-color 0.3s ease, transform 0.2s ease;
-}
-
-.wq-cta .wq-btn-outline-white::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--btn-gradient);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.wq-cta .wq-btn-outline-white:hover::before,
-.wq-cta .wq-btn-outline-white:focus-visible::before {
-  opacity: 1;
-}
-
-.wq-cta .wq-btn-outline-white:hover,
-.wq-cta .wq-btn-outline-white:focus-visible {
-  border-color: transparent !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(21, 157, 145, 0.35);
-  outline: none;
-}
+/* Final CTA buttons (.wq-btn-white / .wq-btn-outline-white) intentionally
+   not redefined here — they inherit the shared look from css/index.css
+   so this page's CTA matches every other page's exactly. */
 
 /* =====================================================================
    PHASE 1 — MOBILE RESPONSIVE PASS

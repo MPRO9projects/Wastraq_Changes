@@ -956,49 +956,11 @@ html.sol-motion-ready .solution-detail.anim-in .wq-feature-list li:nth-child(6) 
   line-height: 1.5;
 }
 
-/* UNIFIED BUTTON STYLES FOR SOLUTIONS PAGE */
-.solutions-page .wq-btn-primary,
-.solutions-page .wq-btn-white,
-.solutions-page .wq-btn-outline-white,
-.solutions-page .sol-demo-btn,
-.solutions-page .sol-explore-btn,
-.sol-municipal-section .wq-btn-primary,
-.sol-collectors-section .wq-btn-primary,
-.solutions-page .wq-cta .wq-btn-white,
-.solutions-page .wq-cta .wq-btn-outline-white {
-  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%) !important;
-  color: #ffffff !important;
-  border: none !important;
-  border-radius: 14px !important;
-  font-family: var(--font);
-  font-weight: 700 !important;
-  font-size: 0.95rem !important;
-  padding: 13px 28px !important;
-  box-shadow: 0 8px 24px rgba(7, 80, 173, 0.25) !important;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  text-decoration: none !important;
-  cursor: pointer;
-}
-
-.solutions-page .wq-btn-primary:hover,
-.solutions-page .wq-btn-white:hover,
-.solutions-page .wq-btn-outline-white:hover,
-.solutions-page .sol-demo-btn:hover,
-.solutions-page .sol-explore-btn:hover,
-.sol-municipal-section .wq-btn-primary:hover,
-.sol-collectors-section .wq-btn-primary:hover,
-.solutions-page .wq-cta .wq-btn-white:hover,
-.solutions-page .wq-cta .wq-btn-outline-white:hover {
-  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%) !important;
-  color: #ffffff !important;
-  transform: translateY(-2px) !important;
-  filter: brightness(1.08) saturate(1.1) !important;
-  box-shadow: 0 12px 32px rgba(7, 80, 173, 0.38) !important;
-}
+/* .sol-demo-btn / .sol-explore-btn are extra hooks on top of the real
+   shared .wq-btn-white / .wq-btn-outline-white classes (sol-demo-btn is
+   also a JS target for the pointer-follow hover effect below) — no CSS
+   override here so these buttons inherit the shared look from
+   css/index.css and match every other page's buttons exactly. */
 
 /* "What WASTRAQ Customers Achieve" Metric Grid */
 .sol-exit-group {
