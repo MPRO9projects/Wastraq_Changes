@@ -314,7 +314,10 @@ nav {
   justify-content: center;
   gap: 8px;
   padding: 11px 22px;
-  border-radius: var(--radius-md);
+  /* Was var(--radius-md) = 16px, a much rounder/pill-like corner than
+     every other page's buttons (var(--radius-sm) = 8px, same as
+     .wq-btn-primary/.wq-btn-outline in css/index.css). */
+  border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
@@ -322,32 +325,44 @@ nav {
   overflow: hidden;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: transform 0.2s var(--ease-smooth), box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  box-sizing: border-box;
+  background-clip: padding-box;
+  transition: transform 0.2s var(--ease-smooth), box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease, filter 0.2s ease;
   user-select: none;
 }
 
 .btn-grad {
   background: var(--cta-grad);
   color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(21, 157, 145, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Canonical .wq-btn-primary has border:none — the 1px white ring this
+     used to have doesn't exist on any other page's gradient button. */
+  border: none;
+  box-shadow: 0 4px 16px rgba(21, 157, 145, 0.32);
 }
 
 .btn-grad:hover {
-  box-shadow: 0 8px 24px rgba(21, 157, 145, 0.35);
+  filter: brightness(1.08);
+  box-shadow: 0 6px 24px rgba(7, 80, 173, 0.4);
   transform: translateY(-2px);
 }
 
 .btn-outline {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  color: var(--forest);
+  /* Was a pale gray border (var(--border)) with --forest (dark green-900)
+     text — every other page's outline button has a visible green border
+     matching its text color (var(--green-600)), giving it real presence
+     instead of reading as barely-there. Hover now fills with the same
+     brand gradient other pages use instead of turning solid teal. */
+  background: transparent;
+  border: 2px solid var(--green-600);
+  color: var(--green-600);
 }
 
 .btn-outline:hover {
-  border-color: var(--teal);
-  color: var(--teal);
-  background: var(--teal-light);
+  border: 2px solid transparent;
+  color: #FFFFFF;
+  background: var(--cta-grad) border-box;
+  background-clip: border-box;
+  box-shadow: 0 6px 20px rgba(7, 80, 173, 0.25);
   transform: translateY(-2px);
 }
 
