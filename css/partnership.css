@@ -415,8 +415,17 @@ nav {
    ========================================================================= */
 .scroll-stage-hero {
   position: relative;
-  height: 130vh;
-  /* Reduced height to eliminate dead scroll gap */
+  /* Was 130vh: since the hero->cards fade (js/partnership.js initHeroMorph,
+     fadeEnd 0.45) completes at 45% of whatever extra scroll distance this
+     height provides beyond 100vh, the other 55% was ~16.5vh of scroll where
+     the fully-morphed cards just sit there pinned with nothing changing
+     before releasing into the next section — that "long static hold" is
+     what reads as the hero abruptly vanishing. Reduced to 115vh (15vh of
+     pin budget instead of 30vh) so the hold shrinks proportionally to
+     ~8vh while the fade itself still gets a comfortable ~7vh of scroll to
+     play out — the fade's own pacing/easing/trigger logic in
+     initHeroMorph() is untouched. */
+  height: 115vh;
   z-index: 10;
 }
 
