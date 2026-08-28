@@ -23,7 +23,7 @@
       // the homepage — every real standalone page needs to be listed here,
       // since this reload-redirect logic runs on every page that includes
       // this shared script.
-      const STANDALONE_PAGES = ['cookies.html', 'products.html', 'solutions.html', 'enterprise.html', 'about.html', 'blog.html', 'contact.html'];
+      const STANDALONE_PAGES = ['cookies.html', 'products.html', 'solutions.html', 'enterprise.html', 'about.html', 'blog.html', 'contact.html', 'careers.html'];
       const isHome = path.endsWith('index.html') || path.endsWith('/') || path === ''
         || STANDALONE_PAGES.some(p => path.endsWith(p));
       if (!isHome) {
@@ -51,15 +51,11 @@ function injectNav(activePage = '') {
         <li class="has-dropdown ${activePage==='products'?'active':''}">
           <a href="products.html">Products <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
           <div class="wq-dropdown">
-            <a href="products.html#core">TraqCore – The Core Platform</a>
+            <a href="products.html#core">TraqCore Platform</a>
             <a href="products.html#residential">Residential Collection</a>
             <a href="products.html#commercial">Commercial Collection</a>
-            <a href="products.html#skip">Skip &amp; Bulk Hire</a>
-            <a href="products.html#routeai">RouteTraq™ | Smart Routing</a>
-            <a href="products.html#incab">In-Cab Navigation</a>
-            <a href="products.html#crm">Customer Relationship Management</a>
-            <a href="products.html#portal">Customer Portal</a>
-            <a href="products.html#insights">Waste Insights &amp; Analytics</a>
+            <a href="products.html#skip">RouteTraq</a>
+            <a href="products.html#insights">Waste Insights & Analytics</a>
             <a href="products.html#integrations">Integrations</a>
           </div>
         </li>
@@ -68,15 +64,16 @@ function injectNav(activePage = '') {
           <div class="wq-dropdown">
             <a href="solutions.html#municipal">Municipal Utilities</a>
             <a href="solutions.html#collectors">Waste Collectors</a>
-            <a href="enterprise.html">Enterprise</a>
+            <a href="enterprise.html">Enterprises</a>
           </div>
         </li>
-        <li class="${activePage==='partnership'?'active':''}"><a href="contact.html">Partnership</a></li>
-        <li class="has-dropdown ${activePage==='about'?'active':''}">
+        <li class="${activePage==='partnership'?'active':''}"><a href="partnership.html">Partnership</a></li>
+        <li class="has-dropdown ${activePage==='about'||activePage==='careers'||activePage==='contact'?'active':''}">
           <a href="about.html">About <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
           <div class="wq-dropdown">
             <a href="about.html">About Us</a>
             <a href="blog.html">Blog</a>
+            <a href="careers.html">Careers</a>
             <a href="contact.html">Contact</a>
           </div>
         </li>
@@ -93,8 +90,9 @@ function injectNav(activePage = '') {
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="solutions.html">Solutions</a>
-      <a href="contact.html">Partnership</a>
+      <a href="partnership.html">Partnership</a>
       <a href="about.html">About Us</a>
+      <a href="careers.html">Careers</a>
       <a href="contact.html">Contact</a>
       <a href="#">Login</a>
       <a href="contact.html" class="wq-btn-primary" style="margin-top:12px;display:block;text-align:center">Schedule Demo</a>
@@ -140,39 +138,36 @@ function injectFooter() {
         <div class="wq-footer-col">
           <h4>Products</h4>
           <a href="products.html#core">TraqCore Platform</a>
-          <a href="products.html#commercial">Commercial Collection</a>
-          <a href="products.html#residential">Residential Collection</a>
-          <a href="products.html#skip">Skip &amp; Bulk Hire</a>
-          <a href="products.html#crm">CRM</a>
-          <a href="products.html#incab">In-Cab Navigation</a>
-          <a href="products.html#portal">Customer Portal</a>
-          <a href="products.html#insights">Waste Insights</a>
-          <a href="products.html#integrations">Integrations</a>
-        </div>
+            <a href="products.html#residential">Residential Collection</a>
+            <a href="products.html#commercial">Commercial Collection</a>
+            <a href="products.html#skip">RouteTraq</a>
+            <a href="products.html#insights">Waste Insights & Analytics</a>
+            <a href="products.html#integrations">Integrations</a>
+          </div>
         <div class="wq-footer-col">
           <h4>Solutions</h4>
           <a href="solutions.html#municipal">Municipal Utilities</a>
           <a href="solutions.html#collectors">Waste Collectors</a>
+           <a href="enterprise.html">Enterprises</a>
           <h4 style="margin-top:24px">Partnership</h4>
-          <a href="contact.html">Become a Partner</a>
+          <a href="partnership.html">Become a Partner</a>
         </div>
         <div class="wq-footer-col">
           <h4>Company</h4>
           <a href="about.html">About Us</a>
           <a href="blog.html">Blog</a>
           <a href="contact.html">Contact Us</a>
-          <a href="#">Careers</a>
+          <a href="careers.html">Careers</a>
           <a href="#">Help Centre</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Data Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms of Service</a>
+          <a href="data-privacy.html">Data Privacy Policy</a>
           <a href="cookies.html">Read Cookie Policy</a>
-          <a href="#">Security Policy</a>
         </div>
       </div>
     </div>
     <div class="wq-footer-bottom">
       <span>© 2026 WASTRAQ – All rights reserved</span>
-      <span>Developed by <strong><a href="https://www.mpro9.in/" target="_blank" rel="noopener noreferrer">M Pro9 Pvt. Ltd.</a></strong></span>
+      <span>Developed by <strong><a href="https://www.mpro9.in/" target="_blank" rel="noopener noreferrer">M PRO9 Pvt. Ltd.</a></strong></span>
     </div>
   </footer>`;
   document.getElementById('footer-placeholder').innerHTML = footer;
