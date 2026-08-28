@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="canonical" href="https://wastraq.com/login.html">
+  <!-- Clarity tracking code for https://wastraq.com/ -->
+
+  <!-- ── FAVICONS ─────────────────────────────── -->
+<link rel="icon" type="image/png" href="assets/login/login_favicon.png">
+<link rel="apple-touch-icon" href="assets/login/login_apple_touch_icon.png">
+<meta name="description" content="Login to the WASTRAQ smart waste management platform to access dashboards, reports, operations data, and waste tracking tools.">
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wtmhp3u28x");
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Login | WASTRAQ",
+  "url": "https://wastraq.com/login.html",
+  "description": "Login page for the WASTRAQ smart waste management platform."
+}
+</script>
+  <title>Login | WASTRAQ Smart Waste Management Platform</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/nav-footer.css">
+  <link rel="stylesheet" href="css/cookies.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/login.css">
+
+  <!-- WASTRAQ API Configuration -->
+  <script>window.WASTRAQ_API_BASE = "https://backend.wastraq.com"; /* change to production URL */</script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="auth-hero">
+  <a href="index.html">
+    <img src="assets/login/login_wastraq_logo.png" alt="WASTRAQ" height="100" style="display:block;margin:0 auto 20px"/>
+  </a>
+  <div class="wq-section-tag" style="color:var(--green-300);justify-content:center;margin-bottom:12px">Welcome Back</div>
+  <h1>Sign In to WASTRAQ</h1>
+  <p>Continue managing your waste operations with intelligent, real-time insights.</p>
+</div>
+
+<!-- FORM -->
+<div class="auth-main">
+  <div class="auth-card-wrap">
+    <div class="auth-card">
+      <h2>Login to Your Account</h2>
+      <p class="sub">Enter your credentials to access your dashboard.</p>
+
+      <div id="login-form-state">
+        <form class="wq-form" id="loginForm" onsubmit="handleLogin(event)">
+          <div class="wq-field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@company.com" required/>
+            <div class="wq-field-error" id="emailError"></div>
+          </div>
+
+          <div class="wq-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Your password" required/>
+            <div class="wq-field-error" id="passwordError"></div>
+          </div>
+
+          <div class="auth-options-row">
+            <label class="wq-checkbox-label">
+              <input type="checkbox" id="remember"> Remember me
+            </label>
+            <a href="#" class="wq-field-link">Forgot password?</a>
+          </div>
+
+          <div style="margin-top:8px">
+            <button type="submit" id="login-btn" class="wq-btn-primary" style="width:100%;padding:14px;font-size:1rem;border-radius:10px;border:none;cursor:pointer">
+              Sign In →
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Shown after sign-in request is submitted -->
+      <div id="login-success-state" style="display:none;text-align:center;padding:40px 16px;">
+        <div style="width:64px;height:64px;background:var(--green-100);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--green-600);">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-size:1.2rem;font-weight:800;color:var(--green-900);margin-bottom:10px;">Access Request Received</h3>
+        <p style="font-size:.9rem;color:var(--text-muted);line-height:1.7;">
+          Thank you for your interest in WASTRAQ. Our team has been notified and will contact you shortly to set up your account access.
+        </p>
+        <p style="margin-top:12px;font-size:.9rem;color:var(--text-muted);">
+          While you wait, <a href="contact.html" style="color:var(--green-600);font-weight:600;">schedule a personalised demo</a> to see the platform in action.
+        </p>
+      </div>
+    </div>
+
+    <p class="auth-footer-link">
+      Don't have an account? <a href="register.html">Create one for free</a>
+    </p>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="js/shared.js"></script>
+<script>
+  injectNav('login');
+  injectFooter();
+</script>
+<script src="js/login.js"></script>
+<script src="js/cookies.js"></script>
+  <!-- WASTRAQ Chatbot -->
+  <script data-api-base="https://backend.wastraq.com" src="js/chatbot.js"></script>
+  <!-- Set your production API URL above before deployment -->
+</body>
+</html>

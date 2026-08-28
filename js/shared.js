@@ -23,7 +23,7 @@
       // the homepage — every real standalone page needs to be listed here,
       // since this reload-redirect logic runs on every page that includes
       // this shared script.
-      const STANDALONE_PAGES = ['cookies.html', 'products.html', 'solutions.html', 'enterprise.html', 'about.html', 'blog.html', 'contact.html'];
+      const STANDALONE_PAGES = ['cookies.html', 'products.html', 'solutions.html', 'enterprise.html', 'about.html', 'blog.html', 'contact.html', 'partnership.html', 'careers.html', 'kuppam_blog.html', 'nmf_blog.html', 'help.html', 'help-articles.html', 'help-topic.html', 'terms-and-conditions.html', 'data-privacy.html', 'login.html', 'register.html'];
       const isHome = path.endsWith('index.html') || path.endsWith('/') || path === ''
         || STANDALONE_PAGES.some(p => path.endsWith(p));
       if (!isHome) {
@@ -82,7 +82,7 @@ function injectNav(activePage = '') {
         </li>
       </ul>
       <div class="wq-nav-actions">
-        <a href="#" class="wq-btn-ghost">Login</a>
+        <a href="login.html" class="wq-btn-ghost">Login</a>
         <a href="contact.html" class="wq-btn-primary">Schedule Demo</a>
       </div>
       <button class="wq-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
@@ -96,7 +96,7 @@ function injectNav(activePage = '') {
       <a href="partnership.html">Partnership</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact</a>
-      <a href="#">Login</a>
+      <a href="login.html">Login</a>
       <a href="contact.html" class="wq-btn-primary" style="margin-top:12px;display:block;text-align:center">Schedule Demo</a>
     </div>
   </nav>`;

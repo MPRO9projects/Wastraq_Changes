@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="canonical" href="https://wastraq.com/register.html">
+  <!-- Clarity tracking code for https://wastraq.com/ -->
+
+  <!-- ── FAVICONS ─────────────────────────────── -->
+<link rel="icon" type="image/png" href="assets/register/register_favicon.png">
+<link rel="apple-touch-icon" href="assets/register/register_apple_touch_icon.png">
+<meta name="description" content="Create your WASTRAQ account to access smart waste management tools, digital waste tracking, route monitoring, and municipal operations dashboards.">
+
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wtmhp3u28x");
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Register | WASTRAQ",
+  "url": "https://wastraq.com/register.html",
+  "description": "Registration page for the WASTRAQ smart waste management platform."
+}
+</script>
+  <title>Register – WASTRAQ</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/nav-footer.css">
+  <link rel="stylesheet" href="css/cookies.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/register.css">
+
+  <!-- WASTRAQ API Configuration -->
+  <script>window.WASTRAQ_API_BASE = "https://backend.wastraq.com"; /* change to production URL */</script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="auth-hero">
+  <a href="index.html">
+    <img src="assets/register/register_wastraq_logo.png" alt="WASTRAQ" height="100" style="display:block;margin:0 auto 20px"/>
+  </a>
+  <div class="wq-section-tag" style="color:var(--green-300);justify-content:center;margin-bottom:12px">Get Started</div>
+  <h1>Create Your Account</h1>
+  <p>Start your smart waste management journey — set up takes just minutes.</p>
+</div>
+
+<!-- FORM -->
+<div class="auth-main">
+  <div class="auth-card-wrap">
+    <div class="auth-card">
+      <h2>Create a Free Account</h2>
+      <p class="sub">Fill in your details below to get started with WASTRAQ.</p>
+
+      <div id="register-form-state">
+        <form class="wq-form" id="registerForm" onsubmit="handleRegister(event)">
+          <div class="wq-form-row">
+            <div class="wq-field">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" placeholder="First name" required/>
+            </div>
+            <div class="wq-field">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" placeholder="Last name" required/>
+            </div>
+          </div>
+
+          <div class="wq-field">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" placeholder="you@company.com" required/>
+          </div>
+
+          <div class="wq-field">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" placeholder="+1 000 000 0000" required/>
+          </div>
+
+          <div class="wq-field">
+            <label for="password">Password *</label>
+            <input type="password" id="password" placeholder="Min. 6 characters" required/>
+          </div>
+
+          <div class="wq-field">
+            <label for="location">Location</label>
+            <div class="location-wrapper">
+              <input type="text" id="location" placeholder="Enter or detect your location"/>
+              <button type="button" class="location-btn" id="getLocationBtn" title="Detect my location">📍</button>
+            </div>
+          </div>
+
+          <div style="margin-top:8px">
+            <button type="submit" id="register-btn" class="wq-btn-primary" style="width:100%;padding:14px;font-size:1rem;border-radius:10px;border:none;cursor:pointer">
+              Create Account →
+            </button>
+          </div>
+
+          <p style="font-size:.75rem;color:var(--text-light);text-align:center;margin-top:12px">
+            By registering, you agree to our Terms of Service and Privacy Policy.
+          </p>
+        </form>
+      </div>
+
+      <!-- Success state shown after successful submission -->
+      <div id="register-success-state" style="display:none;text-align:center;padding:40px 16px;">
+        <div style="width:64px;height:64px;background:var(--green-100);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--green-600);">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-size:1.2rem;font-weight:800;color:var(--green-900);margin-bottom:10px;">Registration Received!</h3>
+        <p style="font-size:.9rem;color:var(--text-muted);line-height:1.7;">
+          Thank you for registering with WASTRAQ. Our team will review your details and get in touch within one business day to set up your account.
+        </p>
+        <p style="margin-top:12px;font-size:.9rem;color:var(--text-muted);">
+          In the meantime, <a href="contact.html" style="color:var(--green-600);font-weight:600;">schedule a demo</a> to see WASTRAQ in action.
+        </p>
+      </div>
+    </div>
+
+    <p class="auth-footer-link">
+      Already have an account? <a href="login.html">Sign in here</a>
+    </p>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="js/shared.js"></script>
+<script>
+  injectNav('register');
+  injectFooter();
+</script>
+<script src="js/register.js"></script>
+<script src="js/cookies.js"></script>
+  <!-- WASTRAQ Chatbot -->
+  <script data-api-base="https://backend.wastraq.com" src="js/chatbot.js"></script>
+  <!-- Set your production API URL above before deployment -->
+</body>
+</html>
