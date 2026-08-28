@@ -32,6 +32,15 @@ CAREERS_EMAIL = os.getenv("CAREERS_EMAIL")
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
 GOOGLE_SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE")
 # ── Logging ───────────────────────────────────────────────────────────────────
+# Log messages throughout this backend use non-ASCII characters (→, —, ✗).
+# Windows' default console codepage (cp1252) can't encode them, which makes
+# every such log call raise inside logging's own error handler — it doesn't
+# crash the request, but it does spam a broken stack trace to the console in
+# place of the actual error message. Force UTF-8 on stdout so logs render
+# correctly on any platform.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s  %(levelname)-8s  %(name)s – %(message)s",
@@ -42,7 +51,11 @@ log = logging.getLogger("wastraq")
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 
+from limiter import limiter
 from routers import forms, chatbot
 
 # ── App ───────────────────────────────────────────────────────────────────────
@@ -53,6 +66,10 @@ app = FastAPI(
     docs_url="/api/docs",
     redoc_url="/api/redoc",
 )
+
+# ── Rate limiting (public form endpoints are unauthenticated write targets) ───
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
 _raw_origins = os.getenv("ALLOWED_ORIGINS", "").strip()
@@ -73,6 +90,7 @@ app.add_middleware(
     allow_methods     = ["GET", "POST", "OPTIONS"],
     allow_headers     = ["Content-Type", "Accept", "Authorization"],
 )
+app.add_middleware(SlowAPIMiddleware)
 
 # ── Routers ───────────────────────────────────────────────────────────────────
 app.include_router(forms.router,   prefix="/api/forms",   tags=["Forms"])

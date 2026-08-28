@@ -1,15 +1,18 @@
 import logging
 from datetime import datetime, timezone
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 
+from limiter import limiter
 from utils.sheets import append_row
 from utils.email  import send_email
 from utils.templates import (
     build_demo_email,
     build_partner_email,
     build_careers_email,
+    build_register_email,
+    build_login_interest_email,
 )
 
 log = logging.getLogger(__name__)
@@ -25,39 +28,60 @@ def _ts() -> str:
 # ══════════════════════════════════════════════════════════════
 
 class DemoRequest(BaseModel):
-    fname:      str            = Field(..., min_length=1)
-    lname:      str            = Field(..., min_length=1)
+    fname:      str            = Field(..., min_length=1, max_length=100)
+    lname:      str            = Field(..., min_length=1, max_length=100)
     email:      EmailStr
-    phone:      Optional[str]  = ""
-    country:    Optional[str]  = ""
-    org:        Optional[str]  = ""
-    orgtype:    Optional[str]  = ""
-    orgwebsite: Optional[str]  = ""
-    fleet:      Optional[str]  = ""
-    msg:        Optional[str]  = ""
+    phone:      Optional[str]  = Field("", max_length=40)
+    country:    Optional[str]  = Field("", max_length=100)
+    org:        Optional[str]  = Field("", max_length=200)
+    orgtype:    Optional[str]  = Field("", max_length=100)
+    orgwebsite: Optional[str]  = Field("", max_length=200)
+    fleet:      Optional[str]  = Field("", max_length=100)
+    msg:        Optional[str]  = Field("", max_length=5000)
 
 
 class PartnerRequest(BaseModel):
     # BUG FIX: was Literal["reseller","referrer","tech","partner"]
     # Frontend may send "Reseller", "reseller", "Tech Partner" etc.
     # Changed to Optional[str] with normalisation below.
-    formType:        Optional[str]  = "partner"
-    name:            str            = Field(..., min_length=1)
+    formType:        Optional[str]  = Field("partner", max_length=50)
+    name:            str            = Field(..., min_length=1, max_length=100)
     email:           EmailStr
-    phone:           Optional[str]  = ""
-    company:         Optional[str]  = ""
-    city:            Optional[str]  = ""
-    partnershipType: Optional[str]  = ""
-    message:         Optional[str]  = ""
+    phone:           Optional[str]  = Field("", max_length=40)
+    company:         Optional[str]  = Field("", max_length=200)
+    city:            Optional[str]  = Field("", max_length=100)
+    partnershipType: Optional[str]  = Field("", max_length=50)
+    message:         Optional[str]  = Field("", max_length=5000)
 
 
 class CareersRequest(BaseModel):
-    name:       str           = Field(..., min_length=1)
+    name:       str           = Field(..., min_length=1, max_length=100)
     email:      EmailStr
-    phone:      Optional[str] = ""
-    position:   str           = Field(..., min_length=1)
-    linkedin:   Optional[str] = ""
-    coverNote:  Optional[str] = ""
+    phone:      Optional[str] = Field("", max_length=40)
+    position:   str           = Field(..., min_length=1, max_length=150)
+    linkedin:   Optional[str] = Field("", max_length=300)
+    coverNote:  Optional[str] = Field("", max_length=5000)
+
+
+# register.html and login.html are "request access" lead-capture forms, not
+# real account creation/authentication — there is no user database, no
+# password hashing, and no session/token system anywhere in this backend.
+# These models deliberately have NO password field: even though both forms
+# collect a password client-side (for a minimum-length UX check only), it
+# must never be transmitted to or accepted by this API. Any password field
+# sent by a client is simply not part of these schemas, so FastAPI/Pydantic
+# ignores it — it is never logged, stored in Sheets, or emailed.
+
+class RegisterRequest(BaseModel):
+    fname:    str           = Field(..., min_length=1, max_length=100)
+    lname:    str           = Field(..., min_length=1, max_length=100)
+    email:    EmailStr
+    phone:    Optional[str] = Field("", max_length=40)
+    location: Optional[str] = Field("", max_length=200)
+
+
+class LoginInterestRequest(BaseModel):
+    email: EmailStr
 
 
 # ══════════════════════════════════════════════════════════════
@@ -65,7 +89,8 @@ class CareersRequest(BaseModel):
 # ══════════════════════════════════════════════════════════════
 
 @router.post("/demo")
-async def submit_demo(data: DemoRequest):
+@limiter.limit("5/minute")
+async def submit_demo(request: Request, data: DemoRequest):
     """Demo request from contact.html — saves to 'Demo Requests' sheet and emails admin."""
 
     row = [
@@ -113,7 +138,8 @@ async def submit_demo(data: DemoRequest):
 # ══════════════════════════════════════════════════════════════
 
 @router.post("/partner")
-async def submit_partner(data: PartnerRequest):
+@limiter.limit("5/minute")
+async def submit_partner(request: Request, data: PartnerRequest):
     """Reseller / Referrer / Tech-Partner modal — saves to 'Partnership' sheet."""
 
     # Normalise formType to lowercase
@@ -172,7 +198,8 @@ async def submit_partner(data: PartnerRequest):
 # ══════════════════════════════════════════════════════════════
 
 @router.post("/careers")
-async def submit_careers(data: CareersRequest):
+@limiter.limit("5/minute")
+async def submit_careers(request: Request, data: CareersRequest):
     """Careers application — saves to 'Careers' sheet and emails careers team."""
 
     row = [
@@ -211,11 +238,101 @@ async def submit_careers(data: CareersRequest):
 
 
 # ══════════════════════════════════════════════════════════════
+#  REGISTER "REQUEST ACCESS"  –  POST /api/forms/register
+# ══════════════════════════════════════════════════════════════
+
+@router.post("/register")
+@limiter.limit("5/minute")
+async def submit_register(request: Request, data: RegisterRequest):
+    """
+    register.html — this is a lead-capture 'request access' form, not real
+    account creation. No password is accepted by RegisterRequest, so none
+    is ever stored in Sheets or included in the notification email.
+    """
+    row = [
+        data.fname, data.lname, data.email, data.phone, data.location, _ts(),
+    ]
+    headers = [
+        "First Name", "Last Name", "Email", "Phone", "Location", "Submitted At",
+    ]
+
+    sheets_ok = True
+    email_ok  = True
+
+    try:
+        append_row("Registrations", headers, row)
+        log.info("Register request saved to Sheets: %s %s <%s>", data.fname, data.lname, data.email)
+    except Exception as exc:
+        sheets_ok = False
+        log.error("Register → Sheets FAILED: %s", exc, exc_info=True)
+
+    try:
+        subject, html = build_register_email(data.model_dump())
+        send_email(subject, html, to="admin")
+        log.info("Register request email sent for: %s", data.email)
+    except Exception as exc:
+        email_ok = False
+        log.error("Register → Email FAILED: %s", exc, exc_info=True)
+
+    return {
+        "success":   True,
+        "message":   "Registration request received. Our team will be in touch shortly.",
+        "sheets_ok": sheets_ok,
+        "email_ok":  email_ok,
+    }
+
+
+# ══════════════════════════════════════════════════════════════
+#  LOGIN "REQUEST ACCESS"  –  POST /api/forms/login
+# ══════════════════════════════════════════════════════════════
+
+@router.post("/login")
+@limiter.limit("8/minute")
+async def submit_login_interest(request: Request, data: LoginInterestRequest):
+    """
+    login.html — there is no real authentication here. This records the
+    email as an access request for manual follow-up. No password is
+    accepted by LoginInterestRequest, so none is ever stored or emailed.
+    """
+    row = [data.email, _ts()]
+    headers = ["Email", "Requested At"]
+
+    sheets_ok = True
+    email_ok  = True
+
+    try:
+        append_row("Login Requests", headers, row)
+        log.info("Login access request saved to Sheets: %s", data.email)
+    except Exception as exc:
+        sheets_ok = False
+        log.error("Login request → Sheets FAILED: %s", exc, exc_info=True)
+
+    try:
+        subject, html = build_login_interest_email(str(data.email))
+        send_email(subject, html, to="admin")
+        log.info("Login access request email sent for: %s", data.email)
+    except Exception as exc:
+        email_ok = False
+        log.error("Login request → Email FAILED: %s", exc, exc_info=True)
+
+    return {
+        "success":   True,
+        "message":   "Request received. Our team will be in touch shortly.",
+        "sheets_ok": sheets_ok,
+        "email_ok":  email_ok,
+    }
+
+
+# ══════════════════════════════════════════════════════════════
 #  DEBUG ENDPOINTS (remove in production if desired)
+#  These are unauthenticated public GET routes with no purpose beyond
+#  one-time setup verification — rate-limited hard so they can't be used
+#  to spam the mailbox/spreadsheet even if left in place after launch.
 # ══════════════════════════════════════════════════════════════
 
 @router.get("/test-email")
-async def test_email():
+@limiter.limit("2/hour")
+async def test_email(request: Request):
     """Send a test email to ADMIN_EMAIL to verify SMTP is working."""
     try:
         send_email(
@@ -230,7 +347,8 @@ async def test_email():
 
 
 @router.get("/test-sheets")
-async def test_sheets():
+@limiter.limit("2/hour")
+async def test_sheets(request: Request):
     """Write a test row to Google Sheets 'Test' tab to verify Sheets API is working."""
     try:
         append_row(
@@ -250,11 +368,12 @@ async def test_sheets():
 
 class SubscriptionRequest(BaseModel):
     email: EmailStr
-    type:  Optional[str] = "subscription"    # always "subscription" from frontend
+    type:  Optional[str] = Field("subscription", max_length=50)    # always "subscription" from frontend
 
 
 @router.post("/subscribe")
-async def submit_subscription(data: SubscriptionRequest):
+@limiter.limit("5/minute")
+async def submit_subscription(request: Request, data: SubscriptionRequest):
     """
     Receives email subscription from any page.
     Saves to 'Subscriptions' sheet and emails admin.

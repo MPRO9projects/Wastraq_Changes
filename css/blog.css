@@ -1,0 +1,310 @@
+/* =====================================================================
+   WASTRAQ — Blog Page (standalone bundle)
+   All CSS the Blog page needs. The Blog page's own content never used
+   any wastraq.css ("wq-") class — its only site-wide dependency was the
+   navbar/footer (via injectNav/injectFooter) and the --nav-h spacing
+   that made room for the navbar, both removed here since this page
+   never renders a navbar or footer.
+   ===================================================================== */
+
+body {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.blog-page {
+  background: #ffffff;
+}
+
+/* ── SECTION 1: HERO SECTION ─────────────────────── */
+.blog-hero-section {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 24px 90px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8faf7 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-hero-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.blog-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #166534;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(-15px);
+}
+
+.blog-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, #6FBB59, #159D91);
+  border-radius: 2px;
+}
+
+.blog-title {
+  font-size: clamp(44px, 4.4vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  margin: 0 auto 24px;
+  color: #020617;
+  max-width: 860px;
+}
+
+/* Letter & Word Spans for animation */
+.blog-char {
+  display: inline-block;
+  will-change: transform, opacity;
+  white-space: pre;
+}
+
+.blog-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.blog-gradient-text,
+.blog-title strong {
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.blog-sub {
+  margin: 0 auto;
+  color: #475569;
+  font-size: clamp(18px, 1.25vw, 21px);
+  line-height: 1.65;
+  max-width: 740px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ── SECTION 2: CARDS SECTION ───────────────────── */
+.blog-cards-section {
+  padding: 100px 24px 120px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.blog-cards-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-cards-header {
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.blog-cards-tag {
+  font-size: 13px;
+  font-weight: 700;
+  color: #166534;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.blog-cards-header h2 {
+  font-size: clamp(26px, 2.2vw, 36px);
+  font-weight: 700;
+  color: #020617;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.blog-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  perspective: 1200px;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 280px;
+  padding: 44px 46px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.blog-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%);
+  opacity: 0.7;
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+.blog-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.03);
+  transform: translateY(-4px);
+}
+
+.blog-card:hover::before {
+  opacity: 1;
+  height: 4px;
+}
+
+.blog-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  margin-bottom: 24px;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.blog-card:hover .blog-icon {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #0f5229;
+}
+
+.blog-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: currentColor;
+}
+
+.blog-meta {
+  font-size: 0.8rem;
+  color: #166534;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+
+.blog-card h2 {
+  margin: 0 0 14px;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: #020617;
+  letter-spacing: -0.015em;
+  transition: color 0.25s ease;
+}
+
+.blog-card:hover h2 {
+  color: #159D91;
+}
+
+.blog-card p {
+  margin: 0 0 28px;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #475569;
+  flex-grow: 1;
+}
+
+.blog-link {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%);
+  padding: 10px 22px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(21, 157, 145, 0.25);
+  width: fit-content;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-card:hover .blog-link {
+  box-shadow: 0 6px 20px rgba(21, 157, 145, 0.4);
+  transform: translateY(-1px);
+}
+
+.blog-link span {
+  transition: transform 0.2s ease;
+}
+
+.blog-card:hover .blog-link span {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .blog-hero-section {
+    min-height: auto;
+    padding: 50px 18px 60px;
+  }
+
+  .blog-title {
+    font-size: clamp(30px, 8vw, 42px);
+  }
+
+  .blog-sub {
+    font-size: 16px;
+  }
+
+  .blog-cards-section {
+    padding: 60px 18px 80px;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .blog-card {
+    min-height: auto;
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+
+  .blog-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+  }
+}

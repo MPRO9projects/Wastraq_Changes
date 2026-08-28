@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WASTRAQ Partnership Program | Simple &amp; Minimal</title>
+  <meta name="description" content="Join the WASTRAQ Partnership Program. Simple, high-value opportunities for Reseller, Referral, and Technology partners." />
+  <link rel="icon" type="image/png" href="assets/images/index_favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/index_apple_touch_icon.png">
+
+  <!-- Modern Editorial Typography (Matching WASTRAQ Brand System) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared site nav/footer (must load before the page's own stylesheet,
+       so partnership.css can still override anything it needs to) -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/nav-footer.css">
+
+  <!-- Primary Stylesheet -->
+  <link rel="stylesheet" href="css/partnership.css">
+</head>
+<body>
+
+  <!-- Shared site navigation — injected by shared.js, see bottom of page -->
+  <div id="nav-placeholder"></div>
+
+  <!-- AMBIENT SOFT BACKGROUND BLOBS -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-blob blob-1" id="blob1"></div>
+    <div class="ambient-blob blob-2" id="blob2"></div>
+    <div class="ambient-blob blob-3" id="blob3"></div>
+  </div>
+
+  <!-- SCROLL PROGRESS INDICATOR -->
+  <div class="scroll-progress-line" id="scrollProgress"></div>
+
+  <main>
+    <!-- =========================================================================
+         1. HERO → 3 PARTNERSHIP CARDS PINNED STAGE
+         ========================================================================= -->
+    <div class="scroll-stage-hero" id="heroStage">
+      <div class="stage-sticky-viewport">
+
+        <!-- INITIAL HERO LAYER -->
+        <div class="hero-editorial-layer" id="heroEditorialLayer">
+          <div class="hero-editorial-inner">
+
+            <!-- LEFT: HERO CONTENT (Minimal & Punchy) -->
+            <div class="hero-text-block" id="heroTextBlock">
+              <div class="hero-eyebrow-pill">
+                <span class="sec-tag-dot"></span>
+                <span>WASTRAQ PARTNERSHIP</span>
+              </div>
+
+              <h1 class="hero-h1">
+                Grow With WASTRAQ.
+              </h1>
+
+              <div class="hero-h1-sub">
+                Reseller • Referral • Technology
+              </div>
+
+              <p class="hero-lead-text">
+                Join our unified ecosystem to deliver intelligent waste tracking, IoT telemetry, and automated sustainability compliance.
+              </p>
+
+              <div class="hero-ctas">
+                <button class="btn btn-grad js-magnetic js-apply" data-open-type="Reseller">
+                  <span>Become a Partner</span>
+                  <span class="btn-arrow">&rarr;</span>
+                </button>
+
+                <button class="btn btn-outline js-magnetic js-login" data-track-login="Reseller">
+                  <span>Partner Login</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- RIGHT: ECOSYSTEM VISUAL (WASTRAQ Hub + 3 Nodes) -->
+            <div class="ecosystem-canvas-wrap" id="ecosystemCanvasWrap">
+              <svg class="ecosystem-svg-lines" viewBox="0 0 680 540" preserveAspectRatio="none" fill="none" id="ecosystemSvg">
+                <defs>
+                  <linearGradient id="gradResellerLine" x1="100%" y1="100%" x2="0%" y2="0%">
+                    <stop offset="0%" stop-color="#159D91" />
+                    <stop offset="100%" stop-color="#6FBB59" />
+                  </linearGradient>
+                  <linearGradient id="gradReferralLine" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#159D91" />
+                    <stop offset="100%" stop-color="#8BA89B" />
+                  </linearGradient>
+                  <!-- gradientUnits="userSpaceOnUse" with explicit coordinates matching
+                       pathLine3's own endpoints — pathLine3 is a perfectly vertical line
+                       (M 340 270 L 340 440), so its bounding box has zero width. The
+                       default objectBoundingBox gradient units can't produce a valid
+                       coordinate transform against a zero-width box, so the browser
+                       renders no stroke at all. userSpaceOnUse sidesteps that entirely
+                       by using the SVG's own coordinate system instead of the shape's
+                       bounding box. -->
+                  <linearGradient id="gradTechLine" gradientUnits="userSpaceOnUse" x1="340" y1="270" x2="340" y2="440">
+                    <stop offset="0%" stop-color="#159D91" />
+                    <stop offset="100%" stop-color="#0EA5E9" />
+                  </linearGradient>
+                </defs>
+
+                <!-- Lines to 3 nodes -->
+                <path id="pathLine1" class="conn-path-line" d="M 340 270 Q 220 150, 110 65" stroke="url(#gradResellerLine)" stroke-width="2.8" stroke-linecap="round" />
+                <path id="pathLine2" class="conn-path-line" d="M 340 270 Q 460 150, 570 65" stroke="url(#gradReferralLine)" stroke-width="2.8" stroke-linecap="round" />
+                <path id="pathLine3" class="conn-path-line" d="M 340 270 L 340 440" stroke="url(#gradTechLine)" stroke-width="2.8" stroke-linecap="round" />
+
+                <!-- Energy particles -->
+                <circle r="4.5" fill="#6FBB59">
+                  <animateMotion dur="2.4s" repeatCount="indefinite" path="M 340 270 Q 220 150, 110 65" />
+                </circle>
+                <circle r="4.5" fill="#5EEAD4">
+                  <animateMotion dur="2.8s" repeatCount="indefinite" path="M 340 270 Q 460 150, 570 65" />
+                </circle>
+                <circle r="4.5" fill="#38BDF8">
+                  <animateMotion dur="2.2s" repeatCount="indefinite" path="M 340 270 L 340 440" />
+                </circle>
+              </svg>
+
+              <!-- Central Hub -->
+              <div class="wastraq-center-hub" id="wastraqCenterHub" title="WASTRAQ Ecosystem">
+                <div class="hub-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 3l3 3-3 3"/><path d="M20 6H9a5 5 0 0 0-5 5v1"/><path d="M7 21l-3-3 3-3"/><path d="M4 18h11a5 5 0 0 0 5-5v-1"/></svg>
+                </div>
+                <span class="hub-title">WASTRAQ</span>
+                <span class="hub-sub">Core Hub</span>
+              </div>
+
+              <!-- 1. Reseller Node -->
+              <div class="hero-partner-node node-pos-reseller node-reseller js-hero-node js-apply" id="heroNodeReseller" data-open-type="Reseller">
+                <div class="hp-node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                </div>
+                <div>
+                  <div class="hp-node-title">Reseller Partner</div>
+                  <div class="hp-node-sub">Deliver Solutions</div>
+                </div>
+              </div>
+
+              <!-- 2. Referral Node -->
+              <div class="hero-partner-node node-pos-referral node-referral js-hero-node js-apply" id="heroNodeReferral" data-open-type="Referral">
+                <div class="hp-node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                </div>
+                <div>
+                  <div class="hp-node-title">Referral Partner</div>
+                  <div class="hp-node-sub">Introduce Leads</div>
+                </div>
+              </div>
+
+              <!-- 3. Technology Node -->
+              <div class="hero-partner-node node-pos-tech node-tech js-hero-node js-apply" id="heroNodeTech" data-open-type="Technology">
+                <div class="hp-node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <div>
+                  <div class="hp-node-title">Technology Partner</div>
+                  <div class="hp-node-sub">APIs &amp; Hardware</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- THREE PARTNERSHIP CARDS (Clean, Simple & Modern) -->
+        <div class="morph-cards-layer" id="morphCardsLayer">
+          <div class="morph-cards-container" id="morphCardsContainer">
+
+            <!-- CARD 01: RESELLER -->
+            <div class="partnership-morph-card card-reseller js-tilt-card js-morph-card" id="cardReseller" data-card-idx="0">
+              <div>
+                <div class="pcard-head">
+                  <div class="pcard-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                  </div>
+                  <span class="pcard-num">01</span>
+                </div>
+                <h3>Reseller Partner</h3>
+                <p class="pcard-desc">
+                  Offer WASTRAQ waste tracking and automated ESG reporting to your enterprise clients.
+                </p>
+                <ul class="pcard-features">
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> Tiered revenue sharing &amp; margins</li>
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> White-label telemetry console</li>
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Dedicated technical onboarding</li>
+                </ul>
+              </div>
+              <div class="pcard-actions">
+                <button class="btn btn-grad btn-sm js-magnetic js-apply" data-open-type="Reseller">
+                  <span>Apply Now</span>
+                  <span class="btn-arrow">&rarr;</span>
+                </button>
+                <button class="btn btn-outline btn-sm js-magnetic js-login" data-track-login="Reseller">
+                  <span>Login</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD 02: REFERRAL -->
+            <div class="partnership-morph-card card-referral js-tilt-card js-morph-card" id="cardReferral" data-card-idx="1">
+              <div>
+                <div class="pcard-head">
+                  <div class="pcard-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  </div>
+                  <span class="pcard-num">02</span>
+                </div>
+                <h3>Referral Partner</h3>
+                <p class="pcard-desc">
+                  Introduce potential customers to WASTRAQ and earn guaranteed rewards upon qualification.
+                </p>
+                <ul class="pcard-features">
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="18"/></svg> Guaranteed deal bounty payouts</li>
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Real-time referral tracking</li>
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Pitch materials &amp; summaries</li>
+                </ul>
+              </div>
+              <div class="pcard-actions">
+                <button class="btn btn-grad btn-sm js-magnetic js-apply" data-open-type="Referral">
+                  <span>Apply Now</span>
+                  <span class="btn-arrow">&rarr;</span>
+                </button>
+                <button class="btn btn-outline btn-sm js-magnetic js-login" data-track-login="Referral">
+                  <span>Login</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD 03: TECHNOLOGY -->
+            <div class="partnership-morph-card card-tech js-tilt-card js-morph-card" id="cardTech" data-card-idx="2">
+              <div>
+                <div class="pcard-head">
+                  <div class="pcard-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg>
+                  </div>
+                  <span class="pcard-num">03</span>
+                </div>
+                <h3>Technology Partner</h3>
+                <p class="pcard-desc">
+                  Connect hardware sensors, telematics, and ERP software via open REST &amp; webhook APIs.
+                </p>
+                <ul class="pcard-features">
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> REST &amp; GraphQL API keys</li>
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/></svg> IoT hardware sandbox testbed</li>
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Joint technical co-engineering</li>
+                </ul>
+              </div>
+              <div class="pcard-actions">
+                <button class="btn btn-grad btn-sm js-magnetic js-apply" data-open-type="Technology">
+                  <span>Apply Now</span>
+                  <span class="btn-arrow">&rarr;</span>
+                </button>
+                <button class="btn btn-outline btn-sm js-magnetic js-login" data-track-login="Technology">
+                  <span>Login</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Minimal Scroll Hint -->
+        <div class="scroll-hint-bar" id="scrollHintBar">
+          <span class="sec-tag-dot"></span>
+          <span id="scrollHintText">Scroll to explore partner pathways</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         2. WHY PARTNER WITH WASTRAQ (Clean & Minimal 4-Pillar Grid)
+         ========================================================================= -->
+    <section class="why-section" id="whySection">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-tag">
+            <span class="sec-tag-dot"></span>
+            <span>Why Partner</span>
+          </div>
+          <h2>Built for Shared Growth</h2>
+          <p class="sec-desc">A lightweight, high-value ecosystem designed for simplicity and mutual scale.</p>
+        </div>
+
+        <div class="why-minimal-grid" id="whyMinimalGrid">
+
+          <!-- Pillar 1 -->
+          <div class="why-card-minimal why-card-1 js-why-card js-growth-card js-apply" id="whyCard1" data-why-idx="0" data-open-type="Reseller">
+            <div class="why-card-head">
+              <span class="why-card-num">01</span>
+              <div class="why-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+            </div>
+            <h3>Expand Your Reach</h3>
+            <p>Deliver smart waste management and automated ESG compliance reporting directly to your customer base.</p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="why-card-minimal why-card-2 js-why-card js-growth-card js-apply" id="whyCard2" data-why-idx="1" data-open-type="Referral">
+            <div class="why-card-head">
+              <span class="why-card-num">02</span>
+              <div class="why-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m16 8-8 8"/><path d="M16 16V8H8"/></svg>
+              </div>
+            </div>
+            <h3>Create Opportunities</h3>
+            <p>Monetize your network by introducing enterprise relationships with high margins and guaranteed deal bounties.</p>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="why-card-minimal why-card-3 js-why-card js-growth-card js-apply" id="whyCard3" data-why-idx="2" data-open-type="Technology">
+            <div class="why-card-head">
+              <span class="why-card-num">03</span>
+              <div class="why-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+            </div>
+            <h3>Technology Collaboration</h3>
+            <p>Seamlessly connect IoT hardware, RFID bin tags, and telematics systems using our robust developer APIs.</p>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="why-card-minimal why-card-4 js-why-card js-growth-card js-apply" id="whyCard4" data-why-idx="3" data-open-type="Reseller">
+            <div class="why-card-head">
+              <span class="why-card-num">04</span>
+              <div class="why-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+            </div>
+            <h3>Long-Term Alliance</h3>
+            <p>Grow with dedicated partner managers, joint marketing funds, and continuous engineering roadmaps.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. SCROLL-CONTROLLED 4-STAGE JOURNEY
+         ========================================================================= -->
+    <section class="journey-section" id="journeySection">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-tag">
+            <span class="sec-tag-dot"></span>
+            <span>How It Works</span>
+          </div>
+          <h2>Simple 4-Step Journey</h2>
+          <p class="sec-desc">A streamlined onboarding process from selection to mutual scale.</p>
+        </div>
+
+        <div class="journey-timeline-wrap">
+          <svg class="journey-svg-canvas" viewBox="0 0 1000 50" fill="none" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="journeyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#6FBB59" />
+                <stop offset="50%" stop-color="#159D91" />
+                <stop offset="100%" stop-color="#0750AD" />
+              </linearGradient>
+            </defs>
+            <path d="M 0 25 Q 250 5, 500 25 T 1000 25" class="journey-base-track" />
+            <path id="journeyProgressPath" d="M 0 25 Q 250 5, 500 25 T 1000 25" class="journey-draw-track" />
+            <circle id="journeyParticle" class="journey-particle-circle" cx="0" cy="25" />
+          </svg>
+
+          <div class="journey-grid">
+
+            <div class="journey-step-card js-journey-step" id="step1" data-threshold="0.10">
+              <div class="step-bubble">01</div>
+              <h3>Choose</h3>
+              <p>Select Reseller, Referral, or Technology track.</p>
+            </div>
+
+            <div class="journey-step-card js-journey-step" id="step2" data-threshold="0.35">
+              <div class="step-bubble">02</div>
+              <h3>Apply</h3>
+              <p>Submit a quick 2-minute accreditation form.</p>
+            </div>
+
+            <div class="journey-step-card js-journey-step" id="step3" data-threshold="0.65">
+              <div class="step-bubble">03</div>
+              <h3>Connect</h3>
+              <p>Access the partner portal, API keys, and assets.</p>
+            </div>
+
+            <div class="journey-step-card js-journey-step" id="step4" data-threshold="0.90">
+              <div class="step-bubble">04</div>
+              <h3>Grow</h3>
+              <p>Deploy solutions, introduce leads, and scale.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. FREQUENTLY ASKED QUESTIONS (2-Section Architecture: 3 + 3 Questions)
+         ========================================================================= -->
+    <section class="faq-section" id="faqSection">
+      <div class="wrap">
+        <div class="sec-head" style="margin-bottom: 24px;">
+          <div class="sec-tag">
+            <span class="sec-tag-dot"></span>
+            <span>FAQ</span>
+          </div>
+          <h2>Frequently Asked Questions</h2>
+          <p class="sec-desc">Quick answers regarding partnership tiers, accreditation, revenue, and integration.</p>
+        </div>
+
+        <div class="faq-two-sections-grid">
+
+          <!-- SECTION 1: PARTNERSHIP & TIERS (3 Questions) -->
+          <div class="faq-sub-section">
+            <div class="faq-sub-header">
+              <span class="faq-sub-badge">01</span>
+              <h3>Partnership &amp; Tiers</h3>
+            </div>
+            <div class="faq-list">
+
+              <div class="faq-item active">
+                <button class="faq-question">
+                  <span class="faq-q-title">What are the differences between partner types?</span>
+                  <div class="faq-toggle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                </button>
+                <div class="faq-answer">
+                  <p><strong>Reseller:</strong> Package and bill solutions directly with software margins. <strong>Referral:</strong> Introduce customer leads for deal bounties. <strong>Technology:</strong> Connect hardware and software via open APIs.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question">
+                  <span class="faq-q-title">How do revenue sharing &amp; bounties work?</span>
+                  <div class="faq-toggle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                </button>
+                <div class="faq-answer">
+                  <p>Resellers receive tiered recurring software revenue margins. Referral partners receive guaranteed per-deal bounty payouts directly upon customer qualification.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question">
+                  <span class="faq-q-title">Are there any upfront or membership fees?</span>
+                  <div class="faq-toggle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                </button>
+                <div class="faq-answer">
+                  <p>No. Joining the WASTRAQ Partner Program is 100% free with zero upfront or recurring dues across all tiers.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- SECTION 2: ONBOARDING & INTEGRATION (3 Questions) -->
+          <div class="faq-sub-section">
+            <div class="faq-sub-header">
+              <span class="faq-sub-badge">02</span>
+              <h3>Onboarding &amp; Integration</h3>
+            </div>
+            <div class="faq-list">
+
+              <div class="faq-item">
+                <button class="faq-question">
+                  <span class="faq-q-title">How long does partner accreditation take?</span>
+                  <div class="faq-toggle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                </button>
+                <div class="faq-answer">
+                  <p>Applications are reviewed within 2 business days. A dedicated partner alliance manager will contact you with portal access keys and onboarding documentation.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question">
+                  <span class="faq-q-title">How do I access developer sandboxes &amp; APIs?</span>
+                  <div class="faq-toggle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                </button>
+                <div class="faq-answer">
+                  <p>Technology partners receive instant access to developer sandbox keys, GraphQL &amp; REST documentation, and test webhooks directly in their Partner Portal.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question">
+                  <span class="faq-q-title">What ongoing technical support is provided?</span>
+                  <div class="faq-toggle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                </button>
+                <div class="faq-answer">
+                  <p>All partners receive dedicated partner managers, technical onboarding assistance, pitch collateral, and priority engineering support.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         FINAL CTA (Pure White Theme)
+         ========================================================================= -->
+    <section class="final-cta-section" id="finalCta">
+      <div class="wrap">
+        <div class="final-cta-content">
+          <h2>Let's Build Something Together</h2>
+          <p>Choose your pathway and accelerate sustainable enterprise growth.</p>
+          <div class="final-cta-buttons">
+            <button class="btn btn-grad js-magnetic js-apply" data-open-type="Reseller">
+              <span>Become a Partner &rarr;</span>
+            </button>
+            <button class="btn btn-outline js-magnetic js-login" data-track-login="Reseller">
+              <span>Partner Login</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared site footer — injected by shared.js, see bottom of page -->
+  <div id="footer-placeholder"></div>
+
+  <!-- =========================================================================
+       MODALS: APPLICATION & PARTNER LOGIN
+       ========================================================================= -->
+  <div class="modal-overlay" id="applyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="modalClose" aria-label="Close modal">&times;</button>
+      <div class="modal-head">
+        <h3 id="modalTitle">Partner Application</h3>
+        <p>Apply to become an official WASTRAQ partner</p>
+      </div>
+
+      <div class="type-pills-row" id="typePills">
+        <div class="modal-pill active" data-type="Reseller">🏢 Reseller</div>
+        <div class="modal-pill" data-type="Referral">🤝 Referral</div>
+        <div class="modal-pill" data-type="Technology">⚡ Technology</div>
+      </div>
+
+      <form id="applyForm">
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Full Name *</label>
+            <input type="text" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-field">
+            <label>Work Email *</label>
+            <input type="email" placeholder="jane@company.com" required>
+          </div>
+          <div class="form-field full">
+            <label>Company / Organisation *</label>
+            <input type="text" placeholder="Acme Solutions Ltd" required>
+          </div>
+          <div class="form-field full">
+            <label>Partnership Track *</label>
+            <select id="typeSelect">
+              <option value="Reseller">Reseller Partner</option>
+              <option value="Referral">Referral Partner</option>
+              <option value="Technology">Technology Partner</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+          <button type="submit" class="btn btn-grad" style="width: 100%;">Submit Application &rarr;</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PARTNER LOGIN MODAL -->
+  <div class="modal-overlay" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="modal-box" style="max-width: 440px;">
+      <canvas class="login-modal-canvas" id="loginCanvas"></canvas>
+      <button class="modal-close-btn" id="loginClose" aria-label="Close modal">&times;</button>
+      <div class="modal-head" style="position: relative; z-index: 2;">
+        <h3 id="loginTitle">Partner Login</h3>
+        <p id="loginSubtitle">Sign in to your registered dashboard</p>
+      </div>
+
+      <div class="type-pills-row" id="loginTypePills" style="position: relative; z-index: 2;">
+        <div class="modal-pill active" data-login-track="Reseller">🏢 Reseller</div>
+        <div class="modal-pill" data-login-track="Referral">🤝 Referral</div>
+        <div class="modal-pill" data-login-track="Technology">⚡ Technology</div>
+      </div>
+
+      <form id="loginForm" style="position: relative; z-index: 2;">
+        <div class="form-field" style="margin-bottom: 12px;">
+          <label>Work Email *</label>
+          <input type="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="form-field" style="margin-bottom: 12px;">
+          <label>Password *</label>
+          <input type="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-grad" id="loginSubmitBtn" style="width: 100%; margin-top: 6px;">
+          Log In &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shared site nav/footer -->
+  <script src="js/shared.js"></script>
+  <script>
+    injectNav('partnership');
+    injectFooter();
+  </script>
+
+  <!-- Primary JavaScript Engine -->
+  <script src="js/partnership.js"></script>
+</body>
+</html>

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Platform Updates & Insights | WASTRAQ Help Center</title>
+<meta name="description" content="Browse all WASTRAQ platform release notes, feature announcements, product updates, and in-depth guides for the smart waste management software platform."/>
+<meta name="keywords" content="WASTRAQ updates, waste management software release notes, smart waste management platform news, route optimization updates, fleet management software features"/>
+<meta name="author" content="WASTRAQ"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://wastraq.com/help-articles.html"/>
+<meta property="og:title" content="Platform Updates & Articles | WASTRAQ Help Center"/>
+<meta property="og:description" content="Latest WASTRAQ release notes, feature updates, and in-depth guides for the waste management platform."/>
+<meta property="og:url" content="https://wastraq.com/help-articles.html"/>
+<meta property="og:type" content="website"/>
+<!-- ── FAVICONS ─────────────────────────────── -->
+<link rel="icon" type="image/png" href="assets/help-articles/help-articles_favicon.png">
+<link rel="apple-touch-icon" href="assets/help-articles/help-articles_apple_touch_icon.png">
+
+<!-- Clarity tracking code for https://wastraq.com/ -->
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wtmhp3u28x");
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "WASTRAQ Platform Updates and Articles",
+  "description": "All release notes, feature announcements, and platform guides for WASTRAQ, the intelligent waste management software.",
+  "url": "https://wastraq.com/help-articles.html",
+  "isPartOf": { "@type": "WebSite", "name": "WASTRAQ", "url": "https://wastraq.com" }
+}
+</script>
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/nav-footer.css">
+<link rel="stylesheet" href="css/cookies.css">
+<link rel="stylesheet" href="css/chatbot.css">
+<link rel="stylesheet" href="css/help-articles.css">
+
+  <!-- WASTRAQ API Configuration -->
+  <script>window.WASTRAQ_API_BASE = "https://backend.wastraq.com"; /* change to production URL */</script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="ha-page">
+
+  <!-- HERO -->
+  <header class="ha-hero">
+    <div class="ha-hero-inner">
+      <nav class="ha-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="ha-breadcrumb-sep">›</span>
+        <a href="help.html">Help Center</a>
+        <span class="ha-breadcrumb-sep">›</span>
+        <span style="color:rgba(255,255,255,.8)">Platform Updates</span>
+      </nav>
+      <h1>Platform Updates &amp; Release Notes</h1>
+      <p>
+        Stay up to date with every improvement, new feature, and fix shipped to
+        the WASTRAQ smart waste management platform. New releases every two weeks.
+      </p>
+    </div>
+  </header>
+
+  <!-- FILTER BAR -->
+  <div class="ha-filter-bar" role="toolbar" aria-label="Filter articles">
+    <div class="ha-filter-inner">
+      <span class="ha-filter-label">Filter:</span>
+      <button class="ha-filter-btn active" onclick="filterArticles(this,'all')">All Updates</button>
+      <button class="ha-filter-btn" onclick="filterArticles(this,'route')">Route Optimization</button>
+      <button class="ha-filter-btn" onclick="filterArticles(this,'fleet')">Fleet Management</button>
+      <button class="ha-filter-btn" onclick="filterArticles(this,'billing')">Billing</button>
+      <button class="ha-filter-btn" onclick="filterArticles(this,'driver')">Driver App</button>
+      <button class="ha-filter-btn" onclick="filterArticles(this,'recycling')">Recycling</button>
+      <button class="ha-filter-btn" onclick="filterArticles(this,'municipal')">Municipal</button>
+      <span class="ha-filter-count" id="ha-count">Showing all 7 updates</span>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="ha-main" id="ha-main-content">
+
+    <!-- Articles -->
+    <div class="ha-articles-list" id="ha-articles-list" role="feed">
+
+      <!-- ── ARTICLE 1: v4.8.0 ── -->
+      <article class="ha-article" id="v480" data-cat="route" aria-labelledby="v480-title">
+        <div class="ha-article-header">
+          <div class="ha-article-icon" style="background:#dcfce7;color:#16a34a" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="ha-article-meta">
+            <div class="ha-article-version">Version 4.8.0</div>
+            <div class="ha-article-date">24 April 2026 &nbsp;·&nbsp; 8 min read</div>
+          </div>
+        </div>
+        <div class="ha-article-tags">
+          <span class="ha-article-tag tag-new">New Feature</span>
+          <span class="ha-article-tag tag-improve">Route AI</span>
+          <span class="ha-article-tag tag-improve">IoT Integration</span>
+        </div>
+        <h2 id="v480-title">RouteTraq AI — Dynamic Fill-Level Re-Routing and Real-Time Schedule Adjustment</h2>
+        <p class="ha-article-lead">
+          WASTRAQ v4.8.0 delivers a major leap in AI route optimization for waste collection fleets.
+          Routes now update automatically in real time when connected bin sensors report fill levels
+          above configured thresholds — eliminating unnecessary collection trips and preventing
+          overflow incidents simultaneously. This is the single largest improvement to the RouteTraq
+          AI engine since its launch, reducing average fleet mileage by an additional 12% in
+          pilot deployments.
+        </p>
+        <div class="ha-article-extended" id="v480-extended">
+          <div class="ha-article-body">
+            <h3>What Changed</h3>
+            <p>Previously, RouteTraq AI generated optimized routes based on schedule frequency and zone data. Routes were static between optimization runs. With v4.8.0, the engine now ingests live fill-level data from IoT sensors and recalculates collection priority in real time.</p>
+            <ul>
+              <li>Bins above the configured fill threshold are automatically added to the active route, even outside scheduled collection windows</li>
+              <li>Bins below the minimum fill threshold are deprioritised and skipped on the current run, with the next scheduled visit auto-adjusted</li>
+              <li>Supervisors receive push notifications when bins exceed emergency overflow thresholds</li>
+              <li>Per-zone sensitivity settings allow different thresholds for residential, commercial, and recycling streams</li>
+              <li>All dynamic re-routing decisions are logged with reasons, enabling full operational audit trails</li>
+            </ul>
+            <h3>How to Enable Dynamic Re-Routing</h3>
+            <p>Navigate to <strong>RouteTraq &gt; Settings &gt; Dynamic Scheduling</strong> and toggle <em>Fill-Level Triggers</em> to enabled. Set your default threshold percentages per waste fraction. Connected IoT sensors will begin feeding data to the scheduler immediately.</p>
+            <p>For full setup instructions, see the <a href="help-topic.html?topic=route-optimization#dynamic-rerouting">Dynamic Re-Routing Configuration Guide</a>.</p>
+            <h3>Performance Impact</h3>
+            <p>Internal data from the pilot programme across 14 municipal customers showed:</p>
+            <ul>
+              <li>12% average reduction in total fleet kilometres driven per month</li>
+              <li>94% reduction in bin overflow incidents in high-density residential zones</li>
+              <li>18% improvement in collection crew utilization rates</li>
+              <li>Average fuel saving of £1,240 per vehicle per year at current fuel prices</li>
+            </ul>
+            <h3>Requirements</h3>
+            <p>Dynamic re-routing requires at least one connected IoT bin sensor per collection zone. WASTRAQ supports all major sensor manufacturers via native connectors. API-based sensor integration is also available. Contact your customer success manager if you need sensor supplier recommendations.</p>
+          </div>
+        </div>
+        <button class="ha-read-more-btn" onclick="toggleArticle('v480-extended', this)" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          Read full release notes
+        </button>
+      </article>
+
+      <!-- ── ARTICLE 2: v4.7.0 ── -->
+      <article class="ha-article" id="v470" data-cat="billing" aria-labelledby="v470-title">
+        <div class="ha-article-header">
+          <div class="ha-article-icon" style="background:#f3e8ff;color:#7c3aed" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <div class="ha-article-meta">
+            <div class="ha-article-version">Version 4.7.0</div>
+            <div class="ha-article-date">10 April 2026 &nbsp;·&nbsp; 6 min read</div>
+          </div>
+        </div>
+        <div class="ha-article-tags">
+          <span class="ha-article-tag tag-new">New Feature</span>
+          <span class="ha-article-tag tag-improve">Billing</span>
+          <span class="ha-article-tag tag-fix">Xero Sync</span>
+        </div>
+        <h2 id="v470-title">Billing Automation — Custom Invoice Templates, Waste Fraction Itemisation, and Xero Credit Note Sync</h2>
+        <p class="ha-article-lead">
+          v4.7.0 significantly expands WASTRAQ's billing engine with fully customisable invoice
+          templates, automatic waste fraction line-item generation, and improved Xero reconciliation
+          including credit note sync. Finance teams can now generate professional, branded invoices
+          that automatically break down charges by waste stream, frequency, and service tier without
+          any manual data entry.
+        </p>
+        <div class="ha-article-extended" id="v470-extended">
+          <div class="ha-article-body">
+            <h3>Custom Invoice Templates</h3>
+            <p>The new template builder in <strong>Billing &gt; Invoice Templates</strong> supports full logo and brand colour customisation, custom header and footer text, configurable line-item formats, and PDF/email delivery preferences per customer account.</p>
+            <ul>
+              <li>Drag-and-drop field ordering for invoice line items</li>
+              <li>Conditional sections (show VAT breakdown only for VAT-registered accounts)</li>
+              <li>Per-customer template overrides for white-label deployments</li>
+              <li>Template preview with live data before activation</li>
+            </ul>
+            <h3>Waste Fraction Itemisation</h3>
+            <p>When enabled, the billing engine automatically generates separate line items for each waste fraction collected during the billing period. General waste, recycling, food waste, and green waste are itemised separately with individual unit rates applied. This feature is particularly valuable for municipal contracts where waste fraction costs are reported separately to environmental agencies.</p>
+            <h3>Xero Credit Note Reconciliation</h3>
+            <p>The Xero integration now handles credit notes bidirectionally. Credit notes raised in WASTRAQ are pushed to Xero automatically. Credit notes reconciled in Xero are reflected in the WASTRAQ billing dashboard within 15 minutes. This resolves a long-standing reconciliation gap that required manual journal entries.</p>
+          </div>
+        </div>
+        <button class="ha-read-more-btn" onclick="toggleArticle('v470-extended', this)" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          Read full release notes
+        </button>
+      </article>
+
+      <!-- ── ARTICLE 3: v4.6.2 ── -->
+      <article class="ha-article" id="v462" data-cat="driver" aria-labelledby="v462-title">
+        <div class="ha-article-header">
+          <div class="ha-article-icon" style="background:#fef3c7;color:#d97706" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <div class="ha-article-meta">
+            <div class="ha-article-version">Version 4.6.2</div>
+            <div class="ha-article-date">27 March 2026 &nbsp;·&nbsp; 5 min read</div>
+          </div>
+        </div>
+        <div class="ha-article-tags">
+          <span class="ha-article-tag tag-improve">Driver App</span>
+          <span class="ha-article-tag tag-fix">Bug Fix</span>
+          <span class="ha-article-tag tag-improve">Offline Mode</span>
+        </div>
+        <h2 id="v462-title">Driver App v3.2 — 7-Day Offline Mode, Improved Navigation, and Issue Reporting</h2>
+        <p class="ha-article-lead">
+          The WASTRAQ Driver App receives its most significant update this year. Version 3.2 ships
+          an extended offline data cache holding up to 7 days of route information, a redesigned
+          in-cab navigation interface with larger touch targets, and an overhauled issue reporting
+          workflow that allows drivers to log collection problems with photos, GPS coordinates, and
+          customer notes in under 10 seconds.
+        </p>
+        <div class="ha-article-extended" id="v462-extended">
+          <div class="ha-article-body">
+            <h3>Extended Offline Mode</h3>
+            <p>Previously, the Driver App stored 24 hours of route data offline. With v3.2, the cache extends to 7 days. Collection confirmations, photos, GPS location stamps, and issue reports are stored locally and automatically synced to the WASTRAQ platform whenever connectivity is restored — whether via Wi-Fi, 4G, or 5G.</p>
+            <p>This is critical for drivers operating in rural areas, underground facilities, or building basements where mobile signal is inconsistent.</p>
+            <ul>
+              <li>All collection confirmations queue locally with exact timestamps</li>
+              <li>Photos are compressed for storage efficiency without quality loss</li>
+              <li>Sync happens automatically — no driver action required</li>
+              <li>Sync status indicator added to the app toolbar</li>
+            </ul>
+            <h3>Redesigned Navigation Interface</h3>
+            <p>The in-cab navigation screen has been redesigned with driver ergonomics as the priority. Turn instructions now use 40% larger text. The next-stop indicator occupies the full top third of the screen. Collection confirmation buttons are now at thumb height for one-handed operation while seated.</p>
+            <h3>10-Second Issue Reporting</h3>
+            <p>The new issue reporting flow reduces the tap count from 9 to 3 for the most common issue types. Drivers select a pre-set issue category, optionally add a photo, and confirm. GPS coordinates and collection point details are attached automatically. Supervisors receive the report in real time on the dashboard.</p>
+          </div>
+        </div>
+        <button class="ha-read-more-btn" onclick="toggleArticle('v462-extended', this)" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          Read full release notes
+        </button>
+      </article>
+
+      <!-- ── ARTICLE 4: v4.6.0 ── -->
+      <article class="ha-article" id="v460" data-cat="municipal" aria-labelledby="v460-title">
+        <div class="ha-article-header">
+          <div class="ha-article-icon" style="background:#dbeafe;color:#1d4ed8" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="ha-article-meta">
+            <div class="ha-article-version">Version 4.6.0</div>
+            <div class="ha-article-date">12 March 2026 &nbsp;·&nbsp; 7 min read</div>
+          </div>
+        </div>
+        <div class="ha-article-tags">
+          <span class="ha-article-tag tag-module">New Module</span>
+          <span class="ha-article-tag tag-improve">Municipal</span>
+          <span class="ha-article-tag tag-improve">Compliance</span>
+        </div>
+        <h2 id="v460-title">Municipal Compliance Reporting Module — Waste Tonnage, SLA Tracking, and GDPR Data Export</h2>
+        <p class="ha-article-lead">
+          WASTRAQ v4.6.0 introduces a dedicated Municipal Compliance Reporting module — a
+          pre-built dashboard and report generator designed specifically for local authorities
+          and municipal waste operators who must report performance data to environmental
+          agencies, auditors, and elected councils on a regular basis.
+        </p>
+        <div class="ha-article-extended" id="v460-extended">
+          <div class="ha-article-body">
+            <h3>Pre-Built Compliance Report Templates</h3>
+            <p>The module ships with seven pre-configured report templates covering the most common municipal reporting requirements:</p>
+            <ul>
+              <li>Monthly waste tonnage by fraction and collection zone</li>
+              <li>Collection frequency SLA adherence by ward and route</li>
+              <li>Vehicle fleet emissions (CO₂, NOₓ) and fuel consumption</li>
+              <li>Recycling rate by household and commercial account</li>
+              <li>Missed collection rate and complaint resolution times</li>
+              <li>Depot operational hours and crew utilization</li>
+              <li>Year-on-year diversion rate from landfill</li>
+            </ul>
+            <h3>GDPR-Compliant Data Export</h3>
+            <p>All personal data exports (customer records, driver data, GPS histories) now include a GDPR compliance layer. Exports can be scoped by data category, date range, and data subject type. A processing record is automatically generated for every export, satisfying Article 30 Record of Processing Activities requirements.</p>
+            <h3>Scheduled Report Delivery</h3>
+            <p>Reports can be scheduled for automatic generation and email delivery to named recipients. Municipal finance officers, environmental managers, and elected members can receive tailored report packs without requiring platform access.</p>
+          </div>
+        </div>
+        <button class="ha-read-more-btn" onclick="toggleArticle('v460-extended', this)" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          Read full release notes
+        </button>
+      </article>
+
+      <!-- ── ARTICLE 5: Feature Guide ── -->
+      <article class="ha-article" id="fleet-analytics-guide" data-cat="fleet" aria-labelledby="fleet-guide-title">
+        <div class="ha-article-header">
+          <div class="ha-article-icon" style="background:#dcfce7;color:#16a34a" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="ha-article-meta">
+            <div class="ha-article-version">Feature Guide</div>
+            <div class="ha-article-date">5 March 2026 &nbsp;·&nbsp; 10 min read</div>
+          </div>
+        </div>
+        <div class="ha-article-tags">
+          <span class="ha-article-tag tag-improve">Fleet Management</span>
+          <span class="ha-article-tag tag-improve">Analytics</span>
+        </div>
+        <h2 id="fleet-guide-title">Complete Guide to Fleet Analytics: Reducing Operating Costs with WASTRAQ Data</h2>
+        <p class="ha-article-lead">
+          WASTRAQ's Fleet Analytics module gives waste management operators a real-time and
+          historical view of every vehicle, driver, and route in their operation. This guide
+          explains how to use analytics data to identify inefficiencies, benchmark driver
+          performance, and build the operational case for fleet size changes.
+        </p>
+        <div class="ha-article-extended" id="fleet-guide-extended">
+          <div class="ha-article-body">
+            <h3>Key Analytics Metrics Explained</h3>
+            <p>The Fleet Analytics dashboard surfaces six core operational metrics that are most directly linked to cost and service quality in waste collection operations:</p>
+            <ul>
+              <li><strong>Fleet Utilization Rate</strong> — percentage of available vehicle hours spent on active collection versus idle, travelling to/from depot, or under maintenance</li>
+              <li><strong>Route Adherence Score</strong> — how closely drivers follow the planned RouteTraq AI route, measured by stop sequence accuracy and deviation distance</li>
+              <li><strong>Fuel Cost Per Tonne Collected</strong> — the single most powerful efficiency metric, normalised by waste volume to account for collection density differences between zones</li>
+              <li><strong>First-Time Collection Rate</strong> — percentage of scheduled stops successfully completed on the first visit, without requiring a re-run</li>
+              <li><strong>Average Stop Dwell Time</strong> — time spent at each collection point, used to identify bottlenecks and inform crew training priorities</li>
+              <li><strong>Maintenance-Driven Downtime</strong> — vehicle downtime caused by scheduled and unscheduled maintenance, linked to your vehicle service records</li>
+            </ul>
+            <h3>Building a Cost Reduction Case</h3>
+            <p>Use the <strong>Analytics &gt; Custom Reports</strong> section to build a comparison between your current operational baseline and a RouteTraq-optimized scenario. The report engine can model fuel savings, mileage reduction, and crew hour savings across your full fleet based on your actual route data.</p>
+            <p>Most WASTRAQ customers who run this analysis before and after optimization identify between 22% and 38% in recoverable operational cost — a figure that is compelling for budget submissions to finance committees or for annual route contract renegotiations.</p>
+          </div>
+        </div>
+        <button class="ha-read-more-btn" onclick="toggleArticle('fleet-guide-extended', this)" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          Read full guide
+        </button>
+      </article>
+
+      <!-- ── ARTICLE 6: Recycling ── -->
+      <article class="ha-article" id="recycling-guide" data-cat="recycling" aria-labelledby="recycling-guide-title">
+        <div class="ha-article-header">
+          <div class="ha-article-icon" style="background:#ecfdf5;color:#059669" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          </div>
+          <div class="ha-article-meta">
+            <div class="ha-article-version">Operations Guide</div>
+            <div class="ha-article-date">20 February 2026 &nbsp;·&nbsp; 9 min read</div>
+          </div>
+        </div>
+        <div class="ha-article-tags">
+          <span class="ha-article-tag tag-improve">Recycling</span>
+          <span class="ha-article-tag tag-improve">Sustainability</span>
+        </div>
+        <h2 id="recycling-guide-title">Maximising Recycling Rates with WASTRAQ: Contamination Tracking, Target Setting, and Reporting</h2>
+        <p class="ha-article-lead">
+          WASTRAQ's recycling operations module enables waste managers to set per-zone recycling
+          targets, track contamination at the collection point level, alert drivers to contaminated
+          loads in real time, and generate recyclate quality reports for material recovery facility
+          (MRF) partners. This guide covers the full configuration and operational workflow.
+        </p>
+        <div class="ha-article-extended" id="recycling-guide-extended">
+          <div class="ha-article-body">
+            <h3>Setting Recycling Targets</h3>
+            <p>Navigate to <strong>Recycling &gt; Target Management</strong> to configure diversion targets. Targets can be set at organisation, depot, zone, or individual route level. The platform calculates current performance versus target in real time and highlights underperforming zones in the supervisor dashboard.</p>
+            <ul>
+              <li>Dry recycling (paper, card, plastics, metals, glass) tracked separately by fraction</li>
+              <li>Food waste diversion tracked against residual waste volumes</li>
+              <li>Garden/green waste with seasonal adjustment settings</li>
+              <li>WEEE and hazardous waste logged separately for regulatory compliance</li>
+            </ul>
+            <h3>Contamination Detection and Driver Alerts</h3>
+            <p>When a driver identifies a contaminated recycling container, they log the contamination type via the Driver App in under 10 seconds. The contamination record is geo-tagged, time-stamped, and linked to the specific collection point in the system. Repeat offenders can be flagged for customer communication via the portal or by post.</p>
+            <p>Supervisors can set contamination rate thresholds that trigger automatic notifications. When a route exceeds the threshold, the supervisor is alerted and the data is included in the weekly recycling quality report.</p>
+          </div>
+        </div>
+        <button class="ha-read-more-btn" onclick="toggleArticle('recycling-guide-extended', this)" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          Read full guide
+        </button>
+      </article>
+
+      <!-- ── ARTICLE 7: Smart City ── -->
+      <article class="ha-article" id="smart-city-guide" data-cat="municipal" aria-labelledby="smart-city-title">
+        <div class="ha-article-header">
+          <div class="ha-article-icon" style="background:#f0fdf4;color:#16a34a" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
+          </div>
+          <div class="ha-article-meta">
+            <div class="ha-article-version">Smart City Guide</div>
+            <div class="ha-article-date">8 February 2026 &nbsp;·&nbsp; 12 min read</div>
+          </div>
+        </div>
+        <div class="ha-article-tags">
+          <span class="ha-article-tag tag-module">Smart City</span>
+          <span class="ha-article-tag tag-improve">IoT</span>
+          <span class="ha-article-tag tag-improve">Municipal</span>
+        </div>
+        <h2 id="smart-city-title">WASTRAQ as a Smart City Waste Platform: IoT Integration, Open Data APIs, and Urban Analytics</h2>
+        <p class="ha-article-lead">
+          As cities invest in smart infrastructure, waste management is increasingly required to
+          contribute data to city-wide dashboards, open data portals, and environmental monitoring
+          systems. This guide explains how WASTRAQ integrates with smart city platforms, publishes
+          data to urban analytics systems, and uses IoT infrastructure to build a real-time picture
+          of sanitation operations across an entire municipality.
+        </p>
+        <div class="ha-article-extended" id="smart-city-extended">
+          <div class="ha-article-body">
+            <h3>Open Data API for Smart City Platforms</h3>
+            <p>WASTRAQ's REST API supports authenticated read access to aggregated, anonymised operational data that smart city platforms can consume. Published datasets include:</p>
+            <ul>
+              <li>Real-time vehicle locations (anonymised fleet positions, not individual driver data)</li>
+              <li>Zone-level waste volumes and recycling rates updated daily</li>
+              <li>Service exception rates by ward for public transparency dashboards</li>
+              <li>Fleet emissions data in kg CO₂e per tonne collected</li>
+            </ul>
+            <h3>Integration with Smart City Platforms</h3>
+            <p>WASTRAQ has pre-built connectors for the most commonly deployed smart city platforms. Direct integrations are available for Cisco Kinetic, Microsoft Azure IoT Hub, AWS IoT Core, and FIWARE-based city platforms via the NGSI-LD API standard. For cities running bespoke urban data platforms, our open REST API handles all required data exchange formats including JSON-LD and GeoJSON.</p>
+            <h3>Sensor Infrastructure Sharing</h3>
+            <p>Cities that already have deployed IoT infrastructure — lamp-post sensors, environmental monitors, or existing bin sensors — can feed that data directly to WASTRAQ alongside dedicated waste sensors. This reduces the sensor deployment cost for waste management digitalisation projects and leverages existing smart city investment.</p>
+          </div>
+        </div>
+        <button class="ha-read-more-btn" onclick="toggleArticle('smart-city-extended', this)" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          Read full guide
+        </button>
+      </article>
+
+      <div class="ha-no-results" id="ha-no-results">
+        <strong style="display:block;font-size:1rem;color:var(--text-muted);margin-bottom:6px">No articles in this category yet.</strong>
+        New content is added with every release. <a href="help.html" style="color:var(--green-600);font-weight:700">Return to Help Center</a>
+      </div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="ha-sidebar" aria-label="Article navigation">
+      <a href="help.html" class="ha-back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Help Center
+      </a>
+
+      <div class="ha-sidebar-card">
+        <div class="ha-sidebar-title">On This Page</div>
+        <nav aria-label="Table of contents">
+          <a href="#v480" class="ha-toc-link">
+            Dynamic Fill-Level Re-Routing
+            <span class="ha-toc-version">v4.8.0</span>
+          </a>
+          <a href="#v470" class="ha-toc-link">
+            Custom Invoice Templates
+            <span class="ha-toc-version">v4.7.0</span>
+          </a>
+          <a href="#v462" class="ha-toc-link">
+            Driver App Offline Mode
+            <span class="ha-toc-version">v4.6.2</span>
+          </a>
+          <a href="#v460" class="ha-toc-link">
+            Municipal Compliance Module
+            <span class="ha-toc-version">v4.6.0</span>
+          </a>
+          <a href="#fleet-analytics-guide" class="ha-toc-link">
+            Fleet Analytics Guide
+            <span class="ha-toc-version">Guide</span>
+          </a>
+          <a href="#recycling-guide" class="ha-toc-link">
+            Recycling Operations Guide
+            <span class="ha-toc-version">Guide</span>
+          </a>
+          <a href="#smart-city-guide" class="ha-toc-link">
+            Smart City Integration
+            <span class="ha-toc-version">Guide</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="ha-sidebar-card">
+        <div class="ha-sidebar-title">Release Schedule</div>
+        <p style="font-size:.82rem;color:var(--text-muted);line-height:1.6;margin-bottom:10px">
+          WASTRAQ ships platform updates every two weeks. Major versions are released quarterly.
+        </p>
+        <div style="font-size:.78rem;color:var(--text-light)">
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>Next release</span><strong style="color:var(--green-700)">v4.9.0 — 8 May 2026</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0"><span>Release cycle</span><strong style="color:var(--text-muted)">Every 2 weeks</strong></div>
+        </div>
+      </div>
+
+      <div class="ha-sidebar-card">
+        <div class="ha-sidebar-title">Get Release Alerts</div>
+        <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px;line-height:1.55">Get notified when new updates are published.</p>
+
+        <!-- Subscribe form -->
+        <div id="ha-subscribe-form">
+          <div class="ha-subscribe-form">
+            <input
+              class="ha-subscribe-input"
+              type="email"
+              id="ha-subscribe-email"
+              placeholder="your@email.com"
+              aria-label="Email address for release alerts"
+              autocomplete="email"
+            />
+            <button
+              class="ha-subscribe-btn"
+              id="ha-subscribe-btn"
+              type="button"
+              onclick="wastraqSubscribe()"
+            >Notify Me</button>
+          </div>
+          <p id="ha-subscribe-error" style="display:none;margin:6px 0 0;font-size:.74rem;color:#dc2626;font-weight:600;"></p>
+        </div>
+
+        <!-- Success state (hidden until submission) -->
+        <div id="ha-subscribe-success" style="display:none;text-align:center;padding:12px 4px;">
+          <div style="width:38px;height:38px;background:#dcfce7;border-radius:50%;
+                      display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <p style="margin:0;font-size:.82rem;font-weight:700;color:#14502e;line-height:1.5;">
+            Thank you! We will notify you soon.
+          </p>
+        </div>
+      </div>
+
+      <div class="ha-sidebar-card">
+        <div class="ha-sidebar-title">Browse Topics</div>
+        <nav aria-label="Topic links">
+          <a href="help-topic.html?topic=route-optimization" class="ha-toc-link">Route Optimization</a>
+          <a href="help-topic.html?topic=fleet-management" class="ha-toc-link">Fleet Management</a>
+          <a href="help-topic.html?topic=driver-app" class="ha-toc-link">Driver App</a>
+          <a href="help-topic.html?topic=billing" class="ha-toc-link">Billing & Invoicing</a>
+          <a href="help-topic.html?topic=recycling" class="ha-toc-link">Recycling Operations</a>
+          <a href="help-topic.html?topic=supervisor-dashboard" class="ha-toc-link">Supervisor Dashboard</a>
+          <a href="help-topic.html?topic=municipal" class="ha-toc-link">Municipal Operations</a>
+          <a href="help-topic.html?topic=reporting" class="ha-toc-link">Reporting & Analytics</a>
+        </nav>
+      </div>
+    </aside>
+
+  </main>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="js/shared.js"></script>
+<script>
+  injectNav('about');
+  injectFooter();
+</script>
+<script src="js/help-articles.js"></script>
+<script src="js/cookies.js"></script>
+<!-- WASTRAQ Chatbot -->
+<script data-api-base="https://backend.wastraq.com" src="js/chatbot.js"></script>
+<!-- Set your production API URL above before deployment -->
+</body>
+</html>

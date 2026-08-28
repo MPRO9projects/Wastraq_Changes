@@ -19,6 +19,21 @@ def _esc(value) -> str:
     return _html_module.escape(str(value).strip())
 
 
+def _subj(value, fallback: str = "") -> str:
+    """
+    Sanitise a value before it's interpolated into an email Subject line.
+    Every subject below is built with a plain str.format() call on
+    attacker-controlled form fields (name, org, company, position, etc.) —
+    stripping CR/LF and other control characters here closes off header
+    injection (a submitted value containing embedded newlines could
+    otherwise inject extra headers, e.g. a spoofed Bcc, into the message).
+    """
+    if value is None:
+        return fallback
+    cleaned = "".join(ch for ch in str(value) if ch not in "\r\n\x00").strip()
+    return cleaned or fallback
+
+
 def _ts() -> str:
     return datetime.utcnow().strftime("%d %b %Y, %H:%M UTC")
 
@@ -85,7 +100,9 @@ def build_demo_email(data: dict):
     fname = data.get("fname", "")
     lname = data.get("lname", "")
     org   = data.get("org", "")
-    subject = "New Demo Request — {} {} ({})".format(fname, lname, org or "No org")
+    subject = "New Demo Request — {} {} ({})".format(
+        _subj(fname), _subj(lname), _subj(org, "No org")
+    )
     body = (
         _section("Contact Details")
         + _field("Full Name",         "{} {}".format(fname, lname))
@@ -116,7 +133,7 @@ def build_partner_email(data: dict):
         "tech":     ("Technology Partner Application", "#8b5cf6"),
     }
     label, accent = type_labels.get(form_type, ("Partner Application", "#f59e0b"))
-    subject = "New {} — {} ({})".format(label, name, company or "No company")
+    subject = "New {} — {} ({})".format(label, _subj(name), _subj(company, "No company"))
     badge = (
         "<span style='display:inline-block;margin-bottom:14px;padding:4px 12px;border-radius:100px;"
         "background:{a}22;border:1px solid {a}55;font-size:11px;font-weight:800;"
@@ -143,7 +160,7 @@ def build_partner_email(data: dict):
 def build_careers_email(data: dict):
     name     = data.get("name", "")
     position = data.get("position", "")
-    subject  = "New Job Application — {} for {}".format(name, position)
+    subject  = "New Job Application — {} for {}".format(_subj(name), _subj(position))
     body = (
         _section("Applicant Details")
         + _field("Full Name",            name)
@@ -163,7 +180,7 @@ def build_careers_email(data: dict):
 def build_register_email(data: dict):
     fname   = data.get("fname", "")
     lname   = data.get("lname", "")
-    subject = "New Registration — {} {}".format(fname, lname)
+    subject = "New Registration — {} {}".format(_subj(fname), _subj(lname))
     body = (
         _section("New Account Registration")
         + _field("Full Name", "{} {}".format(fname, lname))
@@ -178,7 +195,7 @@ def build_register_email(data: dict):
 # ── LOGIN ACCESS REQUEST ──────────────────────────────────────
 
 def build_login_interest_email(email: str):
-    subject = "Login Access Request — {}".format(email)
+    subject = "Login Access Request — {}".format(_subj(email))
     body = (
         _section("Login Access Request")
         + _field("Email Address", email)

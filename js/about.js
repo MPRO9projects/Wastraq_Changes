@@ -1,4 +1,31 @@
-injectNav('about');injectFooter();
+/* =====================================================================
+   WASTRAQ — About Page (standalone bundle)
+   All custom JS the About page needs: the shared scroll-reveal used by
+   Mission/Vision, What We Stand For, and Environmental Impact (normally
+   provided by the site's wastraq-shared.js — reproduced here so this page
+   has no external JS dependency), the hero entrance/scroll-fade, and the
+   values depth-stack card sequence.
+   No navbar/footer injection — this page never renders them.
+   ===================================================================== */
+
+/* ── Shared scroll-reveal (.anim / .anim-left / .anim-right) ──────────
+   Same behavior as wastraq-shared.js's initScrollAnimations(): reveal each
+   .anim element once it scrolls into view, then stop observing it. */
+(function initScrollAnimations() {
+  var targets = document.querySelectorAll('.anim');
+  if (!targets.length) return;
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('anim-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  targets.forEach(function (el) { observer.observe(el); });
+})();
 
 /* Settle the one-time hero entrance, then apply a very subtle scroll-fade. */
 (function initAboutHero() {
@@ -40,8 +67,8 @@ injectNav('about');injectFooter();
   if (window.scrollY > 0) onScroll();
 })();
 
-/* Mission / Vision now use the shared .anim / .anim-left / .anim-right
-   IntersectionObserver reveal (wastraq-shared.js) — no dedicated controller needed. */
+/* Mission / Vision and Environmental Impact use the shared .anim / .anim-left
+   / .anim-right IntersectionObserver reveal above — no dedicated controller needed. */
 
 /* ── Values — depth-stack card sequence (desktop only) ── */
 (function initValuesStack() {

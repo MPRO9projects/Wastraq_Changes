@@ -19,7 +19,6 @@
   <meta name="robots" content="index, follow" />
 
   <link rel="canonical" href="https://wastraq.com/solutions.html" />
-  <link rel="stylesheet" href="cookie-consent.css">
 
   <!-- ── OPEN GRAPH ────────────────────────────── -->
   <meta property="og:type" content="website" />
@@ -43,14 +42,16 @@
   <meta name="twitter:description"
     content="AI-powered municipal waste management solutions with GPS tracking, analytics, route optimization, and smart operational management." />
 
+  <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/nav-footer.css">
-  <link rel="stylesheet" href="wastraq.css" />
-  <link rel="stylesheet" href="solutions.css" />
+  <link rel="stylesheet" href="css/cookies.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/solutions.css">
 
   <!-- ── FAVICONS ─────────────────────────────── -->
-  <link rel="icon" type="image/png" href="screenshots/favicon.png">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="screenshots/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="assets/solutions/solutions_favicon.png">
+  <link rel="shortcut icon" href="assets/solutions/solutions_favicon.ico">
+  <link rel="apple-touch-icon" href="assets/solutions/solutions_apple-touch-icon.png">
 
   <!-- Clarity tracking code for https://www.wastraq.com/ -->
   <script>
@@ -127,8 +128,8 @@
         <p class="sol-reveal sol-subtext">Whether you run a city's entire waste infrastructure or operate a growing
           private collection business, WASTRAQ has a solution shaped precisely for your context, scale, and goals.</p>
         <div class="sol-reveal sol-actions" style="display:flex;gap:14px;justify-content:flex-start;flex-wrap:wrap">
-          <a href="contact.html" class="wq-btn-white sol-demo-btn">Request a Demo</a>
-          <a href="#municipal" class="wq-btn-outline-white sol-explore-btn">Explore Solutions <span class="sol-arrow"
+          <a href="contact.html" class="wq-btn-primary sol-demo-btn">Request a Demo</a>
+          <a href="#municipal" class="wq-btn-outline sol-explore-btn">Explore Solutions <span class="sol-arrow"
               aria-hidden="true">↓</span></a>
         </div>
         <div class="sol-tabs" role="tablist" aria-label="Solutions by audience">
@@ -415,7 +416,7 @@
   <div id="footer-placeholder"></div>
   <script src="js/shared.js"></script>
   <script>
-    injectNav('products');
+    injectNav('solutions');
     injectFooter();
   </script>
   <script>
@@ -620,9 +621,9 @@
       handleArchScroll();
     }
   </script>
-  <script src="cookie-consent.js"></script>
+  <script src="js/cookies.js"></script>
   <!-- WASTRAQ Chatbot -->
-  <script data-api-base="https://backend.wastraq.com" src="wastraq-chatbot.js"></script>
+  <script data-api-base="https://backend.wastraq.com" src="js/chatbot.js"></script>
   <!-- Set your production API URL above before deployment -->
 </body>
 

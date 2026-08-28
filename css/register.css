@@ -1,0 +1,87 @@
+/* register.css — page-specific styles for register.html
+   (base tokens/resets come from css/index.css; nav/footer styles come
+   from css/nav-footer.css) */
+
+    .auth-hero {
+      padding: calc(var(--nav-h) + 60px) 32px 60px;
+      background: linear-gradient(145deg, var(--green-900), #0c3520);
+      color: white;
+      text-align: center;
+    }
+    .auth-hero h1 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      margin-bottom: 14px;
+    }
+    .auth-hero p {
+      font-size: 1.05rem;
+      opacity: .8;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .auth-main {
+      background: var(--bg);
+      padding: 64px 32px 80px;
+      min-height: 60vh;
+    }
+    .auth-card-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .auth-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+    .auth-card h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--green-900);
+      margin-bottom: 6px;
+      letter-spacing: -.02em;
+    }
+    .auth-card .sub {
+      font-size: .9rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .location-wrapper {
+      display: flex;
+      gap: 8px;
+    }
+    .location-wrapper input { flex: 1; }
+    .location-btn {
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--green-50);
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--green-700);
+      transition: background .2s, border-color .2s;
+      flex-shrink: 0;
+    }
+    .location-btn:hover {
+      background: var(--green-100);
+      border-color: var(--green-300);
+    }
+    .auth-footer-link {
+      text-align: center;
+      margin-top: 22px;
+      font-size: .875rem;
+      color: var(--text-muted);
+    }
+    .auth-footer-link a {
+      color: var(--green-600);
+      font-weight: 700;
+    }
+    .auth-footer-link a:hover { color: var(--green-700); }
+
+    @media (max-width: 480px) {
+      .auth-card { padding: 28px 20px; }
+      .auth-main { padding: 40px 16px 60px; }
+    }
