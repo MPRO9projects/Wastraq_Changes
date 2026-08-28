@@ -13,9 +13,19 @@
   --brand-green-dark: #1E7D46;
   --brand-green-light: #EBF7EE;
 
-  --navy: #0A1B33;
+  /* --navy (body text) and --forest (headings) are aliased to the site's
+     real text-color tokens from css/index.css (loaded before this file)
+     instead of their own navy/teal-green values — the whole reason this
+     page's text was reading as a different color/font from every other
+     page. --slate/--muted/--muted-light (secondary text) and
+     --font-heading/--font-body (this page had a separate heading+body
+     font pairing that no other page uses) are aliased the same way.
+     --border and --radius-sm used to be redeclared here with different
+     values than css/index.css's tokens of the same name — removed so
+     the shared values apply instead of being silently overridden. */
+  --navy: var(--text);
   --navy-soft: #112540;
-  --forest: #173E35;
+  --forest: var(--green-900);
   --forest-deep: #0D2620;
   --forest-card: #13332C;
   --forest-glass: rgba(13, 38, 32, 0.85);
@@ -33,20 +43,18 @@
   --sky: #0EA5E9;
   --sky-light: #EAF6FE;
 
-  --slate: #334155;
-  --muted: #5A6A80;
-  --muted-light: #94A3B8;
-  --border: #E8ECEF;
+  --slate: var(--text-muted);
+  --muted: var(--text-muted);
+  --muted-light: var(--text-light);
   --border-light: #F1F4F6;
 
-  --font-heading: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: var(--font);
+  --font-body: var(--font);
 
   /* WASTRAQ Brand CTA Gradient */
   --cta-grad: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%);
   --dark-grad: linear-gradient(145deg, #173E35 0%, #0D2620 100%);
 
-  --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
@@ -173,7 +181,7 @@ nav {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 19px;
   color: var(--forest);
@@ -611,7 +619,7 @@ nav {
 }
 
 .hub-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 800;
 }
@@ -749,7 +757,7 @@ nav {
 }
 
 .hp-node-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 0.85rem;
   color: var(--navy);
@@ -910,7 +918,7 @@ nav {
 }
 
 .pcard-num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 0.78rem;
   color: var(--muted);
@@ -1050,7 +1058,7 @@ nav {
 }
 
 .why-card-num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.78rem;
   font-weight: 800;
   color: var(--teal-dark);
@@ -1219,7 +1227,7 @@ nav {
   background: rgba(255, 255, 255, 0.1);
   border: 1.5px solid #5EEAD4;
   color: #5EEAD4;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.1rem;
   display: flex;
@@ -1475,7 +1483,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 0.9rem;
   color: var(--forest);

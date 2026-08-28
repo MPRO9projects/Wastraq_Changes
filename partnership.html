@@ -80,7 +80,7 @@
 
             <!-- RIGHT: ECOSYSTEM VISUAL (WASTRAQ Hub + 3 Nodes) -->
             <div class="ecosystem-canvas-wrap" id="ecosystemCanvasWrap">
-              <svg class="ecosystem-svg-lines" viewBox="0 0 680 540" fill="none" id="ecosystemSvg">
+              <svg class="ecosystem-svg-lines" viewBox="0 0 680 540" preserveAspectRatio="none" fill="none" id="ecosystemSvg">
                 <defs>
                   <linearGradient id="gradResellerLine" x1="100%" y1="100%" x2="0%" y2="0%">
                     <stop offset="0%" stop-color="#159D91" />
@@ -90,7 +90,15 @@
                     <stop offset="0%" stop-color="#159D91" />
                     <stop offset="100%" stop-color="#8BA89B" />
                   </linearGradient>
-                  <linearGradient id="gradTechLine" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <!-- gradientUnits="userSpaceOnUse" with explicit coordinates matching
+                       pathLine3's own endpoints — pathLine3 is a perfectly vertical line
+                       (M 340 270 L 340 440), so its bounding box has zero width. The
+                       default objectBoundingBox gradient units can't produce a valid
+                       coordinate transform against a zero-width box, so the browser
+                       renders no stroke at all. userSpaceOnUse sidesteps that entirely
+                       by using the SVG's own coordinate system instead of the shape's
+                       bounding box. -->
+                  <linearGradient id="gradTechLine" gradientUnits="userSpaceOnUse" x1="340" y1="270" x2="340" y2="440">
                     <stop offset="0%" stop-color="#159D91" />
                     <stop offset="100%" stop-color="#0EA5E9" />
                   </linearGradient>
