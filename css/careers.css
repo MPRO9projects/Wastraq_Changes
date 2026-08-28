@@ -1,0 +1,1510 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── RESPONSIVE SAFETY ────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green-900: #0a2016;
+  --green-800: #0f3422;
+  --green-700: #14502e;
+  --green-600: #166534;
+  --green-500: #16a34a;
+  --green-400: #22c55e;
+  --green-300: #4ade80;
+  --green-200: #bbf7d0;
+  --green-100: #dcfce7;
+  --green-50:  #f0fdf4;
+  --bg: #f8faf7;
+  --bg-card: #ffffff;
+  --text: #0d1f0b;
+  --text-muted: #4b5e47;
+  --text-light: #7c9177;
+  --border: #e2ead0;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 24px rgba(10,32,22,.07);
+  --shadow-lg: 0 8px 48px rgba(10,32,22,.12);
+  --font: 'Plus Jakarta Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+  --btn-gradient: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%);
+  --nav-h: 72px;
+}
+
+/* ── SHARED NAV BUTTON (required by css/nav-footer.css) ──────────── */
+.wq-btn-primary,
+button.wq-btn-primary,
+a.wq-btn-primary {
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-size: .875rem;
+  font-weight: 700;
+  background: var(--btn-gradient) !important;
+  color: #ffffff !important;
+  border: none !important;
+  transition: transform .18s ease, box-shadow .2s ease, filter .2s ease;
+  box-shadow: 0 4px 16px rgba(21, 157, 145, .32) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.wq-btn-primary:hover,
+button.wq-btn-primary:hover,
+a.wq-btn-primary:hover {
+  filter: brightness(1.08) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(7, 80, 173, .4) !important;
+}
+
+@media (max-width: 768px) {
+  :root { --nav-h: 60px; }
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── SHARED SECTION UTILITIES ────────────────────── */
+.wq-section {
+  padding: 64px 32px;
+}
+
+.wq-bg-white {
+  background: #ffffff !important;
+}
+
+.wq-section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.wq-section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--green-600);
+  margin-bottom: 14px;
+}
+
+.wq-section-tag::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--green-400);
+  border-radius: 2px;
+}
+
+h2.wq-section-title {
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.03em;
+  color: var(--green-900);
+  margin-bottom: 16px;
+}
+
+.wq-section-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.wq-section-header {
+  margin-bottom: 56px;
+}
+
+.wq-section-header.center {
+  text-align: center;
+}
+
+.wq-section-header.center .wq-section-tag {
+  justify-content: center;
+}
+
+.wq-section-header.center .wq-section-sub {
+  margin: 0 auto;
+}
+
+/* ── CTA BANNER ──────────────────────────────── */
+.wq-cta {
+  background: linear-gradient(135deg, var(--green-800) 0%, var(--green-600) 100%);
+  padding: 64px 32px;
+  text-align: center;
+}
+
+.wq-cta-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.wq-cta h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: white;
+  margin-bottom: 14px;
+  letter-spacing: -.03em;
+}
+
+.wq-cta p {
+  color: rgba(255, 255, 255, .8);
+  font-size: 1.05rem;
+  margin-bottom: 36px;
+}
+
+.wq-cta-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wq-btn-white {
+  padding: 14px 30px;
+  border-radius: 10px;
+  font-size: .95rem;
+  font-weight: 700;
+  background: white;
+  color: var(--green-700);
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.wq-btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
+}
+
+.wq-btn-outline-white {
+  padding: 14px 30px;
+  border-radius: 10px;
+  font-size: .95rem;
+  font-weight: 700;
+  border: 2px solid rgba(255, 255, 255, .5);
+  color: white;
+  transition: border-color .2s, background .2s, color .2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.wq-btn-outline-white:hover {
+  border-color: white;
+  color: var(--green-800);
+  background: rgba(255, 255, 255, 1);
+}
+
+/* ── HERO ──────────────────────────────────────── */
+.car-hero {
+  padding: 60px 32px 72px;
+  margin-top: var(--nav-h);
+  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100dvh - var(--nav-h));
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.car-hero-inner {
+  max-width: 840px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  width: 100%;
+}
+
+.car-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+.car-hero-tag-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+.car-hero-heading {
+  font-size: clamp(34px, 4.6vw, 70px);
+  font-weight: 700;
+  color: var(--green-900, #0a2016);
+  line-height: 1.08;
+  letter-spacing: -.035em;
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+
+.car-hero-line {
+  display: block;
+  will-change: transform, opacity;
+}
+
+.car-hero-line-2 {
+  background: linear-gradient(90deg, #15803d 0%, #159D91 50%, #0750AD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.car-hero-desc {
+  font-size: clamp(16px, 1vw, 20px);
+  color: var(--text-muted, #475569);
+  line-height: 1.65;
+  max-width: 700px;
+  margin: 0 auto 36px;
+  will-change: transform, opacity;
+}
+
+.car-hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  will-change: transform, opacity;
+}
+
+.car-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 28px;
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%) !important;
+  color: #ffffff !important;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm, 8px);
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 4px 14px rgba(21, 157, 145, 0.25);
+}
+
+.car-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(21, 157, 145, 0.35);
+}
+
+.car-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: #ffffff;
+  color: var(--green-900, #0a2016) !important;
+  font-size: .95rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm, 8px);
+  border: 1.5px solid var(--border, #cbd5e1);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.car-btn-secondary:hover {
+  background: var(--green-50, #f0fdf4);
+  border-color: var(--green-300, #86efac);
+  transform: translateY(-2px);
+}
+
+.car-hero-stats {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 52px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border, #e2e8f0);
+  will-change: transform, opacity;
+}
+
+.car-hero-stat-num {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #159D91;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+.car-hero-stat-label {
+  font-size: .82rem;
+  color: var(--text-muted, #64748b);
+  font-weight: 600;
+  margin-top: 6px;
+  letter-spacing: .01em;
+}
+
+/* ── MISSION STRIP ─────────────────────────────── */
+.car-mission {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 56px 32px;
+}
+
+.car-mission-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.car-mission-text {
+  grid-column: 1 / 3;
+}
+
+.car-mission-text h2 {
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 800;
+  color: var(--green-900);
+  letter-spacing: -.025em;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.car-mission-text p {
+  font-size: .97rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.car-mission-quote {
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  border-left: 4px solid var(--green-500);
+  border-radius: 12px;
+  padding: 22px 20px;
+}
+
+.car-mission-quote p {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--green-800);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.car-mission-quote cite {
+  display: block;
+  font-size: .78rem;
+  color: var(--green-600);
+  font-style: normal;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+/* ── BENEFITS SECTION (SCROLL-DRIVEN EXPANDABLE CARDS) ── */
+.car-benefits-section {
+  background: var(--bg, #f8faf7);
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.car-benefits-container {
+  width: min(94vw, 1500px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.car-benefits-stage-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+}
+
+.car-benefits-stage {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  height: clamp(380px, 50vh, 500px);
+  align-items: stretch;
+}
+
+.car-benefit-card {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid var(--border, #e2e8f0);
+  border-radius: 26px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  flex: 1 1 9%;
+  min-width: 0;
+  opacity: 0.72;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: flex-basis 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              flex-grow 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.4s ease,
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.car-benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.car-benefit-card.active {
+  flex: 5 1 50%;
+  opacity: 1;
+  border-color: rgba(21, 157, 145, 0.35);
+  box-shadow: 0 16px 40px rgba(10, 32, 22, 0.1);
+}
+
+.car-benefit-card.active::before {
+  opacity: 1;
+}
+
+.car-benefit-badge {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-light, #94a3b8);
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.car-benefit-card.active .car-benefit-badge {
+  color: #159D91;
+}
+
+.car-benefit-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: auto;
+  flex-shrink: 0;
+  transition: transform 0.4s ease;
+}
+
+.car-benefit-card.active .car-benefit-icon {
+  transform: scale(1.08);
+}
+
+.car-benefit-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.car-benefit-card.active .car-benefit-content {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.car-benefit-content h4 {
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-weight: 800;
+  color: var(--green-900, #0a2016);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+  white-space: normal;
+}
+
+.car-benefit-desc {
+  font-size: clamp(0.88rem, 1.05vw, 0.96rem);
+  color: var(--text-muted, #475569);
+  line-height: 1.68;
+  margin: 0;
+  max-width: 520px;
+}
+
+.car-benefit-vertical-label {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted, #475569);
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.car-benefit-card.active .car-benefit-vertical-label {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.car-benefits-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.car-benefits-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border, #cbd5e1);
+  transition: width 0.35s ease, background 0.35s ease, border-radius 0.35s ease;
+}
+
+.car-benefits-dots .dot.active {
+  width: 32px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 50%, #0750AD 100%);
+}
+
+/* ── CULTURE SECTION ───────────────────────────── */
+.car-culture-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.car-culture-text p {
+  font-size: .97rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.car-culture-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.car-culture-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 100px;
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--green-700);
+}
+
+.car-culture-pill svg {
+  flex-shrink: 0;
+}
+
+.car-culture-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.car-culture-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.car-culture-card:hover {
+  border-color: var(--green-300);
+  box-shadow: var(--shadow);
+}
+
+.car-culture-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--green-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-600);
+  flex-shrink: 0;
+}
+
+.car-culture-card-text h5 {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--green-900);
+  margin-bottom: 3px;
+}
+
+.car-culture-card-text p {
+  font-size: .8rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ── OPEN POSITIONS ────────────────────────────── */
+.car-positions-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.car-dept-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.car-dept-btn {
+  padding: 7px 18px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: white;
+  font-family: var(--font);
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.car-dept-btn:hover {
+  border-color: var(--green-400);
+  color: var(--green-700);
+  background: var(--green-50);
+}
+
+.car-dept-btn.active {
+  border-color: var(--green-500);
+  background: var(--green-500);
+  color: white;
+  box-shadow: 0 3px 12px rgba(22, 163, 74, .28);
+}
+
+/* Job card */
+.car-jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.car-job-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+  transition: border-color .25s, box-shadow .25s, transform .2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.car-job-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--green-400);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .25s cubic-bezier(.4, 0, .2, 1);
+}
+
+.car-job-card:hover::before {
+  transform: scaleY(1);
+}
+
+.car-job-card:hover {
+  border-color: var(--green-300);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(3px);
+}
+
+.car-job-card-left {
+  min-width: 0;
+}
+
+.car-job-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.car-job-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--green-900);
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+
+.car-job-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.car-job-badge.new {
+  background: #ecfdf5;
+  color: var(--green-700);
+  border-color: var(--green-200, #bbf7d0);
+}
+
+.car-job-badge.urgent {
+  background: #fffbeb;
+  color: #92400e;
+  border-color: #fde68a;
+}
+
+.car-job-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.car-job-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.car-job-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.car-job-meta-item svg {
+  flex-shrink: 0;
+}
+
+.car-job-desc {
+  font-size: .855rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-top: 10px;
+  max-width: 640px;
+}
+
+.car-job-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.car-job-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.car-job-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.car-job-dept {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-light);
+}
+
+.car-job-dept-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.car-apply-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%) !important;
+  color: white !important;
+  font-size: .85rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm, 8px);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 3px 12px rgba(21, 157, 145, 0.25);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.car-apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(21, 157, 145, 0.35);
+}
+
+.car-no-match {
+  display: none;
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-light);
+  font-size: .92rem;
+  font-weight: 500;
+}
+
+.car-no-match strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* ── PROCESS SECTION ───────────────────────────── */
+.car-process-section {
+  position: relative;
+  background: #ffffff;
+  padding: 88px 32px;
+  overflow: hidden;
+}
+
+.car-process-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.car-process-track-container {
+  position: relative;
+  margin-top: 56px;
+  padding-top: 10px;
+}
+
+.car-process-line-bar {
+  position: absolute;
+  top: 36px;
+  left: calc(12.5% + 10px);
+  right: calc(12.5% + 10px);
+  height: 3px;
+  background: var(--border, #e2e8f0);
+  border-radius: 4px;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.car-process-line-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 50%, #0750AD 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.car-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.car-process-step {
+  text-align: center;
+  padding: 0 12px;
+  position: relative;
+  opacity: 0.4;
+  transform: scale(0.94);
+  will-change: transform, opacity;
+}
+
+.car-process-step.active {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.car-process-num-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.car-process-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--border, #cbd5e1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--text-muted, #64748b);
+  transition: all 0.35s ease;
+}
+
+.car-process-step.active .car-process-num {
+  background: linear-gradient(135deg, #6FBB59 0%, #159D91 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 18px rgba(21, 157, 145, 0.4);
+}
+
+.car-process-step h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--green-900, #0a2016);
+  margin-bottom: 8px;
+  letter-spacing: -.01em;
+}
+
+.car-process-step p {
+  font-size: .86rem;
+  color: var(--text-muted, #475569);
+  line-height: 1.65;
+}
+
+/* ── APPLY FORM SECTION ────────────────────────── */
+.car-apply-section {
+  background: var(--bg);
+}
+
+.car-apply-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.car-apply-info h2 {
+  font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+  font-weight: 800;
+  color: var(--green-900);
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.car-apply-info p {
+  font-size: .97rem;
+  color: var(--text-muted);
+  line-height: 1.78;
+  margin-bottom: 28px;
+}
+
+.car-contact-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.car-contact-chip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+
+.car-contact-chip:hover {
+  border-color: var(--green-400);
+  box-shadow: var(--shadow);
+  transform: translateX(3px);
+}
+
+.car-contact-chip-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--green-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-600);
+  flex-shrink: 0;
+}
+
+.car-contact-chip-label {
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-light);
+  margin-bottom: 1px;
+}
+
+.car-contact-chip-value {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--green-700);
+}
+
+.car-contact-chip-arrow {
+  margin-left: auto;
+  color: var(--green-400);
+  flex-shrink: 0;
+}
+
+/* Apply form */
+.car-apply-form-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: var(--shadow);
+}
+
+.car-apply-form-card h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--green-900);
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+
+.car-apply-form-card .car-form-sub {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: 26px;
+  line-height: 1.55;
+}
+
+.car-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.car-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.car-form-group.full {
+  grid-column: 1 / -1;
+}
+
+.car-form-label {
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: .02em;
+}
+
+.car-form-label span {
+  color: var(--green-500);
+}
+
+.car-form-input,
+.car-form-select,
+.car-form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: .9rem;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color .2s, box-shadow .2s, background .2s;
+  outline: none;
+  appearance: none;
+}
+
+.car-form-input:focus,
+.car-form-select:focus,
+.car-form-textarea:focus {
+  border-color: var(--green-500);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, .12);
+  background: white;
+}
+
+.car-form-input::placeholder,
+.car-form-textarea::placeholder {
+  color: var(--text-light);
+}
+
+.car-form-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237c9177' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 38px;
+}
+
+.car-form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.car-form-note {
+  font-size: .76rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.car-submit-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(90deg, #6FBB59 0%, #159D91 45%, #0750AD 100%) !important;
+  color: white !important;
+  font-family: var(--font);
+  font-size: .95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 4px 14px rgba(21, 157, 145, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.car-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(21, 157, 145, 0.38);
+}
+
+.car-submit-btn.submitted {
+  background: var(--green-500);
+  pointer-events: none;
+}
+
+.car-form-success {
+  display: none;
+  text-align: center;
+  padding: 28px 20px;
+}
+
+.car-form-success-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--green-100);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  color: var(--green-600);
+}
+
+.car-form-success h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--green-900);
+  margin-bottom: 6px;
+}
+
+.car-form-success p {
+  font-size: .87rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── RESPONSIVE MEDIA QUERIES ────────────────── */
+@media (max-width: 1024px) {
+  .car-mission-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .car-mission-text {
+    grid-column: 1 / 2;
+  }
+  .car-culture-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .car-apply-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .car-benefits-section {
+    padding: 48px 20px;
+  }
+  .car-benefits-container {
+    gap: 28px;
+  }
+  .car-benefits-stage-wrap {
+    gap: 0;
+  }
+  .car-benefits-stage {
+    flex-direction: column;
+    height: auto !important;
+    gap: 16px;
+  }
+  .car-benefit-card {
+    flex: 1 1 auto !important;
+    opacity: 1 !important;
+    padding: 24px 20px;
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .car-benefit-content {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+  .car-benefit-vertical-label,
+  .car-benefits-dots {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .car-hero {
+    padding: 48px 20px;
+    min-height: auto;
+    height: auto;
+  }
+  .car-hero-heading {
+    font-size: clamp(32px, 8.5vw, 44px);
+    line-height: 1.1;
+  }
+  .car-hero-desc {
+    font-size: .98rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .car-hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  .car-hero-actions a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .car-hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 36px;
+    padding-top: 28px;
+  }
+
+  .car-mission {
+    padding: 36px 20px;
+  }
+
+  .car-positions-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .car-dept-filters {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+  .car-dept-btn {
+    white-space: nowrap;
+    padding: 8px 16px;
+  }
+  .car-job-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 20px;
+  }
+  .car-job-card-right {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 1px solid var(--border, #e2e8f0);
+    padding-top: 14px;
+    margin-top: 4px;
+  }
+  .car-apply-btn {
+    width: auto;
+    padding: 10px 18px;
+    font-size: .85rem;
+  }
+
+  .car-process-section {
+    padding: 48px 20px;
+  }
+  .car-process-track-container {
+    margin-top: 32px;
+  }
+  .car-process-line-bar {
+    display: none !important;
+  }
+  .car-process-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .car-process-step {
+    opacity: 1 !important;
+    transform: none !important;
+    text-align: left;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 0;
+  }
+  .car-process-num-wrap {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .car-process-num {
+    width: 44px;
+    height: 44px;
+    font-size: .85rem;
+  }
+
+  .car-apply-section {
+    padding: 48px 20px;
+  }
+  .car-apply-form-card {
+    padding: 24px 18px;
+    width: 100%;
+  }
+  .car-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .car-form-input,
+  .car-form-select,
+  .car-form-textarea {
+    font-size: 16px !important;
+    min-height: 44px;
+  }
+  .car-submit-btn {
+    width: 100%;
+    min-height: 48px;
+  }
+}
+
+@media print {
+  .car-apply-form-card,
+  .car-hero-actions,
+  .wq-cta {
+    display: none !important;
+  }
+}

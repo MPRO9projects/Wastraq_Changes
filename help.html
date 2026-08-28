@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- ── PRIMARY SEO ───────────────────────────── -->
+  <title id="page-doc-title">WASTRAQ Help Center | Support & User Assistance</title>
+  <meta name="description" id="page-meta-desc"
+    content="The WASTRAQ Help Center — comprehensive guides, tutorials, release notes, and support for our smart waste management platform. Find answers for the Driver App, Supervisor Dashboard, Route Optimization, Billing, and more." />
+  <meta name="keywords"
+    content="WASTRAQ help center, smart waste management software support, waste management platform guide, waste collection software tutorial, municipal waste solution documentation, route optimization help, driver app support, supervisor dashboard guide, release notes" />
+  <meta name="author" content="WASTRAQ" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <link rel="canonical" href="https://wastraq.com/help/help.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WASTRAQ" />
+  <meta property="og:title" id="og-doc-title" content="WASTRAQ Help Center – Smart Waste Management Software Support" />
+  <meta property="og:description" id="og-meta-desc"
+    content="Get instant answers, step-by-step guides, release notes, and expert support for the WASTRAQ waste management platform." />
+  <meta property="og:url" content="https://wastraq.com/help/help.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WASTRAQ Help Center | Waste Management Software Support" />
+  <meta name="twitter:description"
+    content="Step-by-step guides, tutorials, release notes, and direct support for the WASTRAQ smart waste management platform." />
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://wastraq.com/help/help.html",
+      "url": "https://wastraq.com/help/help.html",
+      "name": "WASTRAQ Help Center – Smart Waste Management Software Support",
+      "description": "Comprehensive help documentation for WASTRAQ's intelligent waste management platform. Covers onboarding, Driver App, Supervisor Dashboard, Route Optimization, Billing, IoT sensors, and API integration.",
+      "dateModified": "2026-04-24",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I get started with WASTRAQ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Getting started with WASTRAQ takes less than 5 business days. After signing up, our onboarding team will configure your platform, import your existing route data, and train your supervisors and drivers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does WASTRAQ's route optimization work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WASTRAQ's RouteTraq AI engine analyses your collection zones, vehicle capacity, road data, and collection frequency to generate optimized routes. Routes are recalculated in real time based on traffic and bin fill levels."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+  <!-- LOCAL STYLESHEET -->
+  <link rel="stylesheet" href="css/help.css" />
+
+  <!-- GSAP 3.12.5 CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+
+  <main class="help-app">
+
+    <!-- ════════════════════════════════════════════════════════════
+         1. HELP HOME VIEW
+    ════════════════════════════════════════════════════════════ -->
+    <section id="help-home-view" class="help-view">
+
+      <!-- HERO -->
+      <header class="hc-hero" aria-labelledby="hc-hero-title">
+        <div class="hc-hero-bg" aria-hidden="true"></div>
+        <div class="hc-hero-inner">
+
+          <div class="hc-hero-tag hc-anim">
+            <span class="hc-hero-tag-dot"></span>
+            Help Center
+          </div>
+
+          <h1 id="hc-hero-title" class="hc-anim hc-d1">
+            How Can We <span class="wq-gradient-text">Help You Today?</span>
+          </h1>
+          <p class="hc-anim hc-d2">
+            Find step-by-step guides, tutorials, and answers for every part of the
+            WASTRAQ smart waste management platform — from onboarding to advanced
+            route optimization.
+          </p>
+
+          <!-- Search -->
+          <div class="hc-search-wrap hc-anim hc-d3">
+            <svg class="hc-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input class="hc-search-input" type="search" id="hc-search"
+              placeholder="Search for help articles, guides, and tutorials..." autocomplete="off"
+              aria-label="Search help articles" oninput="hcSearchInput(this.value)" onfocus="hcSearchFocus()"
+              onblur="hcSearchBlur()" />
+            <button class="hc-search-btn" type="button" onclick="hcDoSearch()" aria-label="Search">
+              Search
+            </button>
+            <div class="hc-search-results" id="hc-search-results" role="listbox" aria-label="Search results"></div>
+          </div>
+
+          <!-- Suggestions -->
+          <div class="hc-search-suggestions hc-anim hc-d3">
+            <span>Popular:</span>
+            <button class="hc-suggestion-chip" onclick="hcSetSearch('Route optimization setup')">Route optimization setup</button>
+            <button class="hc-suggestion-chip" onclick="hcSetSearch('Driver app installation')">Driver app install</button>
+            <button class="hc-suggestion-chip" onclick="hcSetSearch('Billing and invoicing')">Billing setup</button>
+            <button class="hc-suggestion-chip" onclick="hcSetSearch('IoT sensor integration')">IoT sensors</button>
+            <button class="hc-suggestion-chip" onclick="hcSetSearch('API integration')">API docs</button>
+          </div>
+
+          <!-- Hero stats -->
+          <div class="hc-hero-stats hc-anim hc-d4" aria-label="Help center statistics">
+            <div class="hc-hero-stat-item">
+              <div class="hc-hero-stat-num">120+</div>
+              <div class="hc-hero-stat-lbl">Help articles</div>
+            </div>
+            <div class="hc-hero-stat-item">
+              <div class="hc-hero-stat-num">24/7</div>
+              <div class="hc-hero-stat-lbl">Knowledge base access</div>
+            </div>
+            <div class="hc-hero-stat-item">
+              <div class="hc-hero-stat-num">&lt;4 hrs</div>
+              <div class="hc-hero-stat-lbl">Support response time</div>
+            </div>
+            <div class="hc-hero-stat-item">
+              <div class="hc-hero-stat-num">98%</div>
+              <div class="hc-hero-stat-lbl">Customer satisfaction</div>
+            </div>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- STATUS BAR -->
+      <div class="hc-status-bar" role="complementary" aria-label="Platform status">
+        <div class="hc-status-inner">
+          <div class="hc-status-left">
+            <span class="hc-status-dot" aria-hidden="true"></span>
+            All WASTRAQ systems are operating normally
+          </div>
+          <div class="hc-status-right">
+            <a href="#articles=all" class="hc-status-link" onclick="navigateToView('articles', 'all'); return false;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+              </svg>
+              Latest release: v4.8
+            </a>
+            <a href="#contact" class="hc-status-link" onclick="scrollAppToSupport(); return false;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+              </svg>
+              Contact Support
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BREADCRUMB -->
+      <nav class="hc-breadcrumb" aria-label="Breadcrumb">
+        <a href="#home" onclick="navigateToView('home'); return false;">Home</a>
+        <span class="hc-breadcrumb-sep" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </span>
+        <span class="hc-breadcrumb-current" aria-current="page">Help Center</span>
+      </nav>
+
+      <!-- MAIN CONTENT -->
+      <div class="hc-main">
+
+        <!-- KNOWLEDGE BASE CATEGORIES -->
+        <section aria-labelledby="kb-heading">
+          <div class="hc-categories-header">
+            <div class="hc-section-label">Knowledge Base</div>
+            <h2 class="hc-section-title" id="kb-heading">Browse by <span class="wq-gradient-text">Topic</span></h2>
+            <p class="hc-section-sub">
+              Everything you need to operate, manage, and scale your waste management
+              operations with WASTRAQ — organized by role and feature area.
+            </p>
+          </div>
+
+          <div class="hc-kb-grid" role="list">
+
+            <!-- Card 1: Platform Setup -->
+            <article class="hc-kb-card" role="listitem" aria-labelledby="kb-started" onclick="navigateToView('topic', 'platform-setup')">
+              <div class="hc-kb-card-head">
+                <div class="hc-kb-card-icon" style="background:#dcfce7;color:#166534" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                </div>
+                <span class="hc-kb-article-count">18 articles</span>
+              </div>
+              <h3 id="kb-started">Getting Started &amp; Platform Setup</h3>
+              <p>
+                Account setup, onboarding checklist, first route creation, and platform
+                orientation for new WASTRAQ users — get fully operational within 48 hours.
+              </p>
+              <div class="hc-kb-card-articles">
+                <span class="hc-kb-card-article">Platform overview and first login</span>
+                <span class="hc-kb-card-article">Importing existing route data</span>
+                <span class="hc-kb-card-article">Setting up your organisation and depots</span>
+                <span class="hc-kb-card-article">Inviting supervisors and drivers</span>
+              </div>
+              <div class="hc-kb-card-footer">
+                <span class="hc-kb-card-cta" style="pointer-events:none">
+                  View articles
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- Card 2: Supervisor Dashboard -->
+            <article class="hc-kb-card" role="listitem" aria-labelledby="kb-supervisor" onclick="navigateToView('topic', 'supervisor-dashboard')">
+              <div class="hc-kb-card-head">
+                <div class="hc-kb-card-icon" style="background:#dbeafe;color:#1d4ed8" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                    <path d="M3 17a4 4 0 004 4h3" />
+                  </svg>
+                </div>
+                <span class="hc-kb-article-count">24 articles</span>
+              </div>
+              <h3 id="kb-supervisor">Supervisor Dashboard</h3>
+              <p>
+                Live fleet visibility, dispatch management, exception handling, performance
+                analytics, and compliance reporting for waste operations supervisors.
+              </p>
+              <div class="hc-kb-card-articles">
+                <span class="hc-kb-card-article">Real-time vehicle and driver tracking</span>
+                <span class="hc-kb-card-article">Managing service exceptions and missed collections</span>
+                <span class="hc-kb-card-article">Daily dispatch and run sheets</span>
+                <span class="hc-kb-card-article">Generating KPI and compliance reports</span>
+              </div>
+              <div class="hc-kb-card-footer">
+                <span class="hc-kb-card-cta" style="pointer-events:none">
+                  View articles
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- Card 3: Driver App -->
+            <article class="hc-kb-card" role="listitem" aria-labelledby="kb-driver" onclick="navigateToView('topic', 'driver-app')">
+              <div class="hc-kb-card-head">
+                <div class="hc-kb-card-icon" style="background:#fef3c7;color:#d97706" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2" />
+                    <path d="M12 18h.01" />
+                  </svg>
+                </div>
+                <span class="hc-kb-article-count">16 articles</span>
+              </div>
+              <h3 id="kb-driver">Driver App</h3>
+              <p>
+                The WASTRAQ Driver App for iOS and Android — installation, navigation,
+                collection confirmation, issue reporting, and offline mode guides.
+              </p>
+              <div class="hc-kb-card-articles">
+                <span class="hc-kb-card-article">Android installation and first login</span>
+                <span class="hc-kb-card-article">iOS installation and first login</span>
+                <span class="hc-kb-card-article">Using in-cab turn-by-turn navigation</span>
+                <span class="hc-kb-card-article">Reporting collection issues and photos</span>
+              </div>
+              <div class="hc-kb-card-footer">
+                <span class="hc-kb-card-cta" style="pointer-events:none">
+                  View articles
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- Card 4: Route Optimization -->
+            <article class="hc-kb-card" role="listitem" aria-labelledby="kb-route" onclick="navigateToView('topic', 'route-optimization')">
+              <div class="hc-kb-card-head">
+                <div class="hc-kb-card-icon" style="background:#f0fdf4;color:#16a34a" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <span class="hc-kb-article-count">19 articles</span>
+              </div>
+              <h3 id="kb-route">RouteTraq — Route Optimization</h3>
+              <p>
+                AI-powered route planning for waste collection fleets. Configure zones, run
+                frequency, vehicle capacity, and road constraints to maximize efficiency.
+              </p>
+              <div class="hc-kb-card-articles">
+                <span class="hc-kb-card-article">Creating and configuring collection zones</span>
+                <span class="hc-kb-card-article">Setting vehicle capacity and constraints</span>
+                <span class="hc-kb-card-article">Running the RouteTraq AI optimizer</span>
+                <span class="hc-kb-card-article">Dynamic re-routing with IoT fill-level data</span>
+              </div>
+              <div class="hc-kb-card-footer">
+                <span class="hc-kb-card-cta" style="pointer-events:none">
+                  View articles
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- Card 5: Fleet Management -->
+            <article class="hc-kb-card" role="listitem" aria-labelledby="kb-fleet" onclick="navigateToView('topic', 'fleet-management')">
+              <div class="hc-kb-card-head">
+                <div class="hc-kb-card-icon" style="background:#e0f2fe;color:#0284c7" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="3" width="15" height="13" />
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                    <circle cx="5.5" cy="18.5" r="2.5" />
+                    <circle cx="18.5" cy="18.5" r="2.5" />
+                  </svg>
+                </div>
+                <span class="hc-kb-article-count">15 articles</span>
+              </div>
+              <h3 id="kb-fleet">Fleet Management</h3>
+              <p>
+                Vehicle registry, maintenance tracking, driver assignments, fuel reporting,
+                and telemetry integration for municipal and commercial fleets.
+              </p>
+              <div class="hc-kb-card-articles">
+                <span class="hc-kb-card-article">Adding vehicles and telemetry units</span>
+                <span class="hc-kb-card-article">Driver vehicle assignment workflows</span>
+                <span class="hc-kb-card-article">Preventative maintenance scheduling</span>
+                <span class="hc-kb-card-article">Fuel efficiency and idling reports</span>
+              </div>
+              <div class="hc-kb-card-footer">
+                <span class="hc-kb-card-cta" style="pointer-events:none">
+                  View articles
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- Card 6: Billing & Invoicing -->
+            <article class="hc-kb-card" role="listitem" aria-labelledby="kb-billing" onclick="navigateToView('topic', 'billing')">
+              <div class="hc-kb-card-head">
+                <div class="hc-kb-card-icon" style="background:#f3e8ff;color:#7c3aed" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" />
+                    <line x1="1" y1="10" x2="23" y2="10" />
+                  </svg>
+                </div>
+                <span class="hc-kb-article-count">14 articles</span>
+              </div>
+              <h3 id="kb-billing">Billing and Invoicing</h3>
+              <p>
+                Automated billing cycles, custom invoice templates, payment processing,
+                Xero/QuickBooks integration, and subscription management documentation.
+              </p>
+              <div class="hc-kb-card-articles">
+                <span class="hc-kb-card-article">Setting up automated billing cycles</span>
+                <span class="hc-kb-card-article">Customising invoice templates and branding</span>
+                <span class="hc-kb-card-article">Connecting Xero, QuickBooks, and SAP</span>
+                <span class="hc-kb-card-article">Managing payment terms and overdue accounts</span>
+              </div>
+              <div class="hc-kb-card-footer">
+                <span class="hc-kb-card-cta" style="pointer-events:none">
+                  View articles
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- POPULAR ARTICLES -->
+        <section class="hc-popular-section" aria-labelledby="popular-heading">
+          <div class="hc-popular-header">
+            <div>
+              <div class="hc-section-label">Most Read</div>
+              <h2 class="hc-section-title" id="popular-heading">Popular <span class="wq-gradient-text">Help Articles</span></h2>
+            </div>
+            <a href="#articles=all" class="hc-view-all" onclick="navigateToView('articles', 'all'); return false;" aria-label="View all help articles">
+              View all articles
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="hc-popular-grid" role="list">
+
+            <a href="#topic=driver-app" onclick="navigateToView('topic', 'driver-app'); return false;" class="hc-article-card" role="listitem">
+              <div class="hc-article-card-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" />
+                  <path d="M12 18h.01" />
+                </svg>
+              </div>
+              <div class="hc-article-card-text">
+                <div class="hc-article-card-cat">Driver App</div>
+                <div class="hc-article-card-title">Android Installation and Initial Setup Guide</div>
+                <div class="hc-article-card-desc">Step-by-step guide to installing the WASTRAQ Driver App on Android devices, logging in, and completing the first run.</div>
+                <div class="hc-article-card-meta">
+                  <span class="hc-article-card-time">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 8v4l3 3" />
+                    </svg>
+                    5 min read
+                  </span>
+                  <span class="hc-article-card-read">Read article</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="#topic=driver-app" onclick="navigateToView('topic', 'driver-app'); return false;" class="hc-article-card" role="listitem">
+              <div class="hc-article-card-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" />
+                  <path d="M12 18h.01" />
+                </svg>
+              </div>
+              <div class="hc-article-card-text">
+                <div class="hc-article-card-cat">Driver App</div>
+                <div class="hc-article-card-title">iOS Installation and Initial Setup Guide</div>
+                <div class="hc-article-card-desc">How to download, install, and configure the WASTRAQ Driver App on iPhone and iPad running iOS 15 or later.</div>
+                <div class="hc-article-card-meta">
+                  <span class="hc-article-card-time">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 8v4l3 3" />
+                    </svg>
+                    4 min read
+                  </span>
+                  <span class="hc-article-card-read">Read article</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="#topic=route-optimization" onclick="navigateToView('topic', 'route-optimization'); return false;" class="hc-article-card" role="listitem">
+              <div class="hc-article-card-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div class="hc-article-card-text">
+                <div class="hc-article-card-cat">Route Optimization</div>
+                <div class="hc-article-card-title">How to Run the RouteTraq AI Optimizer for the First Time</div>
+                <div class="hc-article-card-desc">Configure your collection zones, vehicle fleet, and service frequencies to generate your first AI-optimized routes.</div>
+                <div class="hc-article-card-meta">
+                  <span class="hc-article-card-time">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 8v4l3 3" />
+                    </svg>
+                    8 min read
+                  </span>
+                  <span class="hc-article-card-read">Read article</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="#topic=platform-setup" onclick="navigateToView('topic', 'platform-setup'); return false;" class="hc-article-card" role="listitem">
+              <div class="hc-article-card-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                </svg>
+              </div>
+              <div class="hc-article-card-text">
+                <div class="hc-article-card-cat">Administration</div>
+                <div class="hc-article-card-title">Configuring User Roles and Permission Levels</div>
+                <div class="hc-article-card-desc">Set up admin, supervisor, driver, and read-only roles. Control which features and data each user type can access across your account.</div>
+                <div class="hc-article-card-meta">
+                  <span class="hc-article-card-time">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 8v4l3 3" />
+                    </svg>
+                    6 min read
+                  </span>
+                  <span class="hc-article-card-read">Read article</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="#topic=billing" onclick="navigateToView('topic', 'billing'); return false;" class="hc-article-card" role="listitem">
+              <div class="hc-article-card-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="4" width="22" height="16" rx="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+              </div>
+              <div class="hc-article-card-text">
+                <div class="hc-article-card-cat">Billing</div>
+                <div class="hc-article-card-title">Setting Up Automated Billing and Recurring Invoices</div>
+                <div class="hc-article-card-desc">Configure billing cycles, payment terms, and automated invoice dispatch for residential, commercial, and municipal accounts.</div>
+                <div class="hc-article-card-meta">
+                  <span class="hc-article-card-time">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 8v4l3 3" />
+                    </svg>
+                    7 min read
+                  </span>
+                  <span class="hc-article-card-read">Read article</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="#topic=platform-setup" onclick="navigateToView('topic', 'platform-setup'); return false;" class="hc-article-card" role="listitem">
+              <div class="hc-article-card-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" />
+                </svg>
+              </div>
+              <div class="hc-article-card-text">
+                <div class="hc-article-card-cat">IoT Integration</div>
+                <div class="hc-article-card-title">Connecting IoT Bin-Level Sensors to Your WASTRAQ Account</div>
+                <div class="hc-article-card-desc">How to add, configure, and test bin-level fill sensors. Link sensor data to dynamic route scheduling in the RouteTraq engine.</div>
+                <div class="hc-article-card-meta">
+                  <span class="hc-article-card-time">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 8v4l3 3" />
+                    </svg>
+                    10 min read
+                  </span>
+                  <span class="hc-article-card-read">Read article</span>
+                </div>
+              </div>
+            </a>
+
+          </div>
+        </section>
+
+        <!-- FAQ + SIDEBAR -->
+        <div class="hc-two-col">
+
+          <!-- FAQ -->
+          <section aria-labelledby="faq-heading">
+            <div class="hc-section-label">FAQ</div>
+            <h2 class="hc-section-title" id="faq-heading">Frequently Asked <span class="wq-gradient-text">Questions</span></h2>
+            <p class="hc-section-sub" style="margin-bottom:0">
+              Quick answers to the most common questions about the WASTRAQ smart waste
+              management platform.
+            </p>
+
+            <div class="hc-faq-list" role="list">
+
+              <div class="hc-faq-item" role="listitem">
+                <button class="hc-faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+                  <span class="hc-faq-q">How long does it take to get started with WASTRAQ?</span>
+                  <span class="hc-faq-chevron" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </span>
+                </button>
+                <div class="hc-faq-body" role="region">
+                  <div class="hc-faq-inner">
+                    <p>Most organisations are fully operational within <strong>2 to 5 business days</strong> of signing up. Our dedicated onboarding team handles data migration, platform configuration, and hands-on training for your supervisors and drivers.</p>
+                    <p>For enterprise and municipal deployments with complex route structures or ERP integrations, full onboarding typically takes 2 to 3 weeks. Your customer success manager will provide a detailed project timeline at kickoff.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hc-faq-item" role="listitem">
+                <button class="hc-faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+                  <span class="hc-faq-q">How does WASTRAQ's AI route optimization work?</span>
+                  <span class="hc-faq-chevron" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </span>
+                </button>
+                <div class="hc-faq-body" role="region">
+                  <div class="hc-faq-inner">
+                    <p>WASTRAQ's <strong>RouteTraq AI engine</strong> analyses your collection zones, vehicle capacity, road network data, service frequencies, and collection point locations to generate mathematically optimized routes.</p>
+                    <p>When IoT bin sensors are connected, routes are dynamically adjusted in real time based on actual fill levels — eliminating trips to empty bins and triggering urgent collections for overfull containers. Most customers achieve <strong>25–35% fuel cost reductions</strong> within the first month.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hc-faq-item" role="listitem">
+                <button class="hc-faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+                  <span class="hc-faq-q">Is WASTRAQ compatible with IoT bin sensors?</span>
+                  <span class="hc-faq-chevron" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </span>
+                </button>
+                <div class="hc-faq-body" role="region">
+                  <div class="hc-faq-inner">
+                    <p>Yes. WASTRAQ supports all major IoT bin sensor manufacturers via native connectors and our open REST API. Fill-level data, temperature readings, and tilt/tip events are ingested in real time and feed directly into the RouteTraq AI scheduling engine.</p>
+                    <p>See the <a href="#topic=platform-setup" onclick="navigateToView('topic', 'platform-setup'); return false;">IoT Sensors and Integrations</a> guide for setup instructions.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hc-faq-item" role="listitem">
+                <button class="hc-faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+                  <span class="hc-faq-q">Can WASTRAQ integrate with our existing ERP or accounting system?</span>
+                  <span class="hc-faq-chevron" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </span>
+                </button>
+                <div class="hc-faq-body" role="region">
+                  <div class="hc-faq-inner">
+                    <p>WASTRAQ offers native integrations with <strong>Xero, QuickBooks, SAP, and Oracle</strong>. Our full REST API also supports custom integrations with any ERP, CRM, or business intelligence platform your organisation already uses.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hc-faq-item" role="listitem">
+                <button class="hc-faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+                  <span class="hc-faq-q">What support options are available?</span>
+                  <span class="hc-faq-chevron" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </span>
+                </button>
+                <div class="hc-faq-body" role="region">
+                  <div class="hc-faq-inner">
+                    <p>All WASTRAQ customers have access to this knowledge base 24/7, in-app live chat during business hours, and email support with a <strong>4-hour first response SLA</strong>.</p>
+                    <p>Enterprise and municipal customers receive a dedicated customer success manager, priority phone support, and 24/7 emergency technical support for critical operational issues.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- Sidebar -->
+          <aside class="hc-sidebar" aria-label="Support resources">
+
+            <!-- Get Support -->
+            <div class="hc-sidebar-card">
+              <div class="hc-sidebar-card-title">Get Direct Support</div>
+              <div class="hc-support-options">
+                <a href="mailto:info@wastraq.com" class="hc-support-option" aria-label="Live chat support">
+                  <div class="hc-support-opt-icon" style="background:#dcfce7;color:#166534" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                    </svg>
+                  </div>
+                  <div class="hc-support-opt-text">
+                    <div class="hc-support-opt-title">Live Chat</div>
+                    <div class="hc-support-opt-sub">Mon–Fri, 8am–6pm GMT</div>
+                  </div>
+                </a>
+                <a href="mailto:info@wastraq.com" class="hc-support-option" aria-label="Email support team">
+                  <div class="hc-support-opt-icon" style="background:#dbeafe;color:#1d4ed8" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </div>
+                  <div class="hc-support-opt-text">
+                    <div class="hc-support-opt-title">Email Support</div>
+                    <div class="hc-support-opt-sub">Response within 4 hours</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="hc-sidebar-card">
+              <div class="hc-sidebar-card-title">Quick Links</div>
+              <div class="hc-sidebar-links">
+                <a href="#topic=platform-setup" onclick="navigateToView('topic', 'platform-setup'); return false;" class="hc-sidebar-link">
+                  Platform Setup Guide
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </a>
+                <a href="#topic=supervisor-dashboard" onclick="navigateToView('topic', 'supervisor-dashboard'); return false;" class="hc-sidebar-link">
+                  Supervisor Dashboard Overview
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </a>
+                <a href="#articles=all" onclick="navigateToView('articles', 'all'); return false;" class="hc-sidebar-link">
+                  Latest Platform Release Notes
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Platform Status -->
+            <div class="hc-sidebar-card">
+              <div class="hc-sidebar-card-title">Platform Status</div>
+              <div>
+                <div class="hc-sidebar-status-row">
+                  <span>TraqCore Platform</span>
+                  <span class="hc-status-badge hc-status-ok">Operational</span>
+                </div>
+                <div class="hc-sidebar-status-row">
+                  <span>Driver App (iOS / Android)</span>
+                  <span class="hc-status-badge hc-status-ok">Operational</span>
+                </div>
+                <div class="hc-sidebar-status-row">
+                  <span>RouteTraq AI Engine</span>
+                  <span class="hc-status-badge hc-status-ok">Operational</span>
+                </div>
+                <div class="hc-sidebar-status-row">
+                  <span>API &amp; Webhooks</span>
+                  <span class="hc-status-badge hc-status-ok">Operational</span>
+                </div>
+              </div>
+            </div>
+
+          </aside>
+        </div>
+
+        <!-- RECENT PLATFORM UPDATES -->
+        <section class="hc-releases-section" id="releases" aria-labelledby="releases-heading">
+          <div>
+            <div class="hc-section-label">What's New</div>
+            <h2 class="hc-section-title" id="releases-heading">Recent Platform <span class="wq-gradient-text">Updates</span></h2>
+            <p class="hc-section-sub">
+              WASTRAQ ships product updates every two weeks. Here are the most recent
+              improvements to the smart waste management platform.
+            </p>
+          </div>
+
+          <div class="hc-releases-list" role="list">
+
+            <article class="hc-release-item" role="listitem">
+              <div>
+                <div class="hc-release-version">v4.8.0</div>
+                <div class="hc-release-date">24 Apr 2026</div>
+              </div>
+              <div class="hc-release-content">
+                <div class="hc-release-title">RouteTraq AI — Dynamic Fill-Level Re-Routing</div>
+                <div class="hc-release-desc">
+                  Routes now update automatically when connected bin sensors report fill levels above configured thresholds.
+                </div>
+                <div class="hc-release-tags">
+                  <span class="hc-release-tag hc-tag-new">New Feature</span>
+                  <span class="hc-release-tag hc-tag-improve">Route AI</span>
+                </div>
+              </div>
+              <a href="#articles=route" onclick="navigateToView('articles', 'route'); return false;" class="hc-release-read" aria-label="Read full release notes for v4.8.0">
+                Read notes
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </article>
+
+            <article class="hc-release-item" role="listitem">
+              <div>
+                <div class="hc-release-version">v4.7.0</div>
+                <div class="hc-release-date">10 Apr 2026</div>
+              </div>
+              <div class="hc-release-content">
+                <div class="hc-release-title">Billing Automation Enhancements — Custom Invoice Templates</div>
+                <div class="hc-release-desc">
+                  Administrators can now create fully branded invoice templates with custom fields and automated itemisation.
+                </div>
+                <div class="hc-release-tags">
+                  <span class="hc-release-tag hc-tag-new">New Feature</span>
+                  <span class="hc-release-tag hc-tag-improve">Billing</span>
+                </div>
+              </div>
+              <a href="#articles=billing" onclick="navigateToView('articles', 'billing'); return false;" class="hc-release-read" aria-label="Read full release notes for v4.7.0">
+                Read notes
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- CLOSING CTA -->
+        <div class="hc-cta-block" id="support-cta" role="complementary" aria-label="Get more help">
+          <div class="hc-cta-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+            </svg>
+          </div>
+          <h3>Did Not Find What <span class="wq-gradient-text">You Were Looking For?</span></h3>
+          <p>
+            Our support team and customer success managers are here to help.
+            Reach out directly and we will get you the right answer — fast.
+          </p>
+          <div class="hc-cta-btns">
+            <a href="mailto:info@wastraq.com" class="hc-cta-btn-solid">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+              </svg>
+              Contact Support
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         2. HELP TOPIC VIEW
+    ════════════════════════════════════════════════════════════ -->
+    <section id="help-topic-view" class="help-view" hidden>
+
+      <!-- BREADCRUMB -->
+      <div class="ht-breadcrumb-bar">
+        <nav class="ht-breadcrumb" aria-label="Breadcrumb">
+          <a href="#home" onclick="navigateToView('home'); return false;">Home</a>
+          <span class="ht-breadcrumb-sep">›</span>
+          <a href="#home" onclick="navigateToView('home'); return false;">Help Center</a>
+          <span class="ht-breadcrumb-sep">›</span>
+          <span class="ht-breadcrumb-current" id="ht-breadcrumb-title">Platform Setup &amp; Configuration</span>
+        </nav>
+      </div>
+
+      <!-- TOPIC HERO HEADER -->
+      <header class="ht-hero" id="ht-hero">
+        <div class="ht-hero-inner">
+          <div class="ht-hero-left">
+            <div class="ht-hero-icon" id="ht-hero-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 12l2 2 4-4" />
+              </svg>
+            </div>
+            <h1 id="ht-title">Platform Setup &amp; Configuration</h1>
+            <p class="ht-hero-desc" id="ht-desc">
+              Account setup, user management, onboarding, IoT sensor connection, API authentication, and platform configuration guides.
+            </p>
+          </div>
+
+          <!-- Compact Header Stats -->
+          <div class="ht-hero-stats">
+            <div class="ht-stat-item">
+              <div class="ht-stat-icon-wrap" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                </svg>
+              </div>
+              <div class="ht-stat-num" id="ht-article-count-stat">18+</div>
+              <div class="ht-stat-lbl">Articles</div>
+            </div>
+            <div class="ht-stat-divider" aria-hidden="true"></div>
+            <div class="ht-stat-item">
+              <div class="ht-stat-icon-wrap" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div class="ht-stat-num">24/7</div>
+              <div class="ht-stat-lbl">Access</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOPIC MAIN LAYOUT -->
+      <div class="ht-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="ht-sidebar" aria-label="Topic navigation">
+          <!-- Card 1: Search Articles -->
+          <div class="ht-sidebar-card">
+            <div class="ht-sidebar-title">Search Articles</div>
+            <div class="ht-search-wrap">
+              <svg class="ht-search-icon-left" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg>
+              <input class="ht-search-mini" type="search" id="ht-mini-search" placeholder="Filter articles..." oninput="htFilterArticles(this.value)" aria-label="Filter articles" />
+            </div>
+          </div>
+
+          <!-- Card 2: All Topics -->
+          <div class="ht-sidebar-card">
+            <div class="ht-sidebar-title">All Topics</div>
+            <nav class="ht-topic-nav" aria-label="Topic categories" id="ht-topic-nav">
+              <a href="#topic=platform-setup" class="ht-sidebar-link ht-active" onclick="navigateToView('topic', 'platform-setup'); return false;">
+                <span class="ht-sidebar-link-inner">Platform Setup</span>
+                <svg class="ht-sidebar-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+              </a>
+              <a href="#topic=supervisor-dashboard" class="ht-sidebar-link" onclick="navigateToView('topic', 'supervisor-dashboard'); return false;">
+                <span class="ht-sidebar-link-inner">Supervisor Dashboard</span>
+                <svg class="ht-sidebar-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+              </a>
+              <a href="#topic=driver-app" class="ht-sidebar-link" onclick="navigateToView('topic', 'driver-app'); return false;">
+                <span class="ht-sidebar-link-inner">Driver App</span>
+                <svg class="ht-sidebar-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+              </a>
+              <a href="#topic=route-optimization" class="ht-sidebar-link" onclick="navigateToView('topic', 'route-optimization'); return false;">
+                <span class="ht-sidebar-link-inner">Route Optimization</span>
+                <svg class="ht-sidebar-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+              </a>
+              <a href="#topic=fleet-management" class="ht-sidebar-link" onclick="navigateToView('topic', 'fleet-management'); return false;">
+                <span class="ht-sidebar-link-inner">Fleet Management</span>
+                <svg class="ht-sidebar-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+              </a>
+              <a href="#topic=billing" class="ht-sidebar-link" onclick="navigateToView('topic', 'billing'); return false;">
+                <span class="ht-sidebar-link-inner">Billing &amp; Invoicing</span>
+                <svg class="ht-sidebar-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+              </a>
+            </nav>
+          </div>
+
+          <!-- Card 3: Support Card -->
+          <div class="ht-sidebar-card">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+              <div style="width:36px;height:36px;border-radius:10px;background:#f0fdf4;color:#166534;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+              </div>
+              <div>
+                <div style="font-size:.92rem;font-weight:800;color:#0f172a;">Need help?</div>
+                <div style="font-size:.78rem;color:#64748b;line-height:1.4;">Our support team is here to assist you.</div>
+              </div>
+            </div>
+            <div style="margin-top:12px;">
+              <a href="mailto:info@wastraq.com" style="font-size:.82rem;font-weight:700;color:#159D91;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
+                Contact support →
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- TOPIC ARTICLES LIST -->
+        <main id="ht-content" aria-live="polite">
+
+          <div class="ht-section-title">
+            <span id="ht-topic-heading">Platform Setup &amp; Configuration Articles</span>
+          </div>
+
+          <!-- No Results State -->
+          <div id="ht-no-results" class="ht-no-results">
+            <h3>No matching articles found</h3>
+            <p>No articles match your search or filter criteria. Try adjusting your search term or select another topic.</p>
+          </div>
+
+          <!-- Articles Catalog Container -->
+          <div id="ht-articles-list">
+
+            <!-- ARTICLE 1 -->
+            <article class="ht-article-card" id="art-1" data-cat="platform-setup" data-tags="overview login getting started orientation onboarding">
+              <div class="ht-article-icon-box" style="background:#dcfce7;color:#166534;" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+              </div>
+              <div class="ht-article-content">
+                <div class="ht-article-header-row">
+                  <h3>WASTRAQ Platform Overview and First Login</h3>
+                  <span class="ht-badge ht-badge-popular">POPULAR</span>
+                </div>
+                <div class="ht-article-meta-row">
+                  <span class="ht-article-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                    5 min read
+                  </span>
+                </div>
+                <p class="ht-article-desc">
+                  A complete orientation to the WASTRAQ platform. Understand the main modules, navigation structure, and where to start after your first login.
+                </p>
+                <div class="ht-article-body-wrap" id="body-art-1">
+                  <div class="ht-article-body">
+                    <h4>After Your First Login</h4>
+                    <p>When you log into WASTRAQ for the first time, you will land on the Operations Dashboard. This is your command centre for daily waste management activity.</p>
+                    <ul>
+                      <li><strong>Operations Dashboard</strong> — live fleet view, today's routes, and exception alerts</li>
+                      <li><strong>RouteTraq AI</strong> — route creation, optimization, and schedule management</li>
+                      <li><strong>Fleet Management</strong> — vehicle registry, maintenance, and tracking</li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="ht-toggle-btn" onclick="htToggle('art-1', this)" aria-expanded="false">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" /></svg>
+                  Read full article
+                </button>
+              </div>
+            </article>
+
+            <!-- ARTICLE 2 -->
+            <article class="ht-article-card" id="art-2" data-cat="platform-setup" data-tags="importing route data migrate csv excel spreadsheets collection points">
+              <div class="ht-article-icon-box" style="background:#dbeafe;color:#1e40af;" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
+              </div>
+              <div class="ht-article-content">
+                <div class="ht-article-header-row">
+                  <h3>Importing Existing Route Data into WASTRAQ</h3>
+                  <span class="ht-badge ht-badge-popular">POPULAR</span>
+                </div>
+                <div class="ht-article-meta-row">
+                  <span class="ht-article-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                    8 min read
+                  </span>
+                </div>
+                <p class="ht-article-desc">
+                  Migrate your existing collection points, route structures, and customer data from spreadsheets or your previous software into WASTRAQ.
+                </p>
+                <div class="ht-article-body-wrap" id="body-art-2">
+                  <div class="ht-article-body">
+                    <h4>Supported Import Formats</h4>
+                    <p>WASTRAQ accepts collection point data in CSV, Excel (XLSX), and GeoJSON format.</p>
+                  </div>
+                </div>
+                <button class="ht-toggle-btn" onclick="htToggle('art-2', this)" aria-expanded="false">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" /></svg>
+                  Read full article
+                </button>
+              </div>
+            </article>
+
+            <!-- ARTICLE 3 -->
+            <article class="ht-article-card" id="art-3" data-cat="supervisor-dashboard" data-tags="supervisor dispatch live tracking exceptions">
+              <div class="ht-article-icon-box" style="background:#fef3c7;color:#b45309;" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
+              </div>
+              <div class="ht-article-content">
+                <div class="ht-article-header-row">
+                  <h3>Supervisor Dashboard Overview and Dispatch Management</h3>
+                  <span class="ht-badge ht-badge-new">NEW</span>
+                </div>
+                <div class="ht-article-meta-row">
+                  <span class="ht-article-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                    6 min read
+                  </span>
+                </div>
+                <p class="ht-article-desc">
+                  Learn how to monitor active collection crews, assign emergency dispatches, and review real-time exception alerts.
+                </p>
+                <div class="ht-article-body-wrap" id="body-art-3">
+                  <div class="ht-article-body">
+                    <h4>Dispatch Workflows</h4>
+                    <p>Supervisors can drag and drop unassigned collections directly onto active driver runsheets in real time.</p>
+                  </div>
+                </div>
+                <button class="ht-toggle-btn" onclick="htToggle('art-3', this)" aria-expanded="false">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" /></svg>
+                  Read full article
+                </button>
+              </div>
+            </article>
+
+          </div>
+
+        </main>
+      </div>
+
+      <!-- MORE WAYS TO GET HELP -->
+      <section class="ht-explore-section">
+        <div class="ht-explore-header">
+          <h2>More ways to get help</h2>
+        </div>
+
+        <div class="ht-explore-card">
+          <div class="ht-explore-item">
+            <div class="ht-explore-icon" style="background:#dcfce7;color:#166534;" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+            </div>
+            <h3>Video Tutorials</h3>
+            <p>Step-by-step video guides to help you get started.</p>
+            <a href="#home" onclick="navigateToView('home'); return false;" class="ht-explore-link">
+              Watch videos
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </div>
+
+          <div class="ht-explore-item">
+            <div class="ht-explore-icon" style="background:#dbeafe;color:#1e40af;" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
+            </div>
+            <h3>Release Notes</h3>
+            <p>Stay updated with the latest features and fixes.</p>
+            <a href="#articles=all" onclick="navigateToView('articles', 'all'); return false;" class="ht-explore-link">
+              View updates
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </div>
+
+          <div class="ht-explore-item">
+            <div class="ht-explore-icon" style="background:#fef3c7;color:#b45309;" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
+            </div>
+            <h3>Community Support</h3>
+            <p>Connect with other users and share best practices.</p>
+            <a href="#home" onclick="navigateToView('home'); return false;" class="ht-explore-link">
+              Visit forum
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </div>
+
+          <div class="ht-explore-item">
+            <div class="ht-explore-icon" style="background:#f3e8ff;color:#6b21a8;" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+            </div>
+            <h3>Contact Team</h3>
+            <p>Reach out to our experts for personalized help.</p>
+            <a href="mailto:info@wastraq.com" class="ht-explore-link">
+              Contact support
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         3. HELP ARTICLES / RELEASE NOTES VIEW
+    ════════════════════════════════════════════════════════════ -->
+    <section id="help-articles-view" class="help-view" hidden>
+
+      <!-- HERO -->
+      <header class="ha-hero">
+        <div class="ha-hero-inner">
+          <nav class="ha-breadcrumb" aria-label="Breadcrumb">
+            <a href="#home" onclick="navigateToView('home'); return false;">Home</a>
+            <span class="ha-breadcrumb-sep">›</span>
+            <a href="#home" onclick="navigateToView('home'); return false;">Help Center</a>
+            <span class="ha-breadcrumb-sep">›</span>
+            <span style="color:#64748b">Platform Updates</span>
+          </nav>
+          <h1>Platform Updates &amp; <span class="wq-gradient-text">Release Notes</span></h1>
+          <p>
+            Stay up to date with every improvement, new feature, and fix shipped to
+            the WASTRAQ smart waste management platform. New releases every two weeks.
+          </p>
+        </div>
+      </header>
+
+      <!-- FILTER BAR -->
+      <div class="ha-filter-bar" role="toolbar" aria-label="Filter articles">
+        <div class="ha-filter-inner">
+          <span class="ha-filter-label">Filter:</span>
+          <button class="ha-filter-btn active" onclick="filterArticles(this,'all')">All Updates</button>
+          <button class="ha-filter-btn" onclick="filterArticles(this,'route')">Route Optimization</button>
+          <button class="ha-filter-btn" onclick="filterArticles(this,'fleet')">Fleet Management</button>
+          <button class="ha-filter-btn" onclick="filterArticles(this,'billing')">Billing</button>
+          <button class="ha-filter-btn" onclick="filterArticles(this,'driver')">Driver App</button>
+          <button class="ha-filter-btn" onclick="filterArticles(this,'recycling')">Recycling</button>
+          <button class="ha-filter-btn" onclick="filterArticles(this,'municipal')">Municipal</button>
+          <span class="ha-filter-count" id="ha-count">Showing all 7 updates</span>
+        </div>
+      </div>
+
+      <!-- MAIN -->
+      <div class="ha-main" id="ha-main-content">
+
+        <!-- Articles List -->
+        <div class="ha-articles-list" id="ha-articles-list" role="feed">
+
+          <!-- ARTICLE 1: v4.8.0 -->
+          <article class="ha-article" id="v480" data-cat="route" aria-labelledby="v480-title">
+            <div class="ha-article-header">
+              <div class="ha-article-icon" style="background:#dcfce7;color:#16a34a" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+              </div>
+              <div class="ha-article-meta">
+                <div class="ha-article-version">Version 4.8.0</div>
+                <div class="ha-article-date">24 April 2026 &nbsp;·&nbsp; 8 min read</div>
+              </div>
+            </div>
+            <div class="ha-article-tags">
+              <span class="ha-article-tag tag-new">New Feature</span>
+              <span class="ha-article-tag tag-improve">Route AI</span>
+              <span class="ha-article-tag tag-improve">IoT Integration</span>
+            </div>
+            <h2 id="v480-title">RouteTraq AI — Dynamic Fill-Level Re-Routing and Real-Time Schedule Adjustment</h2>
+            <p class="ha-article-lead">
+              WASTRAQ v4.8.0 delivers a major leap in AI route optimization for waste collection fleets.
+              Routes now update automatically in real time when connected bin sensors report fill levels
+              above configured thresholds.
+            </p>
+            <div class="ha-article-extended" id="v480-extended">
+              <div class="ha-article-body">
+                <h3>What Changed</h3>
+                <p>Previously, RouteTraq AI generated optimized routes based on schedule frequency and zone data. With v4.8.0, the engine ingests live fill-level data from IoT sensors.</p>
+                <ul>
+                  <li>Bins above configured fill threshold are automatically added to active routes</li>
+                  <li>Bins below minimum fill threshold are deprioritised and skipped</li>
+                </ul>
+              </div>
+            </div>
+            <button class="ha-read-more-btn" onclick="toggleArticle('v480-extended', this)" aria-expanded="false">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+              Read full release notes
+            </button>
+          </article>
+
+          <!-- ARTICLE 2: v4.7.0 -->
+          <article class="ha-article" id="v470" data-cat="billing" aria-labelledby="v470-title">
+            <div class="ha-article-header">
+              <div class="ha-article-icon" style="background:#f3e8ff;color:#7c3aed" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>
+              </div>
+              <div class="ha-article-meta">
+                <div class="ha-article-version">Version 4.7.0</div>
+                <div class="ha-article-date">10 April 2026 &nbsp;·&nbsp; 6 min read</div>
+              </div>
+            </div>
+            <div class="ha-article-tags">
+              <span class="ha-article-tag tag-new">New Feature</span>
+              <span class="ha-article-tag tag-improve">Billing</span>
+            </div>
+            <h2 id="v470-title">Billing Automation — Custom Invoice Templates and Xero Credit Note Sync</h2>
+            <p class="ha-article-lead">
+              v4.7.0 significantly expands WASTRAQ's billing engine with fully customisable invoice templates and Xero reconciliation.
+            </p>
+            <div class="ha-article-extended" id="v470-extended">
+              <div class="ha-article-body">
+                <h3>Custom Invoice Templates</h3>
+                <p>The new template builder supports full logo and brand colour customisation.</p>
+              </div>
+            </div>
+            <button class="ha-read-more-btn" onclick="toggleArticle('v470-extended', this)" aria-expanded="false">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+              Read full release notes
+            </button>
+          </article>
+
+          <div class="ha-no-results" id="ha-no-results">
+            <strong style="display:block;font-size:1rem;color:var(--text-muted);margin-bottom:6px">No articles in this category yet.</strong>
+            New content is added with every release. <a href="#home" onclick="navigateToView('home'); return false;" style="color:var(--green-600);font-weight:700">Return to Help Center</a>
+          </div>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="ha-sidebar" aria-label="Article navigation">
+          <a href="#home" onclick="navigateToView('home'); return false;" class="ha-back-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            Back to Help Center
+          </a>
+
+          <div class="ha-sidebar-card">
+            <div class="ha-sidebar-title">On This Page</div>
+            <nav aria-label="Table of contents">
+              <a href="#v480" class="ha-toc-link">
+                Dynamic Fill-Level Re-Routing
+                <span class="ha-toc-version">v4.8.0</span>
+              </a>
+              <a href="#v470" class="ha-toc-link">
+                Custom Invoice Templates
+                <span class="ha-toc-version">v4.7.0</span>
+              </a>
+            </nav>
+          </div>
+
+          <div class="ha-sidebar-card">
+            <div class="ha-sidebar-title">Get Release Alerts</div>
+            <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px;line-height:1.55">Get notified when new updates are published.</p>
+
+            <div id="ha-subscribe-form">
+              <div class="ha-subscribe-form">
+                <input class="ha-subscribe-input" type="email" id="ha-subscribe-email" placeholder="your@email.com" aria-label="Email address for release alerts" autocomplete="email" />
+                <button class="ha-subscribe-btn" id="ha-subscribe-btn" type="button" onclick="wastraqSubscribe()">Notify Me</button>
+              </div>
+              <p id="ha-subscribe-error" style="display:none;margin:6px 0 0;font-size:.74rem;color:#dc2626;font-weight:600;"></p>
+            </div>
+
+            <div id="ha-subscribe-success" style="display:none;text-align:center;padding:12px 4px;">
+              <div style="width:38px;height:38px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p style="margin:0;font-size:.82rem;font-weight:700;color:#14502e;line-height:1.5;">
+                Thank you! We will notify you soon.
+              </p>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- STANDALONE HELP SCRIPT -->
+  <script src="js/help.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,5425 @@
+/* =====================================================================
+   WASTRAQ — Products Page (standalone build)
+   product.css — merged, self-contained stylesheet for product.html.
+
+   This file consolidates, in cascade order (matching the original
+   products.html <head> load order so every override behaves exactly as
+   it did on the live site):
+     1. A small base layer pulled from wastraq.css — CSS custom
+        properties, the global box-sizing/reset, and the handful of
+        global selectors (body/a/img, .wq-cta banner, .wq-btn-white /
+        .wq-btn-outline-white) that this page's markup actually uses.
+        Everything else in wastraq.css (nav, footer, other pages'
+        components) was audited and excluded — dead weight for a
+        standalone Products page with no navbar/footer.
+     2. css/products-hero.css      (hero section)
+     3. css/products-hero-transition.css (hero -> TraqCore curved reveal)
+     4. css/product-section-transition.css (pinned section hand-offs)
+     5. css/product-showcase.css   (TraqCore/Residential/Commercial/
+        RouteTraq/Insights/Integrations visuals + the Phase 1 responsive
+        fixes made during this task)
+
+   --nav-h is defined as 0px below (was 72px on the live site, to offset
+   the fixed navbar) since this standalone page has no navbar to clear.
+   Every var(--nav-h, 72px) reference elsewhere in this file resolves
+   from this single definition — no navbar-height gap is reserved.
+
+   Confirmed-dead component CSS from the original product-showcase.css
+   (.wq-crm-*, .wq-skip-*, .wq-incab-*, .wq-portal-*) was NOT ported —
+   grep-verified against product.html to have zero matching elements.
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --green-900: #0a2016;
+  --green-800: #0f3422;
+  --green-700: #14502e;
+  --green-600: #166534;
+  --green-500: #16a34a;
+  --green-400: #22c55e;
+  --green-300: #4ade80;
+  --green-100: #dcfce7;
+  --green-50:  #f0fdf4;
+  --bg: #f8faf7;
+  --bg-card: #ffffff;
+  --text: #0d1f0b;
+  --text-muted: #4b5e47;
+  --text-light: #7c9177;
+  --border: #e2ead0;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 24px rgba(10,32,22,.07);
+  --shadow-lg: 0 8px 48px rgba(10,32,22,.12);
+  --font: 'Plus Jakarta Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+  /* No navbar on this standalone page — 0, not the site's 72px, so the
+     hero pin and pinned sections' var(--nav-h, 72px) references don't
+     reserve a phantom navbar gap at the top of the viewport. */
+  --nav-h: 72px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ── Final CTA banner (.wq-cta) — used once, at the bottom of the page.
+   product-showcase.css restyles .wq-btn-outline-white with its own
+   gradient-border treatment (loaded after this, so it wins the
+   cascade) but doesn't define .wq-cta/.wq-cta-inner/.wq-btn-white at
+   all, so those base rules are kept here as-is. ── */
+.wq-cta { background: linear-gradient(135deg, var(--green-800) 0%, var(--green-600) 100%); padding: 40px 32px 80px; text-align: center; }
+.wq-cta-inner { max-width: 680px; margin: 0 auto; }
+.wq-cta h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; color: white; margin-bottom: 14px; letter-spacing: -.03em; }
+.wq-cta p { color: rgba(255,255,255,.8); font-size: 1.05rem; margin-bottom: 36px; }
+.wq-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.wq-btn-white { padding: 14px 30px; border-radius: 10px; font-size: .95rem; font-weight: 700; background: white; color: var(--green-700); transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 20px rgba(0,0,0,.15); }
+.wq-btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
+.wq-btn-outline-white { padding: 14px 30px; border-radius: 10px; font-size: .95rem; font-weight: 700; border: 2px solid rgba(255,255,255,.5); color: white; transition: border-color .2s, background .2s; }
+.wq-btn-outline-white:hover { border-color: white; color: var(--green-800); background: rgba(255, 255, 255, 255); }
+
+/* ── Small-screen base typography (from wastraq.css's global mobile
+   pass) — the plain body{} rule affects every page including this one;
+   the .wq-btn-white/.wq-btn-outline-white box-sizing fix matters for
+   the CTA banner's buttons at narrow widths. ── */
+@media (max-width: 480px) {
+  body { font-size: 14.5px; line-height: 1.65; }
+}
+
+@media (max-width: 768px) {
+  body { font-size: 15px; line-height: 1.65; }
+  .wq-btn-white,
+  .wq-btn-outline-white { box-sizing: border-box; }
+}
+
+
+/* ===================================================================== */
+/* Source: css/products-hero.css */
+/* ===================================================================== */
+/* ===== Products Page Hero — Refined SaaS Proportions ===== */
+.wq-products-hero {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #ffffff;
+  color: #07162f;
+  padding: clamp(20px, 2.5vw, 36px) clamp(24px, 4vw, 56px);
+}
+
+.wq-products-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(20px, 2.5vw, 36px);
+}
+
+/* 2-Column Grid Layout */
+.wq-hero-grid {
+  display: grid;
+  grid-template-columns: 48% 52%;
+  align-items: center;
+  gap: clamp(24px, 3vw, 48px);
+  width: 100%;
+}
+
+.wq-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Entrance Animations */
+.wq-ph-anim {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wq-products-hero.wq-ph-in .wq-ph-anim {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wq-products-hero.wq-ph-in .wq-hero-left .wq-ph-heading { transition-delay: 0.08s; }
+.wq-products-hero.wq-ph-in .wq-hero-left .wq-ph-sub { transition-delay: 0.18s; }
+.wq-products-hero.wq-ph-in .wq-hero-left .wq-ph-cta { transition-delay: 0.28s; }
+.wq-products-hero.wq-ph-in .wq-hero-right { transition-delay: 0.38s; }
+.wq-products-hero.wq-ph-in .wq-hero-modules-strip { transition-delay: 0.48s; }
+
+/* Refined Heading & Typography */
+.wq-ph-heading {
+  /* Same hero-title scale as the rest of the site, tempered for this
+     hero's narrower 48% left column so the two-column layout doesn't overflow. */
+  font-size: clamp(42px, 3.8vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.03;
+  color: #07162f;
+  margin: 0 0 18px;
+}
+
+.wq-ph-gradient-text {
+  background: linear-gradient(90deg, #37c85a 0%, #11a8a8 45%, #0b5ed7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.wq-ph-sub {
+  font-size: clamp(17px, 1.2vw, 20px);
+  color: #4f5f73;
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0 0 24px;
+  font-weight: 400;
+}
+
+/* CTA Buttons */
+.wq-ph-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.wq-btn-gradient {
+  background: linear-gradient(90deg, #37c85a 0%, #11a8a8 45%, #0b5ed7 100%);
+  color: #ffffff !important;
+  border-radius: 50px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(17, 168, 168, 0.22) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.wq-btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(17, 168, 168, 0.32) !important;
+  filter: brightness(1.05);
+  color: #ffffff !important;
+}
+
+.wq-btn-secondary {
+  background: #ffffff;
+  color: #07162f !important;
+  border-radius: 50px;
+  padding: 10px 22px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid #cbd5e1 !important;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.wq-btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: #11a8a8 !important;
+  background-color: #f8fafc;
+  color: #07162f !important;
+}
+
+.wq-btn-play-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #07162f;
+  flex-shrink: 0;
+  padding-left: 2px;
+}
+
+/* Right Column Visual (Balanced Scale) */
+.wq-hero-right {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wq-hero-illustration {
+  position: relative;
+  width: 100%;
+  max-width: 490px;
+  aspect-ratio: 540 / 340;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wq-hero-bg-landscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wq-hero-orbit-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.wq-hero-truck-wrap {
+  position: relative;
+  z-index: 3;
+  width: 68%;
+  max-width: 320px;
+  transition: transform 0.4s ease;
+}
+
+/* Ambient gentle float when settled */
+.wq-products-hero.wq-ph-settled .wq-hero-truck-wrap {
+  animation: wq-truck-drift 7s ease-in-out infinite;
+}
+
+@keyframes wq-truck-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.wq-hero-truck-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 5 Proportional Circular Nodes */
+.wq-hero-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  transition: box-shadow 0.3s ease;
+}
+
+.wq-hero-node svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.wq-hero-node:hover {
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14);
+}
+
+/* Bottom 5-Module Strip (Scaled Down) */
+.wq-hero-modules-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 14px;
+  padding: 12px 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.025);
+  width: 100%;
+}
+
+.wq-module-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  padding: 2px 8px;
+}
+
+.wq-module-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wq-module-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.wq-mod-green {
+  background: #f0fdf4;
+}
+
+.wq-mod-teal {
+  background: #e6fffa;
+}
+
+.wq-mod-blue-soft {
+  background: #eff6ff;
+}
+
+.wq-mod-blue {
+  background: #ebf8ff;
+}
+
+.wq-mod-purple {
+  background: #f3e8ff;
+}
+
+.wq-module-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.wq-module-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #07162f;
+  line-height: 1.2;
+}
+
+.wq-module-desc {
+  font-size: 11.5px;
+  color: #4f5f73;
+  line-height: 1.3;
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+.wq-module-divider {
+  width: 1px;
+  height: 30px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+  margin: 0 2px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .wq-ph-heading {
+    font-size: clamp(38px, 4.5vw, 54px);
+  }
+  .wq-module-desc {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 992px) {
+  .wq-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .wq-hero-left {
+    text-align: center;
+    align-items: center;
+  }
+  .wq-ph-sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .wq-ph-cta {
+    justify-content: center;
+  }
+  .wq-hero-modules-strip {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .wq-module-divider {
+    display: none;
+  }
+  .wq-module-item {
+    flex: 1 1 40%;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 640px) {
+  .wq-products-hero {
+    padding: 20px 16px 32px;
+  }
+  .wq-ph-heading {
+    font-size: clamp(34px, 8vw, 44px);
+  }
+  .wq-ph-cta {
+    flex-direction: column;
+    width: 100%;
+  }
+  .wq-btn-gradient,
+  .wq-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  .wq-hero-node {
+    width: 38px;
+    height: 38px;
+  }
+  .wq-hero-node svg {
+    width: 15px;
+    height: 15px;
+  }
+  .wq-hero-modules-strip {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .wq-module-item {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wq-ph-anim,
+  .wq-hero-node,
+  .wq-hero-truck-wrap {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ===================================================================== */
+/* Source: css/products-hero-transition.css */
+/* ===================================================================== */
+/* ===== Products Hero — curved dark-reveal transition into the module
+   showcase =====
+   The hero (unchanged content/design, see products-hero.css) sits inside a
+   sticky pin. As the user scrolls past it, its content fades, lifts and
+   scales down together as one unit while a large, smooth semi-circle
+   rises from the lower edge of the screen and expands upward into a solid
+   dark-green field, covering the (otherwise untouched) hero beneath it.
+
+   The first module section (#wq-modshow) is pulled up to overlap the tail
+   of that same rise (see .wq-ps1-wrap below) and clipped by the identical
+   growing circle, so its own real content — not a placeholder, not a
+   duplicate — reveals progressively while the field is still rising,
+   rather than only after the hero's pin has fully released. Both clip
+   shapes are driven by the same progress value (see
+   js/products-hero-transition.js), so they stay pixel-congruent and the
+   hand-off between the two pins never produces a visible seam or a blank
+   hold. Pure scroll-progress driven — no wheel interception. */
+
+.wq-ph-wrap {
+  position: relative;
+  width: 100%;
+  height: 180vh;
+  min-height: 180vh;
+}
+
+.wq-ph-pin {
+  position: sticky;
+  top: var(--nav-h, 72px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: calc(100dvh - var(--nav-h, 72px));
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* The hero's own content (label/heading/paragraph/CTAs/pills, orbits) fades
+   and lifts as a single coordinated unit — it is not sliced or duplicated.
+   Layered below the rising field (z-index: 5, below), so once the field
+   has grown over a given area it physically covers that content; there's
+   no ghosting through a still-fading foreground layer. */
+.wq-products-hero-inner,
+.wq-ph-orbits {
+  transition: opacity 0.05s linear, transform 0.05s linear; /* overridden inline per-frame by JS while scrolling */
+}
+
+/* --- The rising curved dark-green field --- */
+.wq-ph-rise {
+  position: absolute;
+  inset: 0;
+  z-index: 5; /* above the hero's own text/orbits (z-index: 1–2, products-hero.css) — it must cover them, not sit behind them */
+  pointer-events: none;
+}
+
+.wq-ph-dark-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--green-900);
+  clip-path: circle(0% at 50% 100%);
+  will-change: clip-path;
+}
+
+/* A soft, lighter rim that tracks just ahead of the dark field's own edge
+   — same shape, slightly larger radius — so the curve reads as a gentle
+   glow rather than a hard-edged cut. Sits behind .wq-ph-dark-fill in
+   paint order (declared first), so only a thin ring peeks out past it. */
+.wq-ph-dark-fill-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(143, 227, 174, 0.55), rgba(143, 227, 174, 0) 70%);
+  clip-path: circle(0% at 50% 100%);
+  will-change: clip-path;
+}
+
+/* --- The first module section's own sticky pin ---
+   Deliberately overlaps the hero wrap's tail (negative margin) so it
+   engages well before the hero's own pin releases — its default hidden
+   state (below) keeps it invisible until it's genuinely stuck, exactly
+   like the hero/module hand-offs used elsewhere on this site; otherwise
+   it would briefly render at its normal, not-yet-stuck position and
+   bleed into view early. */
+.wq-ps1-wrap {
+  position: relative;
+  width: 100%;
+  height: 200vh;
+  min-height: 200vh;
+  margin-top: -160vh;
+  visibility: hidden;
+}
+
+.wq-ps1-pin {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  /* Above the hero's own pin (z-index: 5) — once stuck, its content needs
+     to paint on top of the (by-then fully dark) hero field beneath it. */
+  z-index: 6;
+  visibility: hidden;
+  clip-path: circle(0% at 50% 100%);
+  will-change: clip-path;
+}
+
+@media (prefers-reduced-motion: reduce), (max-width: 900px) {
+  /* No pin, no rise/reveal — fall back to a plain, fully static stacked
+     page so everything stays reachable by ordinary scrolling with no
+     motion (the module showcase's own mobile layout already does the
+     same, see product-showcase.css). */
+  .wq-ph-wrap {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .wq-ph-pin {
+    position: static !important;
+    height: auto !important;
+  }
+
+  .wq-products-hero {
+    height: auto !important;
+    min-height: calc(100dvh - var(--nav-h, 72px));
+  }
+
+  .wq-ph-rise {
+    display: none !important;
+  }
+
+  .wq-ps1-wrap {
+    height: auto !important;
+    min-height: 0 !important;
+    margin-top: 0 !important;
+    visibility: visible !important;
+  }
+
+  .wq-ps1-pin {
+    position: static !important;
+    height: auto !important;
+    visibility: visible !important;
+    clip-path: none !important;
+  }
+}
+
+/* ===================================================================== */
+/* Source: css/product-section-transition.css */
+/* ===================================================================== */
+/* ===== Products Page — Full-Screen Pinned Section Transitions ===== */
+
+/* --- Section 2: Residential Collection ---
+   Height is 20vh taller than the Section 3 handoff strictly needs, so that
+   Section 2's sticky pin has enough room to stay natively glued at top:0
+   for the *entire* Residential -> Commercial crossfade (driven by Section
+   3's own 20vh progress window). Without the extra room, the pin's native
+   CSS "unstick" (it runs out of container to stick within) kicks in at the
+   exact moment the crossfade starts, adding its own upward drift on top of
+   the JS-driven slide — Section 2 exits faster than Section 3 slides in,
+   exposing blank page background between them for the rest of the handoff.
+   margin-top matches the new height 1:1 so this section still contributes
+   zero net page height against Section 1, same as before. */
+.wq-ps2-wrap {
+  position: relative;
+  width: 100%;
+  height: 140vh;
+  min-height: 140vh;
+  margin-top: -140vh;
+  visibility: hidden;
+}
+
+.wq-ps2-pin {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 7; /* Above Section 1's pin (z-index: 6) */
+  visibility: hidden;
+  background: var(--bg, #ffffff);
+  will-change: transform, opacity;
+}
+
+/* Hide wave rim overlay and scroll seam badge */
+.wq-res-wave-rim-svg,
+.wq-ps-divider {
+  display: none !important;
+}
+
+/* --- Section 3: Commercial Collection ---
+   margin-top is offset by the same 20vh added to Section 2's height above,
+   so this section's own start point (and hand-off timing with Section 2)
+   is unchanged — only Section 2's pin now stays glued long enough to meet
+   it with no gap. */
+.wq-ps3-wrap {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+  min-height: 120vh;
+  margin-top: -120vh;
+  visibility: hidden;
+}
+
+.wq-ps3-pin {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 8; /* Above Section 2's pin (z-index: 7) */
+  visibility: hidden;
+  background: var(--bg, #ffffff);
+  will-change: transform, opacity;
+}
+
+/* --- Section 4: RouteTraq™ --- */
+.wq-ps4-wrap {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+  min-height: 120vh;
+  margin-top: -100vh;
+  visibility: hidden;
+}
+
+.wq-ps4-pin {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 9; /* Above Section 3's pin (z-index: 8) */
+  visibility: hidden;
+  background: var(--green-900, #0b2b26);
+  will-change: transform, opacity;
+}
+
+/* --- Section 5: Waste Insights --- */
+.wq-ps5-wrap {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+  min-height: 120vh;
+  margin-top: -100vh;
+  visibility: hidden;
+}
+
+.wq-ps5-pin {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 10; /* Above Section 4's pin (z-index: 9) */
+  visibility: hidden;
+  transform: translateY(100%);
+  background: var(--bg, #ffffff);
+  will-change: transform, opacity;
+}
+
+/* --- Section 6: Integrations --- */
+.wq-ps6-wrap {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+  min-height: 120vh;
+  margin-top: -100vh;
+  visibility: hidden;
+}
+
+.wq-ps6-pin {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 11; /* Above Section 5's pin (z-index: 10) */
+  visibility: hidden;
+  background: var(--bg, #ffffff);
+  will-change: transform, opacity;
+}
+
+/* Ensure pinned sections fill full viewport and center content vertically */
+.wq-ps1-pin #core {
+  height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 40px 0;
+}
+
+.wq-ps2-pin #residential,
+.wq-ps3-pin #commercial,
+.wq-ps4-pin #routeai,
+.wq-ps5-pin #insights,
+.wq-ps6-pin #integrations {
+  height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 48px 32px;
+}
+
+@media (prefers-reduced-motion: reduce), (max-width: 900px) {
+  /* No pin, fall back to a plain static stacked layout */
+  .wq-ps2-wrap, .wq-ps3-wrap, .wq-ps4-wrap, .wq-ps5-wrap, .wq-ps6-wrap {
+    height: auto !important;
+    min-height: 0 !important;
+    margin-top: 0 !important;
+    visibility: visible !important;
+  }
+
+  .wq-ps2-pin, .wq-ps3-pin, .wq-ps4-pin, .wq-ps5-pin, .wq-ps6-pin {
+    position: static !important;
+    height: auto !important;
+    visibility: visible !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+
+  .wq-res-wave-rim-svg {
+    display: none !important;
+  }
+}
+
+/* ===================================================================== */
+/* Source: css/product-showcase.css (includes this task's Phase 1 fixes) */
+/* ===================================================================== */
+/* ===== Products Page — Module Showcase =====
+   Five stacked sections, two modules each, alternating dark-green/light
+   backgrounds. Ordinary document flow (no scroll-jacking, no pin) — each
+   section reveals itself via IntersectionObserver as it scrolls into view
+   (see js/product-showcase.js), replayable in both directions. */
+
+.wq-ps-section {
+  position: relative;
+  padding: 96px 32px;
+  overflow: hidden;
+}
+
+.wq-ps-section.is-dark {
+  background: var(--green-900);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.wq-ps-section.is-light {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Small chevron badge marking the seam between sections (and between the
+   hero and the first section) — purely decorative. */
+.wq-ps-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  color: var(--green-600);
+}
+
+.wq-ps-divider svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wq-ps-inner {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wq-ps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+}
+
+/* --- Per-module content --- */
+.wq-ps-module {
+  opacity: 0;
+  transform: translateY(36px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Right-hand module reveals slightly after the left one. */
+.wq-ps-grid > .wq-ps-module:nth-child(2) {
+  transition-delay: 0.14s;
+}
+
+.wq-ps-section.is-in .wq-ps-module {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.wq-ps-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.wq-ps-section.is-dark .wq-ps-eyebrow { color: var(--green-300); }
+.wq-ps-section.is-light .wq-ps-eyebrow { color: var(--green-600); }
+
+.wq-ps-module h3 {
+  font-size: clamp(1.35rem, 2.1vw, 1.7rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.wq-ps-section.is-dark .wq-ps-module h3 { color: white; }
+.wq-ps-section.is-light .wq-ps-module h3 { color: var(--green-900); }
+
+.wq-ps-module p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 440px;
+  margin: 0 0 20px;
+}
+
+.wq-ps-section.is-dark .wq-ps-module p { color: rgba(255, 255, 255, 0.72); }
+.wq-ps-section.is-light .wq-ps-module p { color: var(--text-muted); }
+
+.wq-ps-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 32px;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.wq-ps-cta:hover { gap: 8px; }
+
+/* --- Visual area: the diagram itself blooms in with its own extra delay,
+   after the text above it has already started revealing. --- */
+.wq-ps-visual {
+  opacity: 0;
+  transform: translateY(18px) scale(0.94);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.22s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.22s;
+}
+
+.wq-ps-grid > .wq-ps-module:nth-child(2) .wq-ps-visual {
+  transition-delay: 0.36s;
+}
+
+.wq-ps-section.is-in .wq-ps-visual {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ===== Diagram building blocks ===== */
+
+/* -- Chain: a horizontal row of icon nodes separated by arrows -- */
+.wq-ps-chain {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wq-ps-chain-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 74px;
+  text-align: center;
+}
+
+.wq-ps-chain-arrow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  opacity: 0.5;
+}
+
+.wq-ps-chain-arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.wq-ps-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--green-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.wq-ps-icon-circle svg {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wq-ps-chain-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.wq-ps-section.is-dark .wq-ps-chain-label { color: rgba(255, 255, 255, 0.85); }
+.wq-ps-section.is-light .wq-ps-chain-label { color: var(--text); }
+.wq-ps-section.is-dark .wq-ps-chain-arrow { color: rgba(255, 255, 255, 0.55); }
+.wq-ps-section.is-light .wq-ps-chain-arrow { color: var(--green-400); }
+
+/* A branch dropping from one chain node (Commercial: Invoice hangs below
+   Contract) — a short vertical connector plus one extra node beneath. */
+.wq-ps-chain-branch-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wq-ps-chain-branch-line {
+  width: 1.5px;
+  height: 20px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.wq-ps-section.is-dark .wq-ps-chain-branch-line { color: rgba(255, 255, 255, 0.6); }
+.wq-ps-section.is-light .wq-ps-chain-branch-line { color: var(--green-400); }
+
+/* -- Hub: a center node with spokes to surrounding nodes (SVG) -- */
+.wq-ps-hub-svg {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.wq-ps-hub-line {
+  stroke-width: 1.5;
+  opacity: 0.35;
+}
+
+.wq-ps-section.is-dark .wq-ps-hub-line { stroke: white; }
+.wq-ps-section.is-light .wq-ps-hub-line { stroke: var(--green-600); }
+
+.wq-ps-hub-node-bg {
+  fill: var(--green-600);
+}
+
+.wq-ps-hub-center-bg {
+  fill: white;
+}
+
+.wq-ps-hub-center-icon {
+  stroke: var(--green-700);
+}
+
+.wq-ps-hub-label {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.wq-ps-section.is-dark .wq-ps-hub-label { fill: rgba(255, 255, 255, 0.85); }
+.wq-ps-section.is-light .wq-ps-hub-label { fill: var(--text); }
+
+/* -- Process: list → hub icon → output icon -- */
+.wq-ps-process {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.wq-ps-process-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wq-ps-process-item {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.wq-ps-section.is-dark .wq-ps-process-item { background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.85); }
+.wq-ps-section.is-light .wq-ps-process-item { background: white; color: var(--text); border: 1px solid var(--border); }
+
+.wq-ps-process-arrow {
+  flex: 0 0 auto;
+  opacity: 0.5;
+}
+
+.wq-ps-process-arrow svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wq-ps-section.is-dark .wq-ps-process-arrow { color: rgba(255, 255, 255, 0.55); }
+.wq-ps-section.is-light .wq-ps-process-arrow { color: var(--green-400); }
+
+.wq-ps-process-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 90px;
+  text-align: center;
+}
+
+/* -- Stats: compact KPI summary card -- */
+.wq-ps-stats-card {
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wq-ps-section.is-dark .wq-ps-stats-card { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); }
+.wq-ps-section.is-light .wq-ps-stats-card { background: white; border: 1px solid var(--border); box-shadow: var(--shadow-lg); }
+
+.wq-ps-stats-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.wq-ps-stats-tile {
+  flex: 1;
+}
+
+.wq-ps-stats-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.wq-ps-stats-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.wq-ps-stats-trend {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--green-400);
+}
+
+.wq-ps-section.is-light .wq-ps-stats-trend { color: var(--green-600); }
+
+.wq-ps-donut {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: conic-gradient(var(--green-400) calc(var(--pct, 81) * 1%), rgba(255, 255, 255, 0.12) 0);
+}
+
+.wq-ps-section.is-light .wq-ps-donut {
+  background: conic-gradient(var(--green-600) calc(var(--pct, 81) * 1%), var(--border) 0);
+}
+
+.wq-ps-donut-inner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wq-ps-section.is-dark .wq-ps-donut-inner { background: var(--green-900); color: white; }
+.wq-ps-section.is-light .wq-ps-donut-inner { background: white; color: var(--green-900); }
+
+.wq-ps-sparkline {
+  width: 100%;
+  height: 40px;
+  display: block;
+}
+
+/* ===== Residential Collection Specific Styles ===== */
+.wq-res-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.28em;
+  padding-bottom: 4px;
+}
+
+.wq-res-word {
+  display: inline-block;
+  transform: translateY(35px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ===== Residential Collection Section Scale & Proportion Alignment ===== */
+#residential.wq-ps-section {
+  min-height: calc(100dvh - var(--nav-h, 72px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(48px, 7vh, 88px) clamp(64px, 7vw, 120px);
+  background: var(--bg, #ffffff);
+}
+
+.wq-res-inner {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.wq-res-layout {
+  display: grid;
+  /* !important: this element also carries .wq-ps-product-layout.visual-left,
+     a higher-specificity (0,2,0) rule whose plain "52% 48%" columns sum to
+     100% and, combined with any non-zero gap, always overflow the
+     container by the gap amount — percentages don't reserve room for gap
+     the way fr units do. !important restores this section's own columns,
+     converted to minmax(0, fr) (same ~46:50 ratio) so they're gap-aware
+     and shrink-safe too. */
+  grid-template-columns: minmax(0, 46fr) minmax(0, 50fr) !important;
+  gap: clamp(70px, 7vw, 130px);
+  align-items: center;
+  width: 100%;
+}
+
+/* Enlarged Vertical Timeline Journey */
+.wq-res-journey-wrap {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 12px 0;
+}
+
+.wq-journey-step {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-journey-node {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid rgba(11, 43, 38, 0.14);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.wq-journey-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--green-900, #07162f);
+}
+
+.wq-journey-icon.route-active svg {
+  color: #16a34a;
+}
+
+.wq-journey-icon.complete-check svg {
+  color: #16a34a;
+}
+
+.wq-journey-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wq-journey-title {
+  font-family: var(--wq-font-primary);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #07162f;
+  letter-spacing: -0.015em;
+}
+
+.wq-journey-desc {
+  font-family: var(--wq-font-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.wq-journey-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 3px;
+}
+
+.wq-stream-pill {
+  font-family: var(--wq-font-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 14px;
+  background: rgba(248, 250, 252, 0.95);
+  border: 1px solid rgba(11, 43, 38, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #07162f;
+}
+
+.wq-journey-schedule-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--wq-font-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #07162f;
+  background: rgba(248, 250, 252, 0.95);
+  padding: 5px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(11, 43, 38, 0.1);
+}
+
+.wq-sch-date {
+  font-weight: 800;
+  color: #475569;
+}
+
+.wq-sch-stops {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.wq-journey-status-badge.is-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--wq-font-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: #16a34a;
+  background: rgba(34, 197, 94, 0.08);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: none;
+  margin-top: 2px;
+}
+
+.wq-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: none;
+  animation: none;
+}
+
+.wq-journey-complete-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wq-comp-text {
+  font-family: var(--wq-font-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.wq-comp-badge {
+  font-family: var(--wq-font-primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #16a34a;
+  background: rgba(34, 197, 94, 0.14);
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.wq-journey-line {
+  width: 3px;
+  height: 34px;
+  margin-left: 24.5px;
+  background: rgba(11, 43, 38, 0.14);
+  position: relative;
+  transform-origin: top center;
+  transform: scaleY(0);
+  will-change: transform;
+}
+
+.wq-journey-line.line-3 {
+  height: 42px;
+  background: linear-gradient(to bottom, rgba(11, 43, 38, 0.14), #16a34a);
+}
+
+.wq-journey-truck-icon {
+  position: absolute;
+  left: 11.5px;
+  top: 24px;
+  width: 29px;
+  height: 29px;
+  color: #16a34a;
+  z-index: 5;
+  transform: translateY(0);
+  opacity: 0;
+  filter: drop-shadow(0 3px 8px rgba(34, 197, 94, 0.45));
+  will-change: transform, opacity;
+}
+
+.wq-journey-truck-icon svg {
+  width: 29px;
+  height: 29px;
+}
+
+/* Step 4 Collection / Route Active Refined Clean State */
+.wq-journey-step.step-route {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.wq-journey-step.step-route .wq-journey-node {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.04);
+  border: 2px solid #16a34a;
+  box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.wq-journey-step.step-route .wq-journey-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #16a34a;
+}
+
+.wq-journey-step.step-route .wq-journey-title {
+  font-family: var(--wq-font-primary);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #07162f;
+}
+
+.wq-journey-step.step-route.is-arrival-active .wq-journey-node {
+  border-color: #16a34a;
+  background: rgba(34, 197, 94, 0.08);
+  box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12);
+}
+
+/* Right Content Column Scale */
+.wq-res-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.wq-res-eyebrow {
+  font-family: var(--wq-font-primary) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase !important;
+  color: #178a50 !important;
+  margin-bottom: 20px !important;
+}
+
+.wq-res-heading {
+  font-family: var(--wq-font-primary) !important;
+  font-size: clamp(44px, 3.8vw, 60px) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.035em !important;
+  color: #07162f !important;
+  margin-bottom: 28px !important;
+}
+
+.wq-res-p {
+  font-family: var(--wq-font-primary) !important;
+  font-size: clamp(16px, 1.25vw, 19px) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: #4f5f73 !important;
+  max-width: 580px !important;
+  margin-bottom: 26px !important;
+}
+
+.wq-res-capability {
+  font-family: var(--wq-font-primary) !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 1.6 !important;
+  color: #46566a !important;
+  margin-bottom: 30px !important;
+}
+
+.wq-res-cta {
+  font-family: var(--wq-font-primary) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #0b5ed7 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  text-decoration: none !important;
+  transition: transform 0.25s ease, color 0.25s ease !important;
+}
+
+.wq-res-cta:hover {
+  color: #07162f !important;
+  transform: translateX(4px) !important;
+}
+
+
+.wq-res-row {
+  display: grid;
+  grid-template-columns: 88px 1fr 85px 90px;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(250, 250, 250, 0.9);
+  border: 1px solid rgba(11, 43, 38, 0.06);
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--green-900);
+}
+
+.wq-res-row-date {
+  font-weight: 700;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+}
+
+.wq-res-row-zone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.wq-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.zone-gen { background: #475569; }
+.zone-rec { background: #16a34a; }
+.zone-org { background: #d97706; }
+
+.wq-res-row-stops {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-align: right;
+  padding-right: 6px;
+}
+
+.wq-res-row-status {
+  justify-self: end;
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.wq-res-row-status.is-confirmed {
+  background: rgba(34, 197, 94, 0.12);
+  color: #15803d;
+}
+
+.wq-res-row-status.is-planning {
+  background: rgba(245, 158, 11, 0.14);
+  color: #b45309;
+}
+
+/* Route Flow Timeline & Line SVG */
+.wq-res-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(11, 43, 38, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.wq-res-flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.wq-res-flow-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--green-600);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(11, 43, 38, 0.15);
+}
+
+.wq-res-flow-icon.status-done {
+  background: var(--green-700);
+}
+
+.wq-res-flow-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.wq-res-flow-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--green-900);
+}
+
+.wq-res-flow-line-wrap {
+  flex: 1;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+}
+
+.wq-res-flow-line-svg {
+  width: 100%;
+  height: 8px;
+  display: block;
+}
+
+.wq-res-line-bg {
+  stroke: rgba(11, 43, 38, 0.12);
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+}
+
+.wq-res-line-draw {
+  stroke: var(--green-600);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ===== Global Products Showcase Layout & Typography Standard ===== */
+.wq-ps-product-layout {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: clamp(48px, 5vw, 80px);
+  align-items: center;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding-inline: clamp(32px, 6vw, 96px);
+  box-sizing: border-box;
+}
+
+.wq-ps-product-layout.visual-left {
+  grid-template-columns: 52% 48%;
+}
+
+.wq-ps-product-layout.content-left {
+  grid-template-columns: 48% 52%;
+}
+
+.wq-ps-eyebrow,
+.wq-res-eyebrow,
+.wq-com-eyebrow,
+.wq-skip-eyebrow,
+.wq-route-eyebrow,
+.wq-incab-eyebrow,
+.wq-crm-eyebrow,
+.wq-portal-eyebrow,
+.wq-analytics-eyebrow,
+.wq-integ-eyebrow {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 16px !important;
+}
+
+.wq-ps-section.is-dark .wq-ps-eyebrow,
+.wq-ps-section.is-dark .wq-route-eyebrow,
+.wq-ps-section.is-dark .wq-crm-eyebrow { color: var(--green-400, #22c55e) !important; }
+
+.wq-ps-section.is-light .wq-ps-eyebrow,
+.wq-ps-section.is-light .wq-res-eyebrow,
+.wq-ps-section.is-light .wq-com-eyebrow,
+.wq-ps-section.is-light .wq-skip-eyebrow,
+.wq-ps-section.is-light .wq-incab-eyebrow,
+.wq-ps-section.is-light .wq-portal-eyebrow,
+.wq-ps-section.is-light .wq-analytics-eyebrow,
+.wq-ps-section.is-light .wq-integ-eyebrow { color: var(--green-600, #16a34a) !important; }
+
+.wq-ps-heading-seo,
+.wq-res-heading,
+.wq-com-heading,
+.wq-skip-heading,
+.wq-route-heading,
+.wq-incab-heading,
+.wq-crm-heading,
+.wq-portal-heading,
+.wq-analytics-heading,
+.wq-integ-heading {
+  font-size: clamp(40px, 4vw, 60px) !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.05 !important;
+  margin: 0 0 24px 0 !important;
+  max-width: 620px !important;
+}
+
+.wq-integ-heading {
+  font-size: clamp(48px, 4.5vw, 68px) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.04em !important;
+  margin: 0 0 28px 0 !important;
+  max-width: 650px !important;
+  color: var(--green-900, #0b2b26) !important;
+}
+
+.wq-integ-eyebrow {
+  margin-bottom: 20px !important;
+  color: var(--green-600, #16a34a) !important;
+}
+
+.wq-integ-p1 {
+  font-size: clamp(17px, 1.35vw, 20px) !important;
+  line-height: 1.55 !important;
+  max-width: 620px !important;
+  margin-bottom: 28px !important;
+  font-weight: 400 !important;
+  color: rgba(10, 32, 22, 0.74) !important;
+}
+
+.wq-integ-capability {
+  font-size: clamp(14px, 1.1vw, 16px) !important;
+  line-height: 1.7 !important;
+  margin-bottom: 30px !important;
+  font-weight: 500 !important;
+  color: rgba(10, 32, 22, 0.82) !important;
+}
+
+.wq-integ-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--green-600, #16a34a) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+.wq-integ-cta:hover {
+  color: var(--green-900, #0b2b26) !important;
+  transform: translateX(4px) !important;
+}
+
+.wq-route-heading {
+  font-size: clamp(44px, 4.2vw, 64px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 0 28px 0 !important;
+  max-width: 650px !important;
+  color: #ffffff !important;
+  overflow: visible !important;
+}
+
+.wq-ps-section.is-dark .wq-ps-heading-seo,
+.wq-ps-section.is-dark .wq-route-heading,
+.wq-ps-section.is-dark .wq-crm-heading { color: #ffffff !important; }
+
+.wq-ps-section.is-light .wq-ps-heading-seo,
+.wq-ps-section.is-light .wq-res-heading,
+.wq-ps-section.is-light .wq-com-heading,
+.wq-ps-section.is-light .wq-skip-heading,
+.wq-ps-section.is-light .wq-incab-heading,
+.wq-ps-section.is-light .wq-portal-heading,
+.wq-ps-section.is-light .wq-analytics-heading,
+.wq-ps-section.is-light .wq-integ-heading { color: var(--green-900, #0b2b26) !important; }
+
+.wq-ps-lead-p,
+.wq-res-p,
+.wq-com-p,
+.wq-skip-p,
+.wq-route-p1,
+.wq-incab-p1,
+.wq-crm-p1,
+.wq-portal-p1,
+.wq-analytics-p1,
+.wq-integ-p1 {
+  font-size: 18px !important;
+  line-height: 1.6 !important;
+  max-width: 580px !important;
+  margin-bottom: 24px !important;
+  font-weight: 400 !important;
+}
+
+.wq-ps-section.is-dark .wq-ps-lead-p,
+.wq-ps-section.is-dark .wq-route-p1,
+.wq-ps-section.is-dark .wq-crm-p1 { color: rgba(255, 255, 255, 0.78) !important; }
+
+.wq-ps-section.is-light .wq-ps-lead-p,
+.wq-ps-section.is-light .wq-res-p,
+.wq-ps-section.is-light .wq-com-p,
+.wq-ps-section.is-light .wq-skip-p,
+.wq-ps-section.is-light .wq-incab-p1,
+.wq-ps-section.is-light .wq-portal-p1,
+.wq-ps-section.is-light .wq-analytics-p1,
+.wq-ps-section.is-light .wq-integ-p1 { color: #475569 !important; }
+
+.wq-ps-clean-tags,
+.wq-res-capability,
+.wq-com-capability,
+.wq-skip-capability,
+.wq-route-capability,
+.wq-incab-capability,
+.wq-crm-capability,
+.wq-portal-capability,
+.wq-analytics-capability,
+.wq-integ-capability {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  margin-bottom: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+
+.wq-ps-section.is-dark .wq-ps-clean-tags,
+.wq-ps-section.is-dark .wq-route-capability,
+.wq-ps-section.is-dark .wq-crm-capability { color: rgba(255, 255, 255, 0.60) !important; }
+
+.wq-ps-section.is-light .wq-ps-clean-tags,
+.wq-ps-section.is-light .wq-res-capability,
+.wq-ps-section.is-light .wq-com-capability,
+.wq-ps-section.is-light .wq-skip-capability,
+.wq-ps-section.is-light .wq-incab-capability,
+.wq-ps-section.is-light .wq-portal-capability,
+.wq-ps-section.is-light .wq-analytics-capability,
+.wq-ps-section.is-light .wq-integ-capability { color: #52605d !important; }
+
+.wq-ps-cta,
+.wq-res-cta,
+.wq-com-cta,
+.wq-skip-cta,
+.wq-route-cta,
+.wq-incab-cta,
+.wq-crm-cta,
+.wq-portal-cta,
+.wq-analytics-cta,
+.wq-integ-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: gap 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+}
+
+.wq-ps-cta:hover,
+.wq-res-cta:hover,
+.wq-com-cta:hover,
+.wq-skip-cta:hover,
+.wq-route-cta:hover,
+.wq-incab-cta:hover,
+.wq-crm-cta:hover,
+.wq-portal-cta:hover,
+.wq-analytics-cta:hover,
+.wq-integ-cta:hover {
+  gap: 10px !important;
+  transform: translateX(2px) !important;
+}
+
+/* Old section CTA text overrides removed */
+
+/* Old section CTA text overrides removed */
+
+/* ===== TraqCore Section Redesign — Full Viewport Open Ecosystem ===== */
+#core.wq-ps-section {
+  min-height: calc(100dvh - var(--nav-h, 72px));
+  background: #06251d;
+  background-image: radial-gradient(circle at 30% 50%, rgba(40, 200, 105, 0.12), transparent 45%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 72px) 0;
+}
+
+.wq-core-inner {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-inline: clamp(28px, 3.5vw, 64px);
+  box-sizing: border-box;
+}
+
+.wq-core-layout {
+  display: grid;
+  /* !important: this element also carries .wq-ps-product-layout.visual-left,
+     a higher-specificity (0,2,0) rule whose plain "52% 48%" columns sum to
+     100% and, combined with any non-zero gap, always overflow the
+     container by the gap amount — percentages don't reserve room for gap
+     the way fr units do. !important restores this section's own
+     minmax(0, fr) columns (correctly gap-aware and shrink-safe). */
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr) !important;
+  align-items: center;
+  gap: clamp(48px, 4vw, 80px);
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Left Visual Ecosystem Container (Unboxed, Full Width Scale) */
+.wq-core-visual-col {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.wq-core-ecosystem-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.wq-core-network-wrap {
+  width: 100%;
+  max-width: 780px;
+  position: relative;
+}
+
+.wq-core-network-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  display: block;
+}
+
+.wq-core-net-line {
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.8;
+  stroke-dasharray: 6 6;
+  animation: wqCoreLineDash 16s linear infinite;
+}
+
+@keyframes wqCoreLineDash {
+  to { stroke-dashoffset: -100; }
+}
+
+/* Pulse Data Particles */
+.wq-core-pulse-dot {
+  fill: #35d879;
+  filter: drop-shadow(0 0 6px #35d879);
+}
+
+.wq-core-pulse-dot.dot-collections { animation: wqCorePulseCollections 3.4s ease-in-out infinite; }
+.wq-core-pulse-dot.dot-fleet { animation: wqCorePulseFleet 3.1s ease-in-out infinite 0.3s; }
+.wq-core-pulse-dot.dot-customers { animation: wqCorePulseCustomers 3.3s ease-in-out infinite 0.6s; }
+.wq-core-pulse-dot.dot-billing { animation: wqCorePulseBilling 3.6s ease-in-out infinite 0.9s; }
+.wq-core-pulse-dot.dot-insights { animation: wqCorePulseInsights 3.5s ease-in-out infinite 1.2s; }
+
+@keyframes wqCorePulseCollections { 0%, 100% { cx: 360px; cy: 85px; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 90% { cx: 360px; cy: 155px; opacity: 0; } }
+@keyframes wqCorePulseFleet { 0%, 100% { cx: 160px; cy: 190px; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 90% { cx: 260px; cy: 190px; opacity: 0; } }
+@keyframes wqCorePulseCustomers { 0%, 100% { cx: 560px; cy: 190px; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 90% { cx: 460px; cy: 190px; opacity: 0; } }
+@keyframes wqCorePulseBilling { 0%, 100% { cx: 290px; cy: 225px; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 90% { cx: 230px; cy: 300px; opacity: 0; } }
+@keyframes wqCorePulseInsights { 0%, 100% { cx: 430px; cy: 225px; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 90% { cx: 490px; cy: 300px; opacity: 0; } }
+
+/* TraqCore Capsule Core Hub & Node Styling */
+.wq-core-capsule-glow {
+  animation: wqCoreCapsuleGlow 4s ease-in-out infinite;
+}
+
+@keyframes wqCoreCapsuleGlow {
+  0%, 100% { opacity: 0.3; stroke: #37c85a; }
+  50% { opacity: 0.7; stroke: #11a8a8; }
+}
+
+.wq-core-hub-title {
+  fill: #ffffff;
+  font-family: var(--wq-font-primary);
+  font-size: 17px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.wq-core-hub-subtitle {
+  fill: #35d879;
+  font-family: var(--wq-font-primary);
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.wq-core-node-bg {
+  fill: rgba(8, 25, 36, 0.94);
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.5;
+  transition: stroke 0.3s ease, fill 0.3s ease;
+}
+
+.wq-core-node:hover .wq-core-node-bg {
+  stroke: #37c85a;
+  fill: #0c362b;
+}
+
+.wq-core-node-label {
+  fill: rgba(255, 255, 255, 0.94);
+  font-family: var(--wq-font-primary);
+  font-size: 13px;
+  font-weight: 700;
+  dominant-baseline: middle;
+}
+
+/* Minimal Unboxed Operational Metrics Strip */
+.wq-core-metrics-strip {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px 6px;
+  position: relative;
+}
+
+.wq-core-metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.wq-core-metric-val {
+  font-family: var(--wq-font-primary);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.wq-core-metric-val.wq-core-highlight {
+  color: #35d879;
+}
+
+.wq-core-metric-lbl {
+  font-family: var(--wq-font-primary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+.wq-core-metric-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.16);
+  flex-shrink: 0;
+}
+
+/* Performance Flow Line Motion */
+.wq-core-flow-line-wrap {
+  width: 100%;
+  max-width: 740px;
+  height: 16px;
+  opacity: 0.65;
+}
+
+.wq-core-flow-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wq-core-flow-line {
+  fill: none;
+  stroke: url(#wq-core-grad-line);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 80 200;
+  animation: wqCoreFlowDash 6s linear infinite;
+}
+
+@keyframes wqCoreFlowDash {
+  0% { stroke-dashoffset: 280; }
+  100% { stroke-dashoffset: -280; }
+}
+
+/* Right Content Column Styling */
+.wq-core-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 720px;
+}
+
+.wq-core-eyebrow {
+  font-family: var(--wq-font-primary) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #35d879 !important;
+  margin-bottom: 12px !important;
+}
+
+.wq-core-heading {
+  font-family: var(--wq-font-primary) !important;
+  font-size: clamp(48px, 3.8vw, 64px) !important;
+  font-weight: 700 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.035em !important;
+  color: #ffffff !important;
+  margin: 0 0 20px !important;
+  max-width: 680px !important;
+}
+
+.wq-core-p {
+  font-family: var(--wq-font-primary) !important;
+  font-size: clamp(15px, 1.15vw, 17.5px) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.76) !important;
+  max-width: 680px !important;
+  margin: 0 0 26px !important;
+}
+
+.wq-core-capability-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.wq-core-cap-tag {
+  font-family: var(--wq-font-primary);
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.wq-core-cap-dot {
+  font-size: 12px;
+  color: #35d879;
+  opacity: 0.8;
+}
+
+.wq-core-cta {
+  font-family: var(--wq-font-primary) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #37c85a !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  transition: transform 0.25s ease, color 0.25s ease !important;
+}
+
+.wq-core-cta svg {
+  transition: transform 0.25s ease;
+}
+
+.wq-core-cta:hover {
+  color: #ffffff !important;
+}
+
+.wq-core-cta:hover svg {
+  transform: translateX(5px);
+}
+
+/* Responsive Stacking for Section 2 */
+@media (max-width: 1100px) {
+  .wq-core-layout {
+    grid-template-columns: 52% 48%;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .wq-core-inner {
+    padding-inline: 24px;
+  }
+  .wq-core-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .wq-core-content-col {
+    order: 1;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .wq-core-p {
+    max-width: 600px !important;
+  }
+
+  .wq-core-capability-row {
+    justify-content: center;
+  }
+
+  .wq-core-visual-col {
+    order: 2;
+    justify-content: center;
+  }
+
+  .wq-core-metrics-strip {
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+
+  .wq-core-metric-divider {
+    display: none;
+  }
+}
+
+
+.wq-ps-graph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.wq-ps-graph-title {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.wq-ps-graph-badge {
+  color: var(--green-300);
+  background: rgba(34, 197, 94, 0.12);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+}
+
+.wq-ps-perf-svg {
+  width: 100%;
+  height: 36px;
+  display: block;
+}
+
+.wq-ps-perf-area {
+  fill: url(#wq-green-grad);
+}
+
+.wq-ps-perf-line {
+  fill: none;
+  stroke: var(--green-400);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .wq-ps-section { padding: 72px 20px; }
+  .wq-ps-grid { grid-template-columns: 1fr; gap: 56px; }
+  .wq-ps-module p { max-width: none; }
+  .wq-res-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .wq-res-row-stops { text-align: left; }
+  
+  .wq-ps-product-layout,
+  .wq-ps-product-layout.visual-left,
+  .wq-ps-product-layout.content-left {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .wq-ps-ops-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .wq-ps-chain-node { width: 64px; }
+  .wq-ps-chain { gap: 2px; }
+  .wq-res-streams { grid-template-columns: 1fr; }
+}
+
+/* ===== Commercial Collection Section Scale & Proportion Alignment ===== */
+#commercial.wq-ps-section {
+  min-height: calc(100dvh - var(--nav-h, 72px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 72px) 0;
+  background: var(--bg, #ffffff);
+}
+
+.wq-com-inner {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-inline: clamp(40px, 4vw, 72px);
+  box-sizing: border-box;
+}
+
+.wq-com-layout {
+  display: grid;
+  /* !important: see .wq-core-layout above — this element also carries
+     .wq-ps-product-layout.content-left, a higher-specificity (0,2,0) rule
+     whose plain percentage columns sum to 100% and overflow once a
+     non-zero gap is added. */
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr) !important;
+  align-items: center;
+  gap: clamp(40px, 4vw, 72px);
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.wq-com-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 680px;
+}
+
+.wq-com-heading {
+  font-size: clamp(40px, 3.2vw, 56px) !important;
+  font-weight: 700 !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 0 20px !important;
+  max-width: 650px !important;
+}
+
+.wq-com-p {
+  font-size: clamp(15px, 1.1vw, 17.5px) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--text-muted, #475569) !important;
+  max-width: 680px !important;
+  margin: 0 0 26px !important;
+}
+
+.wq-com-visual-col {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wq-com-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.28em;
+  padding-bottom: 4px;
+}
+
+.wq-com-word {
+  display: inline-block;
+  transform: translateY(35px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Open Animated Commercial Waste Service Journey */
+.wq-com-journey-wrap {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.wq-com-step.step-customer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-com-node {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid rgba(11, 43, 38, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wq-com-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--green-900, #0b2b26);
+}
+
+.wq-com-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.wq-com-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+  letter-spacing: -0.01em;
+}
+
+.wq-com-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wq-com-badge.sites {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--green-900, #0b2b26);
+  background: rgba(250, 250, 250, 0.95);
+  padding: 3px 9px;
+  border-radius: 10px;
+  border: 1px solid rgba(11, 43, 38, 0.08);
+}
+
+.wq-com-badge.val {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #16a34a;
+  background: rgba(34, 197, 94, 0.12);
+  padding: 3px 9px;
+  border-radius: 10px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.wq-com-line {
+  background: rgba(11, 43, 38, 0.15);
+  position: relative;
+  transform-origin: top center;
+  will-change: transform;
+}
+
+.line-main-down {
+  width: 2px;
+  height: 18px;
+  margin-left: 21px;
+  transform: scaleY(0);
+}
+
+.wq-com-branches {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(11, 43, 38, 0.12);
+  margin-left: 21px;
+}
+
+.wq-com-branch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(250, 250, 250, 0.95);
+  border: 1px solid rgba(11, 43, 38, 0.08);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-com-branch-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.wq-com-branch-name {
+  font-size: 0.80rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+  line-height: 1.2;
+}
+
+.wq-com-branch-spec {
+  font-size: 0.70rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+  line-height: 1.2;
+}
+
+.line-flow-down {
+  width: 2px;
+  height: 28px;
+  margin-left: 21px;
+  transform: scaleY(0);
+  background: linear-gradient(to bottom, rgba(11, 43, 38, 0.15), #16a34a);
+}
+
+.wq-com-truck-icon {
+  position: absolute;
+  left: -11px;
+  top: -2px;
+  width: 24px;
+  height: 24px;
+  color: #16a34a;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.wq-com-truck-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.wq-com-flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgba(250, 250, 250, 0.95);
+  border: 1px solid rgba(11, 43, 38, 0.08);
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-com-flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.wq-com-flow-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid rgba(11, 43, 38, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wq-com-flow-node svg {
+  width: 15px;
+  height: 15px;
+  color: var(--green-900, #0b2b26);
+}
+
+.wq-com-flow-node.is-active {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.wq-com-flow-node.is-active svg {
+  color: #16a34a;
+}
+
+.wq-com-flow-lbl {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted, #64748b);
+}
+
+.wq-com-flow-lbl.active-lbl {
+  color: #16a34a;
+  font-weight: 800;
+}
+
+.wq-com-flow-arrow {
+  color: var(--green-600, #22c55e);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+/* ===== Section 5: Skip & Bulk Hire ===== */
+.wq-skip-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.28em;
+  padding-bottom: 4px;
+}
+
+.wq-skip-word {
+  display: inline-block;
+  transform: translateY(35px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Open Animated Skip Hire Journey Workflow */
+.wq-skip-journey-wrap {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.wq-skip-job-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(250, 250, 250, 0.95);
+  border: 1px solid rgba(11, 43, 38, 0.08);
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-skip-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wq-skip-code {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+}
+
+.wq-skip-details {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+}
+
+.wq-skip-banner-badge {
+  font-size: 0.70rem;
+  font-weight: 800;
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.12);
+  padding: 3px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.wq-skip-workflow-nodes {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.wq-skip-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-skip-node {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid rgba(11, 43, 38, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wq-skip-node.is-swap-active {
+  background: rgba(217, 119, 6, 0.12);
+  border-color: rgba(217, 119, 6, 0.3);
+}
+
+.wq-skip-node.is-swap-active .wq-skip-icon svg {
+  color: #d97706;
+}
+
+.wq-skip-node.is-complete {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.wq-skip-node.is-complete .wq-skip-icon svg {
+  color: #16a34a;
+}
+
+.wq-skip-icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--green-900, #0b2b26);
+}
+
+.wq-skip-node-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wq-skip-node-title {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+  letter-spacing: -0.01em;
+}
+
+.wq-skip-ctx-lbl {
+  font-size: 0.70rem;
+  font-weight: 700;
+  color: var(--green-900, #0b2b26);
+  background: rgba(250, 250, 250, 0.95);
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(11, 43, 38, 0.08);
+}
+
+.wq-skip-badge-swap {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.12);
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.wq-skip-line {
+  width: 2px;
+  height: 18px;
+  margin-left: 19px;
+  background: rgba(11, 43, 38, 0.15);
+  position: relative;
+  transform-origin: top center;
+  transform: scaleY(0);
+  will-change: transform;
+}
+
+.line-b2 {
+  height: 24px;
+  background: linear-gradient(to bottom, rgba(11, 43, 38, 0.15), #16a34a);
+}
+
+.wq-skip-truck-icon {
+  position: absolute;
+  left: -11px;
+  top: -2px;
+  width: 24px;
+  height: 24px;
+  color: #16a34a;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.wq-skip-truck-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===== RouteTraq Section Scale & Proportion Alignment ===== */
+#routeai.wq-ps-section {
+  min-height: calc(100dvh - var(--nav-h, 72px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 72px) 0;
+  background: var(--green-900, #0b2b26);
+}
+
+.wq-route-inner {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-inline: clamp(40px, 4vw, 72px);
+  box-sizing: border-box;
+}
+
+.wq-route-layout {
+  display: grid;
+  /* !important: see .wq-core-layout above — this element also carries
+     .wq-ps-product-layout.visual-left, a higher-specificity (0,2,0) rule
+     whose plain percentage columns sum to 100% and overflow once a
+     non-zero gap is added. */
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
+  align-items: center;
+  gap: clamp(50px, 4vw, 80px);
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.wq-route-visual-col {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.wq-route-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 680px;
+}
+
+.wq-route-heading {
+  font-size: clamp(48px, 3.8vw, 64px) !important;
+  font-weight: 700 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.035em !important;
+  color: #ffffff !important;
+  margin: 0 0 20px !important;
+  max-width: 650px !important;
+}
+
+.wq-route-p1 {
+  font-size: clamp(15px, 1.15vw, 17.5px) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  max-width: 680px !important;
+  margin: 0 0 26px !important;
+}
+
+.wq-route-word-wrap {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 0.25em;
+}
+
+.wq-route-word {
+  display: inline-block;
+  transform: none;
+  opacity: 1;
+}
+
+.wq-route-visual-wrap {
+  width: 100%;
+  max-width: 780px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 14px;
+}
+
+.wq-route-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.wq-route-input-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transform: translateY(14px);
+  will-change: opacity, transform;
+}
+
+.wq-route-inp-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.wq-route-feeder-lines {
+  display: flex;
+  justify-content: space-around;
+  height: 8px;
+}
+
+.wq-feeder-line {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(34, 197, 94, 0.5), #22c55e);
+  transform-origin: top center;
+  transform: scaleY(0);
+  will-change: transform;
+}
+
+.wq-route-ai-hub {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  background: rgba(34, 197, 94, 0.18);
+  border: 1.5px solid rgba(34, 197, 94, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.3);
+  margin-top: -2px;
+  opacity: 0;
+  transform: scale(0.9);
+  will-change: opacity, transform;
+}
+
+.wq-route-hub-icon svg {
+  width: 22px;
+  height: 22px;
+  color: #22c55e;
+}
+
+.wq-route-hub-label {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.wq-route-path-container {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  margin-top: 2px;
+}
+
+.wq-route-svg-path {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wq-route-active-line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  stroke-width: 3.5;
+  will-change: stroke-dashoffset;
+}
+
+.wq-route-vehicle-marker {
+  position: absolute;
+  top: 40%; /* 48/120, matches the 320x120 connector-line viewBox */
+  left: 4.6875%; /* 15/320 */
+  width: 24px;
+  height: 24px;
+  color: #22c55e;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.wq-route-vehicle-marker svg {
+  width: 24px;
+  height: 24px;
+}
+
+.wq-route-stop-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transform: scale(0.8);
+  will-change: opacity, transform;
+}
+
+.wq-route-stop-node.stop-start { left: 4.5% !important; }
+.wq-route-stop-node.stop-1 { left: 29.5% !important; }
+.wq-route-stop-node.stop-2 { left: 54.5% !important; }
+.wq-route-stop-node.stop-3 { left: 89% !important; }
+
+.wq-stop-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.wq-stop-lbl {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.wq-route-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  margin-top: 2px;
+}
+
+.wq-route-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(14px);
+  will-change: opacity, transform;
+}
+
+.wq-route-metric-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.wq-route-metric.highlight .wq-route-metric-val {
+  color: #22c55e;
+}
+
+.wq-route-metric-lbl {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+.wq-route-p1, .wq-route-p2 {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ===== Section 7: In-Cab Navigation ===== */
+.wq-incab-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.28em;
+  padding-bottom: 4px;
+}
+
+.wq-incab-word {
+  display: inline-block;
+  transform: translateY(35px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.wq-incab-journey-open {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+/* 1. Next Stop & Warning Block */
+.wq-incab-stop-header-open {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-incab-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wq-incab-stop-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+.wq-incab-stop-time {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.wq-incab-address {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+  margin: 2px 0 0 0;
+  line-height: 1.25;
+}
+
+.wq-incab-service-type {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.wq-incab-warning-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #d97706;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-top: 4px;
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: opacity, transform;
+}
+
+.wq-incab-warning-box svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #d97706;
+}
+
+/* 2. Active Route Track */
+.wq-incab-route-open {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 0;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-incab-route-start, .wq-incab-route-end {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.wq-incab-node-dot.start-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 8px rgba(22, 163, 74, 0.4);
+}
+
+.wq-incab-pin-icon {
+  display: flex;
+  align-items: center;
+  color: #16a34a;
+}
+
+.wq-incab-pin-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.wq-incab-node-txt {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+}
+
+.wq-incab-route-track {
+  position: relative;
+  flex-grow: 1;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.wq-incab-route-svg {
+  width: 100%;
+  height: 20px;
+}
+
+.wq-incab-route-line-active {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  will-change: stroke-dashoffset;
+}
+
+.wq-incab-truck-marker {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  color: #16a34a;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.wq-incab-truck-marker svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 3. Field Workflow Steps */
+.wq-incab-flow-open {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(11, 43, 38, 0.03);
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(11, 43, 38, 0.06);
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-incab-step-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: opacity, transform;
+}
+
+.wq-incab-step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(11, 43, 38, 0.06);
+}
+
+.wq-incab-step-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.wq-incab-step-lbl {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+}
+
+.wq-incab-flow-arrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+/* 4. Open Progress Line */
+.wq-incab-progress-open {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 6px;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-incab-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.80rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+}
+
+.wq-incab-progress-pct {
+  color: #16a34a;
+}
+
+.wq-incab-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(11, 43, 38, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.wq-incab-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #16a34a;
+  border-radius: 3px;
+  will-change: width;
+}
+
+/* ===== Section 7: CRM / Customer Management (Dark Premium Presentation) ===== */
+.wq-crm-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.28em;
+  padding-bottom: 4px;
+}
+
+.wq-crm-word {
+  display: inline-block;
+  transform: translateY(35px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.wq-crm-p1 {
+  color: #94a3b8;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.wq-crm-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.wq-crm-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  padding: 6px 14px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.05);
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+/* Left Column Showcase Container */
+.wq-crm-showcase-visual {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wq-crm-ambient-glow {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(6, 182, 212, 0.08) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wq-crm-network-diagram {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  z-index: 1;
+}
+
+.wq-crm-svg-connectors {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wq-crm-line-path {
+  will-change: stroke-dashoffset;
+}
+
+/* Central Glowing Hub */
+.wq-crm-hub-central {
+  position: absolute;
+  left: 260px;
+  top: 160px;
+  transform: translate(-50%, -50%);
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
+  will-change: opacity, transform;
+}
+
+.wq-crm-hub-ring-pulse {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  animation: crmPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes crmPulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.2; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.wq-crm-hub-ring-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(52, 211, 153, 0.35);
+  animation: crmSpin 20s linear infinite;
+}
+
+@keyframes crmSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.wq-crm-hub-core {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #0f2e28, #051815);
+  border: 2px solid #10b981;
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.wq-crm-hub-icon {
+  color: #34d399;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wq-crm-hub-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.wq-crm-hub-title {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.wq-crm-hub-sub {
+  font-size: 0.52rem;
+  font-weight: 700;
+  color: #34d399;
+  letter-spacing: 0.6px;
+}
+
+/* Surrounding 7 Circular Nodes */
+.wq-crm-circle-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 4;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.wq-crm-node-bubble {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(16, 185, 129, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #34d399;
+  backdrop-filter: blur(8px);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.wq-crm-node-bubble svg {
+  width: 18px;
+  height: 18px;
+}
+
+.wq-crm-node-bubble.highlight-green {
+  border-color: #34d399;
+  background: rgba(16, 185, 129, 0.2);
+  color: #a7f3d0;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+}
+
+.wq-crm-node-tooltip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(6, 17, 23, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 8px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.wq-crm-tt-title {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.wq-crm-tt-sub {
+  font-size: 0.54rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* Lower Information Area: Glassmorphic Tiles Grid */
+.wq-crm-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  z-index: 2;
+}
+
+.wq-crm-tile {
+  background: rgba(13, 27, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.wq-crm-tile.tile-activity {
+  grid-column: span 2;
+}
+
+.wq-crm-tile.tile-health-bar {
+  grid-column: span 2;
+}
+
+.wq-crm-tile-badge {
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #64748b;
+}
+
+.wq-crm-tile-badge.badge-emerald {
+  color: #34d399;
+}
+
+.wq-crm-tile-badge.badge-amber {
+  color: #fbbf24;
+}
+
+.wq-crm-tile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.wq-crm-tile-name, .wq-crm-tile-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.wq-crm-tile-desc {
+  font-size: 0.68rem;
+  color: #94a3b8;
+}
+
+.wq-crm-health-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.wq-crm-health-pill {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.wq-crm-health-track-sm {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.wq-crm-health-fill-sm {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  border-radius: 3px;
+  will-change: width;
+}
+
+/* ===== Section 9: Customer Portal ===== */
+.wq-portal-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.28em;
+  padding-bottom: 4px;
+}
+
+.wq-portal-word {
+  display: inline-block;
+  transform: translateY(35px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.wq-portal-p1, .wq-portal-p2 {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.wq-portal-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.wq-portal-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--green-900, #0b2b26);
+  background: rgba(22, 163, 74, 0.08);
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(22, 163, 74, 0.18);
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+.wq-portal-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.wq-portal-journey-open {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+  position: relative;
+}
+
+/* Central Hub Card */
+.wq-portal-center-hub {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  border: 2px solid #16a34a;
+  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  min-width: 160px;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.9);
+  will-change: opacity, transform;
+}
+
+.wq-portal-hub-badge {
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.06em;
+}
+
+.wq-portal-hub-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+  margin: 2px 0 0 0;
+  line-height: 1.2;
+}
+
+.wq-portal-hub-sub {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Connected Nodes Styling */
+.wq-portal-node {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgba(11, 43, 38, 0.08);
+  box-shadow: 0 4px 12px rgba(11, 43, 38, 0.04);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+.wq-portal-node-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wq-portal-node-icon.icon-amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.wq-portal-node-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.wq-portal-node-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.wq-portal-node-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.wq-portal-node-val {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+}
+
+/* Middle Layout Row (Request - Hub - Track) */
+.wq-portal-middle-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0px;
+}
+
+.node-request, .node-track {
+  flex-shrink: 0;
+}
+
+/* Connecting Lines */
+.wq-portal-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wq-portal-link.link-top, .wq-portal-link.link-bottom {
+  width: 2px;
+  height: 28px;
+}
+
+.wq-portal-link.link-left, .wq-portal-link.link-right {
+  width: 20px;
+  height: 2px;
+}
+
+.wq-portal-line-path {
+  will-change: stroke-dashoffset;
+}
+
+.node-billing {
+  margin-bottom: 8px;
+}
+
+.node-issue {
+  margin-bottom: 14px;
+}
+
+/* Bottom Status Banner & Live Ticker */
+.wq-portal-status-open {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+.wq-portal-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.08);
+  padding: 6px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  text-align: center;
+}
+
+.wq-portal-status-check {
+  font-weight: 900;
+}
+
+/* Cycling Live Status Ticker */
+.wq-portal-ticker-wrap {
+  width: 100%;
+  height: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wq-portal-ticker-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #475569;
+  opacity: 0;
+  animation: wqPortalTickerFade 9s infinite;
+}
+
+.wq-portal-ticker-item.item-1 { animation-delay: 0s; }
+.wq-portal-ticker-item.item-2 { animation-delay: 3s; }
+.wq-portal-ticker-item.item-3 { animation-delay: 6s; }
+
+.wq-portal-ticker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.wq-portal-ticker-item strong {
+  color: var(--green-900, #0b2b26);
+  font-weight: 800;
+}
+
+@keyframes wqPortalTickerFade {
+  0% { opacity: 0; transform: translateY(8px); }
+  5% { opacity: 1; transform: translateY(0); }
+  28% { opacity: 1; transform: translateY(0); }
+  33% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+/* ===== Section 10: Waste Insights / Analytics ===== */
+.wq-analytics-word-wrap {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 0.25em;
+}
+
+.wq-analytics-word {
+  display: inline-block;
+  transform: none;
+  opacity: 1;
+}
+
+.wq-analytics-p1, .wq-analytics-p2 {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.wq-analytics-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.wq-analytics-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--green-900, #0b2b26);
+  background: rgba(22, 163, 74, 0.08);
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(22, 163, 74, 0.18);
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+.wq-analytics-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+/* ===== Waste Insights Section Scale & Proportion Alignment ===== */
+#insights.wq-ps-section {
+  min-height: calc(100dvh - var(--nav-h, 72px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(50px, 6vh, 90px) 0;
+  background: var(--bg, #ffffff);
+}
+
+.wq-analytics-inner {
+  width: min(92vw, 1680px);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: clamp(40px, 4vw, 72px);
+  box-sizing: border-box;
+}
+
+.wq-analytics-layout {
+  display: grid;
+  /* !important: see .wq-core-layout above — this element also carries
+     .wq-ps-product-layout.content-left, a higher-specificity (0,2,0) rule
+     whose plain percentage columns sum to 100% and overflow once a
+     non-zero gap is added. */
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) !important;
+  align-items: center;
+  gap: clamp(56px, 5vw, 96px);
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.wq-analytics-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 650px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.wq-analytics-heading {
+  font-size: clamp(38px, 3.5vw, 56px) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 0 20px !important;
+  max-width: 100% !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+.wq-analytics-p1 {
+  font-size: clamp(15px, 1.1vw, 17.5px) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--text-muted, #475569) !important;
+  max-width: 650px !important;
+  margin: 0 0 26px !important;
+}
+
+.wq-analytics-visual-col {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wq-analytics-dashboard-wrap {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  background: #f8fafc;
+  border-radius: 20px;
+  border: 1px solid rgba(11, 43, 38, 0.1);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 12px 36px rgba(11, 43, 38, 0.06);
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  box-sizing: border-box;
+}
+
+.wq-analytics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(11, 43, 38, 0.08);
+}
+
+.wq-analytics-app-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+  letter-spacing: 0.04em;
+}
+
+.wq-analytics-app-title svg {
+  width: 16px;
+  height: 16px;
+  color: #16a34a;
+}
+
+.wq-analytics-brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.wq-analytics-brand-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.wq-analytics-identity-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 12px 16px;
+  border: 1px solid rgba(11, 43, 38, 0.08);
+}
+
+.wq-analytics-dash-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+  margin: 0 0 3px 0;
+  line-height: 1.2;
+}
+
+.wq-analytics-dash-sub {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0;
+}
+
+.wq-analytics-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.wq-analytics-stat-card {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(11, 43, 38, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+.wq-analytics-stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.wq-analytics-stat-label {
+  font-size: 0.70rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.wq-analytics-stat-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+  line-height: 1.1;
+}
+
+.wq-analytics-stat-trend {
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.wq-analytics-stat-trend.trend-up {
+  color: #16a34a;
+}
+
+.wq-analytics-stat-trend.trend-down {
+  color: #16a34a;
+}
+
+.wq-analytics-stat-trend.trend-neutral {
+  color: #64748b;
+}
+
+.wq-analytics-chart-box {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(11, 43, 38, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wq-analytics-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wq-analytics-chart-title {
+  font-size: 0.80rem;
+  font-weight: 800;
+  color: var(--green-900, #0b2b26);
+}
+
+.wq-analytics-chart-badge {
+  font-size: 0.70rem;
+  font-weight: 800;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.wq-analytics-svg-container {
+  width: 100%;
+  height: 90px;
+}
+
+.wq-analytics-chart-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wq-analytics-chart-path {
+  stroke-dasharray: 450;
+  stroke-dashoffset: 450;
+  will-change: stroke-dashoffset;
+}
+
+.wq-analytics-chart-months {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  padding-top: 4px;
+}
+
+/* ===== Section 11: Integrations ===== */
+.wq-integ-word-wrap {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 0.25em;
+}
+
+.wq-integ-word {
+  display: inline-block;
+  transform: none;
+  opacity: 1;
+}
+
+.wq-integ-p1, .wq-integ-p2 {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.wq-integ-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.wq-integ-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--green-900, #0b2b26);
+  background: rgba(22, 163, 74, 0.08);
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(22, 163, 74, 0.18);
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+.wq-integ-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+/* ===== Integrations Section Scale & Proportion Alignment ===== */
+#integrations.wq-ps-section {
+  min-height: calc(100dvh - var(--nav-h, 72px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 72px) 0;
+  background: var(--bg, #ffffff);
+}
+
+.wq-int-inner {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: clamp(40px, 4vw, 80px);
+  box-sizing: border-box;
+}
+
+.wq-int-layout {
+  display: grid;
+  /* !important: see .wq-core-layout above — this element also carries
+     .wq-ps-product-layout.visual-left, a higher-specificity (0,2,0) rule
+     whose plain percentage columns sum to 100% and overflow once a
+     non-zero gap is added. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  align-items: center;
+  gap: clamp(40px, 4vw, 72px);
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.wq-int-visual-col {
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.wq-int-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 620px;
+  min-width: 0;
+  margin-left: 0;
+  box-sizing: border-box;
+}
+
+.wq-integ-heading {
+  font-size: clamp(38px, 3.5vw, 56px) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 0 16px !important;
+  max-width: 100% !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+.wq-integ-accent-line {
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #37c85a 0%, #11a8a8 45%, #0b5ed7 100%);
+  margin: 0 0 20px 0;
+}
+
+.wq-integ-p1 {
+  font-size: clamp(15px, 1.1vw, 17.5px) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--text-muted, #475569) !important;
+  max-width: 680px !important;
+  margin: 0 0 26px !important;
+}
+
+.wq-integ-visual-wrap.wq-integ-open-wrap {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+  overflow: visible;
+  background-image: none;
+  opacity: 1;
+  transform: none;
+  box-sizing: border-box;
+}
+
+.wq-integ-standalone-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #14502e;
+  letter-spacing: 0.05em;
+  padding: 0;
+  background: transparent;
+  border: none;
+  margin-bottom: 12px;
+}
+
+.wq-integ-label-bar {
+  width: 3.5px;
+  height: 16px;
+  border-radius: 2px;
+  background: #22c55e;
+}
+
+.wq-integ-arch-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  height: 320px;
+  margin: 4px auto;
+}
+
+.wq-integ-svg-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wq-integ-line {
+  transition: stroke-dashoffset 0.8s ease, stroke 0.3s ease, opacity 0.3s ease, stroke-width 0.3s ease;
+  will-change: stroke-dashoffset, opacity;
+}
+
+.wq-integ-line.is-active-line {
+  opacity: 1 !important;
+  stroke-width: 2.8px !important;
+  stroke: #11a8a8 !important;
+}
+
+.wq-integ-line.is-dimmed-line {
+  opacity: 0.3 !important;
+}
+
+@keyframes wq-hub-glow-pulse {
+  0%, 100% {
+    opacity: 0.12;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  50% {
+    opacity: 0.24;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+.wq-integ-central-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(17, 168, 168, 0.45) 0%, rgba(55, 200, 90, 0.15) 45%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: wq-hub-glow-pulse 4.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.wq-integ-node-central {
+  position: absolute;
+  top: 46.875%; /* 150/320, matches the 640x320 connector-line viewBox */
+  left: 50%; /* 320/640 */
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  opacity: 0;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transition: transform 0.25s ease;
+}
+
+.wq-integ-node-central:hover {
+  transform: translate(-50%, -50%) scale(1.03);
+}
+
+.wq-integ-central-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #37c85a 0%, #11a8a8 45%, #0b5ed7 100%);
+  padding: 12px 24px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(17, 168, 168, 0.35);
+  border: 2px solid #ffffff;
+}
+
+.wq-integ-central-icon {
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wq-integ-central-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.wq-integ-central-title {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.wq-integ-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(11, 43, 38, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  z-index: 2;
+  opacity: 0;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.wq-integ-node:hover,
+.wq-integ-node.is-hovered {
+  transform: translate(-50%, -50%) scale(1.04) !important;
+  border-color: rgba(17, 168, 168, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(17, 168, 168, 0.22) !important;
+}
+
+.wq-integ-node.is-pulsed {
+  border-color: #11a8a8 !important;
+  box-shadow: 0 0 20px rgba(17, 168, 168, 0.45) !important;
+}
+
+.wq-integ-node-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.wq-integ-node-icon.icon-green {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+}
+
+.wq-integ-node-icon.icon-blue {
+  background: rgba(11, 94, 215, 0.1);
+  color: #0b5ed7;
+}
+
+.wq-integ-node-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.wq-integ-node-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--green-900, #0b2b26);
+  white-space: nowrap;
+}
+
+.wq-integ-inline-status.wq-integ-supporting-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 4px 0 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0b2b26;
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: transform, opacity;
+}
+
+.wq-status-check-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.8px solid #22c55e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wq-status-check-circle svg {
+  width: 12px;
+  height: 12px;
+}
+
+.wq-cap-dot {
+  color: #22c55e;
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin: 0 4px;
+}
+
+.wq-integ-inline-status.wq-integ-supporting-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0b2b26;
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: transform, opacity;
+}
+
+.wq-integ-inline-status svg {
+  width: 16px;
+  height: 16px;
+  color: #11a8a8;
+  flex-shrink: 0;
+}
+
+/* ===== Unified Product Sections Typography Tokens & System ===== */
+:root {
+  --wq-font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --wq-heading-light: #07162f;
+  --wq-heading-dark: #ffffff;
+  --wq-body-light: #4f5f73;
+  --wq-body-dark: rgba(255, 255, 255, 0.78);
+  --wq-accent-green-light: #178a50;
+  --wq-accent-green-dark: #35d879;
+  --wq-cta-light: #0b5ed7;
+  --wq-cta-dark: #37c85a;
+}
+
+/* 1. Shared H2 Heading Standard */
+.wq-ps-heading-seo,
+.wq-res-heading,
+.wq-com-heading,
+.wq-route-heading,
+.wq-analytics-heading,
+.wq-integ-heading {
+  font-family: var(--wq-font-primary) !important;
+  font-size: clamp(38px, 3.5vw, 54px) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.035em !important;
+  margin: 0 0 18px !important;
+}
+
+/* Light Section Headings -> Dark Navy #07162F */
+.wq-ps-section.is-light .wq-ps-heading-seo,
+.wq-ps-section.is-light .wq-res-heading,
+.wq-ps-section.is-light .wq-com-heading,
+.wq-ps-section.is-light .wq-route-heading,
+.wq-ps-section.is-light .wq-analytics-heading,
+.wq-ps-section.is-light .wq-integ-heading {
+  color: var(--wq-heading-light) !important;
+}
+
+/* Dark Section Headings -> Pure White #ffffff */
+.wq-ps-section.is-dark .wq-ps-heading-seo,
+.wq-ps-section.is-dark .wq-res-heading,
+.wq-ps-section.is-dark .wq-com-heading,
+.wq-ps-section.is-dark .wq-route-heading,
+.wq-ps-section.is-dark .wq-analytics-heading,
+.wq-ps-section.is-dark .wq-integ-heading {
+  color: var(--wq-heading-dark) !important;
+}
+
+/* 2. Shared Eyebrows / Labels */
+.wq-ps-eyebrow,
+.wq-res-eyebrow,
+.wq-com-eyebrow,
+.wq-route-eyebrow,
+.wq-analytics-eyebrow,
+.wq-integ-eyebrow {
+  font-family: var(--wq-font-primary) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 12px !important;
+}
+
+.wq-ps-section.is-light .wq-ps-eyebrow,
+.wq-ps-section.is-light .wq-res-eyebrow,
+.wq-ps-section.is-light .wq-com-eyebrow,
+.wq-ps-section.is-light .wq-analytics-eyebrow,
+.wq-ps-section.is-light .wq-integ-eyebrow {
+  color: var(--wq-accent-green-light) !important;
+}
+
+.wq-ps-section.is-dark .wq-ps-eyebrow,
+.wq-ps-section.is-dark .wq-route-eyebrow {
+  color: var(--wq-accent-green-dark) !important;
+}
+
+/* 3. Shared Body Lead Paragraphs */
+.wq-ps-lead-p,
+.wq-res-p,
+.wq-com-p,
+.wq-route-p1,
+.wq-analytics-p1,
+.wq-integ-p1 {
+  font-family: var(--wq-font-primary) !important;
+  font-size: clamp(15px, 1.15vw, 17px) !important;
+  line-height: 1.6 !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  max-width: 580px !important;
+  margin: 0 0 24px !important;
+}
+
+.wq-ps-section.is-light .wq-ps-lead-p,
+.wq-ps-section.is-light .wq-res-p,
+.wq-ps-section.is-light .wq-com-p,
+.wq-ps-section.is-light .wq-analytics-p1,
+.wq-ps-section.is-light .wq-integ-p1 {
+  color: var(--wq-body-light) !important;
+}
+
+.wq-ps-section.is-dark .wq-ps-lead-p,
+.wq-ps-section.is-dark .wq-route-p1 {
+  color: var(--wq-body-dark) !important;
+}
+
+/* 4. Shared Capability Tags */
+.wq-ps-clean-tags,
+.wq-res-capability,
+.wq-com-capability,
+.wq-route-capability,
+.wq-analytics-capability,
+.wq-integ-capability {
+  font-family: var(--wq-font-primary) !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  line-height: 1.6 !important;
+  margin-bottom: 24px !important;
+}
+
+.wq-ps-section.is-light .wq-ps-clean-tags,
+.wq-ps-section.is-light .wq-res-capability,
+.wq-ps-section.is-light .wq-com-capability,
+.wq-ps-section.is-light .wq-analytics-capability,
+.wq-ps-section.is-light .wq-integ-capability {
+  color: #46566a !important;
+}
+
+.wq-ps-section.is-dark .wq-ps-clean-tags,
+.wq-ps-section.is-dark .wq-route-capability {
+  color: var(--wq-body-dark) !important;
+}
+
+/* 5. Shared Unified Gradient CTAs & Strict Text Color Rules */
+.wq-btn-gradient,
+.wq-btn-gradient:link,
+.wq-btn-gradient:visited,
+.wq-btn-gradient:hover,
+.wq-btn-gradient:focus,
+.wq-btn-gradient:focus-visible,
+.wq-btn-gradient:active,
+.wq-gradient-cta,
+.wq-gradient-cta:link,
+.wq-gradient-cta:visited,
+.wq-gradient-cta:hover,
+.wq-gradient-cta:focus,
+.wq-gradient-cta:focus-visible,
+.wq-gradient-cta:active,
+.wq-ps-cta,
+.wq-ps-cta:link,
+.wq-ps-cta:visited,
+.wq-ps-cta:hover,
+.wq-ps-cta:focus,
+.wq-ps-cta:active,
+.wq-res-cta,
+.wq-res-cta:link,
+.wq-res-cta:visited,
+.wq-res-cta:hover,
+.wq-res-cta:focus,
+.wq-res-cta:active,
+.wq-com-cta,
+.wq-com-cta:link,
+.wq-com-cta:visited,
+.wq-com-cta:hover,
+.wq-com-cta:focus,
+.wq-com-cta:active,
+.wq-route-cta,
+.wq-route-cta:link,
+.wq-route-cta:visited,
+.wq-route-cta:hover,
+.wq-route-cta:focus,
+.wq-route-cta:active,
+.wq-analytics-cta,
+.wq-analytics-cta:link,
+.wq-analytics-cta:visited,
+.wq-analytics-cta:hover,
+.wq-analytics-cta:focus,
+.wq-analytics-cta:active,
+.wq-integ-cta,
+.wq-integ-cta:link,
+.wq-integ-cta:visited,
+.wq-integ-cta:hover,
+.wq-integ-cta:focus,
+.wq-integ-cta:active,
+.wq-core-cta,
+.wq-core-cta:link,
+.wq-core-cta:visited,
+.wq-core-cta:hover,
+.wq-core-cta:focus,
+.wq-core-cta:active {
+  background: linear-gradient(90deg, #37c85a 0%, #11a8a8 45%, #0b5ed7 100%) !important;
+  color: #ffffff !important;
+  border-radius: 50px !important;
+  padding: 11px 24px !important;
+  font-family: var(--wq-font-primary, 'Plus Jakarta Sans', sans-serif) !important;
+  font-size: 0.925rem !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 18px rgba(17, 168, 168, 0.25) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease !important;
+  border: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+
+.wq-btn-gradient *,
+.wq-gradient-cta *,
+.wq-ps-cta *,
+.wq-res-cta *,
+.wq-com-cta *,
+.wq-route-cta *,
+.wq-analytics-cta *,
+.wq-integ-cta *,
+.wq-core-cta * {
+  color: #ffffff !important;
+}
+
+.wq-btn-gradient:hover,
+.wq-gradient-cta:hover,
+.wq-ps-cta:hover,
+.wq-res-cta:hover,
+.wq-com-cta:hover,
+.wq-route-cta:hover,
+.wq-analytics-cta:hover,
+.wq-integ-cta:hover,
+.wq-core-cta:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(17, 168, 168, 0.38) !important;
+  color: #ffffff !important;
+}
+
+.wq-btn-gradient svg,
+.wq-gradient-cta svg,
+.wq-ps-cta svg,
+.wq-res-cta svg,
+.wq-com-cta svg,
+.wq-route-cta svg,
+.wq-analytics-cta svg,
+.wq-integ-cta svg,
+.wq-core-cta svg,
+.wq-btn-gradient svg path,
+.wq-gradient-cta svg path,
+.wq-ps-cta svg path,
+.wq-res-cta svg path,
+.wq-com-cta svg path,
+.wq-route-cta svg path,
+.wq-analytics-cta svg path,
+.wq-integ-cta svg path,
+.wq-core-cta svg path {
+  transition: transform 0.25s ease !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.wq-btn-gradient:hover svg,
+.wq-gradient-cta:hover svg,
+.wq-ps-cta:hover svg,
+.wq-res-cta:hover svg,
+.wq-com-cta:hover svg,
+.wq-route-cta:hover svg,
+.wq-analytics-cta:hover svg,
+.wq-integ-cta:hover svg,
+.wq-core-cta:hover svg {
+  transform: translateX(4px) !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* 5b. Final CTA Section Secondary Button (Explore Solutions) */
+.wq-btn-outline-white,
+.wq-btn-outline-white:link,
+.wq-btn-outline-white:visited {
+  position: relative !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 50px !important;
+  padding: 11px 24px !important;
+  font-family: var(--wq-font-primary, 'Plus Jakarta Sans', sans-serif) !important;
+  font-size: 0.925rem !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease !important;
+}
+
+.wq-btn-outline-white::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(90deg, #37c85a 0%, #11a8a8 45%, #0b5ed7 100%) !important;
+  opacity: 0 !important;
+  transition: opacity 0.25s ease !important;
+  z-index: -1 !important;
+  border-radius: 50px !important;
+}
+
+.wq-btn-outline-white:hover::before,
+.wq-btn-outline-white:focus-visible::before {
+  opacity: 1 !important;
+}
+
+.wq-btn-outline-white:hover,
+.wq-btn-outline-white:focus-visible {
+  border-color: transparent !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(17, 168, 168, 0.38) !important;
+}
+
+/* ==================================================
+   FINAL MANDATORY GRADIENT CTA WHITE TEXT OVERRIDE
+================================================== */
+.wq-btn-gradient,
+.wq-btn-gradient:link,
+.wq-btn-gradient:visited,
+.wq-btn-gradient:hover,
+.wq-btn-gradient:focus,
+.wq-btn-gradient:focus-visible,
+.wq-btn-gradient:active,
+.wq-gradient-cta,
+.wq-gradient-cta:link,
+.wq-gradient-cta:visited,
+.wq-gradient-cta:hover,
+.wq-gradient-cta:focus,
+.wq-gradient-cta:focus-visible,
+.wq-gradient-cta:active,
+.wq-ps-cta,
+.wq-ps-cta:link,
+.wq-ps-cta:visited,
+.wq-ps-cta:hover,
+.wq-ps-cta:focus,
+.wq-ps-cta:active,
+.wq-res-cta,
+.wq-res-cta:link,
+.wq-res-cta:visited,
+.wq-res-cta:hover,
+.wq-res-cta:focus,
+.wq-res-cta:active,
+.wq-com-cta,
+.wq-com-cta:link,
+.wq-com-cta:visited,
+.wq-com-cta:hover,
+.wq-com-cta:focus,
+.wq-com-cta:active,
+.wq-route-cta,
+.wq-route-cta:link,
+.wq-route-cta:visited,
+.wq-route-cta:hover,
+.wq-route-cta:focus,
+.wq-route-cta:active,
+.wq-analytics-cta,
+.wq-analytics-cta:link,
+.wq-analytics-cta:visited,
+.wq-analytics-cta:hover,
+.wq-analytics-cta:focus,
+.wq-analytics-cta:active,
+.wq-integ-cta,
+.wq-integ-cta:link,
+.wq-integ-cta:visited,
+.wq-integ-cta:hover,
+.wq-integ-cta:focus,
+.wq-integ-cta:active,
+.wq-core-cta,
+.wq-core-cta:link,
+.wq-core-cta:visited,
+.wq-core-cta:hover,
+.wq-core-cta:focus,
+.wq-core-cta:active,
+.wq-ps-section.is-light .wq-btn-gradient,
+.wq-ps-section.is-light .wq-gradient-cta,
+.wq-ps-section.is-light .wq-ps-cta,
+.wq-ps-section.is-light .wq-res-cta,
+.wq-ps-section.is-light .wq-com-cta,
+.wq-ps-section.is-light .wq-route-cta,
+.wq-ps-section.is-light .wq-analytics-cta,
+.wq-ps-section.is-light .wq-integ-cta,
+.wq-ps-section.is-light .wq-core-cta,
+.wq-ps-section.is-dark .wq-btn-gradient,
+.wq-ps-section.is-dark .wq-gradient-cta,
+.wq-ps-section.is-dark .wq-ps-cta,
+.wq-ps-section.is-dark .wq-res-cta,
+.wq-ps-section.is-dark .wq-com-cta,
+.wq-ps-section.is-dark .wq-route-cta,
+.wq-ps-section.is-dark .wq-analytics-cta,
+.wq-ps-section.is-dark .wq-integ-cta,
+.wq-ps-section.is-dark .wq-core-cta {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  opacity: 1 !important;
+}
+
+.wq-btn-gradient *,
+.wq-gradient-cta *,
+.wq-ps-cta *,
+.wq-res-cta *,
+.wq-com-cta *,
+.wq-route-cta *,
+.wq-analytics-cta *,
+.wq-integ-cta *,
+.wq-core-cta * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.wq-btn-gradient svg,
+.wq-gradient-cta svg,
+.wq-ps-cta svg,
+.wq-res-cta svg,
+.wq-com-cta svg,
+.wq-route-cta svg,
+.wq-analytics-cta svg,
+.wq-integ-cta svg,
+.wq-core-cta svg,
+.wq-btn-gradient svg path,
+.wq-gradient-cta svg path,
+.wq-ps-cta svg path,
+.wq-res-cta svg path,
+.wq-com-cta svg path,
+.wq-route-cta svg path,
+.wq-analytics-cta svg path,
+.wq-integ-cta svg path,
+.wq-core-cta svg path,
+.wq-btn-gradient svg line,
+.wq-gradient-cta svg line,
+.wq-ps-cta svg line,
+.wq-res-cta svg line,
+.wq-com-cta svg line,
+.wq-route-cta svg line,
+.wq-analytics-cta svg line,
+.wq-integ-cta svg line,
+.wq-core-cta svg line,
+.wq-btn-gradient svg polyline,
+.wq-gradient-cta svg polyline,
+.wq-ps-cta svg polyline,
+.wq-res-cta svg polyline,
+.wq-com-cta svg polyline,
+.wq-route-cta svg polyline,
+.wq-analytics-cta svg polyline,
+.wq-integ-cta svg polyline,
+.wq-core-cta svg polyline {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  fill: none;
+  opacity: 1 !important;
+}
+
+/* 6. Word Wrapper Animation Normalization */
+.wq-res-word-wrap,
+.wq-com-word-wrap,
+.wq-portal-word-wrap {
+  display: inline-block !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  margin-right: 0.25em !important;
+}
+
+.wq-res-word,
+.wq-com-word,
+.wq-portal-word {
+  display: inline-block !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* 7. Responsive Headings */
+@media (max-width: 1200px) {
+  .wq-ps-heading-seo,
+  .wq-res-heading,
+  .wq-com-heading,
+  .wq-route-heading,
+  .wq-analytics-heading,
+  .wq-integ-heading {
+    font-size: clamp(34px, 3.4vw, 46px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .wq-ps-heading-seo,
+  .wq-res-heading,
+  .wq-com-heading,
+  .wq-route-heading,
+  .wq-analytics-heading,
+  .wq-integ-heading {
+    font-size: clamp(28px, 6.5vw, 36px) !important;
+  }
+}
+
+/* =====================================================================
+   8. PHASE 1 — MOBILE/TABLET RESPONSIVE PASS
+   Only .wq-core-layout (TraqCore) and the generic .wq-ps-product-layout
+   already had a mobile stack rule — Residential, Commercial, RouteTraq,
+   Waste Insights and Integrations each define their own dedicated
+   2-column layout class that no existing @media rule touched, so they
+   stayed a rigid 2-column grid all the way down to 320px.
+   ===================================================================== */
+@media (max-width: 900px) {
+  .wq-res-layout,
+  .wq-com-layout,
+  .wq-route-layout,
+  .wq-analytics-layout,
+  .wq-int-layout {
+    /* minmax(0, 1fr), not plain 1fr — same reason as the desktop 2-column
+       tracks above: a bare 1fr track's item still defaults to
+       min-width:auto (its content's min-content size), so an oversized
+       child (e.g. a CTA button whose icon+gap+longest-word intrinsic
+       width exceeds the column) pushes the grid item past the container
+       instead of shrinking/wrapping. Since .wq-ps-section itself has
+       overflow-x:hidden, that overflow doesn't show up as a page
+       scrollbar — it just gets silently clipped, cutting text/buttons off
+       on the right. minmax(0, 1fr) lets the track — and its content —
+       actually shrink to fit. */
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 40px !important;
+  }
+
+  .wq-com-visual-col,
+  .wq-route-visual-col,
+  .wq-analytics-visual-col,
+  .wq-int-visual-col {
+    justify-content: center;
+  }
+
+  /* These diagram/card sub-elements all default to opacity:0 (translateY/
+     scale offset) in their base CSS and are ONLY ever revealed by
+     product-section-transition.js's per-frame scroll-driven inline
+     styles — which bails out immediately on mobile (matching this same
+     ≤900px breakpoint) and never touches them. With no CSS fallback, every
+     one of these stayed permanently invisible on mobile: the whole
+     Residential journey timeline, the Commercial customer/branches/flow
+     diagram, every RouteTraq input pill + the AI hub + the vehicle marker
+     + stop nodes + outcome metrics, the Waste Insights dashboard + its
+     stat cards, and every Integrations node (including the central hub)
+     plus its "configured around your requirements" banner. */
+  .wq-journey-step,
+  .wq-journey-truck-icon,
+  .wq-com-step.step-customer,
+  .wq-com-branch,
+  .wq-com-truck-icon,
+  .wq-com-flow-row,
+  .wq-route-input-pill,
+  .wq-route-ai-hub,
+  .wq-route-vehicle-marker,
+  .wq-route-stop-node,
+  .wq-route-metric,
+  .wq-analytics-dashboard-wrap,
+  .wq-analytics-stat-card,
+  .wq-integ-inline-status.wq-integ-supporting-banner {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* .wq-integ-node-central / .wq-integ-node use transform:translate(-50%,-50%)
+     as their actual centering mechanism (they're position:absolute,
+     top/left:50%-ish), not just a reveal-animation offset — forcing
+     transform:none here would un-center them, not just stop them
+     animating. Keep the centering, only force opacity. */
+  .wq-integ-node-central,
+  .wq-integ-node {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  /* min-height:100dvh (minus nav) on every showcase section is fine on
+     desktop (full-screen pinned presentation) but once the pin is
+     disabled here (see product-section-transition.css's own ≤900px
+     fallback) it just forces a mostly-empty tall section around whatever
+     content actually stacks — natural height avoids that blank space. */
+  #core.wq-ps-section,
+  #residential.wq-ps-section,
+  #commercial.wq-ps-section,
+  #routeai.wq-ps-section,
+  #insights.wq-ps-section,
+  #integrations.wq-ps-section {
+    min-height: auto;
+  }
+}
+
+/* --- RouteTraq: optimised-route path diagram ---
+   The connector SVG (viewBox 320x120) and the stop-node markers
+   (positioned in products.html to match that same 320x120 coordinate
+   space) both assumed a fixed 320px-wide container. aspect-ratio keeps
+   the container's rendered box locked to that same 8:3 ratio at any
+   width, so the SVG never needs to letterbox and percentage-based marker
+   positions (see products.html) stay pixel-congruent with the connector
+   line at every breakpoint instead of drifting off it. */
+.wq-route-path-container {
+  height: auto;
+  aspect-ratio: 320 / 120;
+}
+
+@media (max-width: 480px) {
+  .wq-route-metrics-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    row-gap: 12px !important;
+  }
+}
+
+/* --- Integrations: architecture diagram canvas ---
+   Same fix as RouteTraq above: the connector SVG (viewBox 640x320) and
+   the six node positions (in products.html) both assumed a fixed 640px
+   canvas. Locking the container to the same 2:1 ratio via aspect-ratio
+   keeps the SVG filling it exactly (no letterboxing) so the
+   percentage-based node positions stay aligned with the connector lines
+   at every width, not just the original ~640px design width. */
+.wq-integ-arch-canvas {
+  height: auto;
+  aspect-ratio: 2 / 1;
+}
+
+@media (max-width: 600px) {
+  .wq-integ-central-title,
+  .wq-integ-node-label {
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Below ~600px the canvas becomes too narrow for the radial layout: the
+     six nodes' percentage positions (see products.html inline styles,
+     matched to the 640x320 connector-line viewBox) stay correctly aligned
+     with the connector lines, but the nodes themselves have fixed
+     padding/font-size that doesn't shrink with the container — so their
+     pill widths collide with each other and with the central hub well
+     before the canvas gets this narrow. Rather than shrink text to the
+     point of unreadability, drop the radial diagram in favour of a plain
+     stacked list: hub on top, six category pills below it in document
+     flow. The inline left/top percentages need !important to be overridden
+     since inline styles otherwise always win over a stylesheet rule. */
+  .wq-integ-arch-canvas {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 0 4px;
+  }
+
+  .wq-integ-svg-lines,
+  .wq-integ-central-glow {
+    display: none !important; /* the connector geometry only makes sense for the radial layout */
+  }
+
+  .wq-integ-node-central,
+  .wq-integ-node {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  .wq-integ-node-central:hover {
+    transform: none !important;
+  }
+
+  .wq-integ-node:hover,
+  .wq-integ-node.is-hovered {
+    transform: scale(1.02) !important;
+  }
+}
