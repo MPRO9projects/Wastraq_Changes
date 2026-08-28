@@ -28,39 +28,39 @@ def _ts() -> str:
 # ══════════════════════════════════════════════════════════════
 
 class DemoRequest(BaseModel):
-    fname:      str            = Field(..., min_length=1)
-    lname:      str            = Field(..., min_length=1)
+    fname:      str            = Field(..., min_length=1, max_length=100)
+    lname:      str            = Field(..., min_length=1, max_length=100)
     email:      EmailStr
-    phone:      Optional[str]  = ""
-    country:    Optional[str]  = ""
-    org:        Optional[str]  = ""
-    orgtype:    Optional[str]  = ""
-    orgwebsite: Optional[str]  = ""
-    fleet:      Optional[str]  = ""
-    msg:        Optional[str]  = ""
+    phone:      Optional[str]  = Field("", max_length=40)
+    country:    Optional[str]  = Field("", max_length=100)
+    org:        Optional[str]  = Field("", max_length=200)
+    orgtype:    Optional[str]  = Field("", max_length=100)
+    orgwebsite: Optional[str]  = Field("", max_length=200)
+    fleet:      Optional[str]  = Field("", max_length=100)
+    msg:        Optional[str]  = Field("", max_length=5000)
 
 
 class PartnerRequest(BaseModel):
     # BUG FIX: was Literal["reseller","referrer","tech","partner"]
     # Frontend may send "Reseller", "reseller", "Tech Partner" etc.
     # Changed to Optional[str] with normalisation below.
-    formType:        Optional[str]  = "partner"
-    name:            str            = Field(..., min_length=1)
+    formType:        Optional[str]  = Field("partner", max_length=50)
+    name:            str            = Field(..., min_length=1, max_length=100)
     email:           EmailStr
-    phone:           Optional[str]  = ""
-    company:         Optional[str]  = ""
-    city:            Optional[str]  = ""
-    partnershipType: Optional[str]  = ""
-    message:         Optional[str]  = ""
+    phone:           Optional[str]  = Field("", max_length=40)
+    company:         Optional[str]  = Field("", max_length=200)
+    city:            Optional[str]  = Field("", max_length=100)
+    partnershipType: Optional[str]  = Field("", max_length=50)
+    message:         Optional[str]  = Field("", max_length=5000)
 
 
 class CareersRequest(BaseModel):
-    name:       str           = Field(..., min_length=1)
+    name:       str           = Field(..., min_length=1, max_length=100)
     email:      EmailStr
-    phone:      Optional[str] = ""
-    position:   str           = Field(..., min_length=1)
-    linkedin:   Optional[str] = ""
-    coverNote:  Optional[str] = ""
+    phone:      Optional[str] = Field("", max_length=40)
+    position:   str           = Field(..., min_length=1, max_length=150)
+    linkedin:   Optional[str] = Field("", max_length=300)
+    coverNote:  Optional[str] = Field("", max_length=5000)
 
 
 # register.html and login.html are "request access" lead-capture forms, not
@@ -325,10 +325,14 @@ async def submit_login_interest(request: Request, data: LoginInterestRequest):
 
 # ══════════════════════════════════════════════════════════════
 #  DEBUG ENDPOINTS (remove in production if desired)
+#  These are unauthenticated public GET routes with no purpose beyond
+#  one-time setup verification — rate-limited hard so they can't be used
+#  to spam the mailbox/spreadsheet even if left in place after launch.
 # ══════════════════════════════════════════════════════════════
 
 @router.get("/test-email")
-async def test_email():
+@limiter.limit("2/hour")
+async def test_email(request: Request):
     """Send a test email to ADMIN_EMAIL to verify SMTP is working."""
     try:
         send_email(
@@ -343,7 +347,8 @@ async def test_email():
 
 
 @router.get("/test-sheets")
-async def test_sheets():
+@limiter.limit("2/hour")
+async def test_sheets(request: Request):
     """Write a test row to Google Sheets 'Test' tab to verify Sheets API is working."""
     try:
         append_row(
@@ -363,7 +368,7 @@ async def test_sheets():
 
 class SubscriptionRequest(BaseModel):
     email: EmailStr
-    type:  Optional[str] = "subscription"    # always "subscription" from frontend
+    type:  Optional[str] = Field("subscription", max_length=50)    # always "subscription" from frontend
 
 
 @router.post("/subscribe")
