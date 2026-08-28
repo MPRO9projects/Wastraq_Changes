@@ -297,9 +297,11 @@ em {
     gap: 32px;
   }
 
-  .wq-footer-cols {
-    grid-template-columns: 1fr !important;
-  }
+  /* Was forced to a single column here, which is why the footer read as
+     one long left-aligned list with the whole right half of the screen
+     unused. Let it fall back to css/nav-footer.css's 2-column layout
+     (which also spans + splits the long "Company" list into 2 columns
+     so it doesn't sit alone in an empty row) instead of overriding it. */
 
   .wq-footer-bottom {
     flex-direction: column;
